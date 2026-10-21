@@ -30,11 +30,19 @@ Route::prefix('admin')
             Route::get('/create-product-view', [AdminProductsController::class, 'createProductView'])->name('admin.products.create');
             Route::get('/{slug}', [AdminProductsController::class, 'show'])->name('admin.products.show');
             Route::post('/create/{product?}', [AdminProductsController::class, 'create'])->name('admin.product.create');
+            Route::post('/products/{product}/prices', [AdminProductsController::class, 'createPrice'])
+                ->name('admin.products.prices.store');
+
+            Route::put('/products/prices/{productPrice}', [AdminProductsController::class, 'updatePrice'])
+                ->name('admin.products.prices.update');
+
+            Route::delete('/products/prices/{productPrice}', [AdminProductsController::class, 'deletePrice'])
+                ->name('admin.products.prices.delete');
 
             Route::put('/{product}', [AdminProductsController::class, 'update'])->name('admin.product.update');
             Route::delete('/{product:slug}', [AdminProductsController::class, 'destroy'])->name('admin.products.destroy');
-            Route::patch('/gallery-image/delete/{product}', [AdminProductsController::class, 'deleteGalleryImage'])
-                  ->name('product.gallery-image.delete');
+            Route::delete('/gallery-image/delete/{product}', [AdminProductsController::class, 'deleteGalleryImage'])
+                ->name('product.gallery-image.delete');
         });
 
 
@@ -52,5 +60,4 @@ Route::prefix('admin')
             Route::get('/', [AdminCategoriesController::class, 'index'])->name('admin.category.index');
             Route::post('/categories', [AdminCategoriesController::class, 'create'])->name('category.create');
         });
-        
     });

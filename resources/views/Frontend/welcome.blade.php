@@ -201,7 +201,7 @@
         </div>
     </div>
     <!-- Services Section Start -->
-    <div class="services-sec2 sec-padding overflow-hidden bg-cover jarallax" data-jarallax data-speed=".2">
+    <section class="services-sec2 sec-padding overflow-hidden bg-cover jarallax" data-jarallax data-speed=".2">
         <img src="/assets/images/service2-bg.jpg" alt="parallax" class="jarallax-img">
         <div class="container ct-container p-0">
             <div class="row align-items-center serv-header">
@@ -376,7 +376,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
     <!-- Services Section End -->
     <!-- Choose Section Start -->
     <section class="choose-sec2 bg-cover sec-padding" style="background-image: url('images/choose-bg.png');">

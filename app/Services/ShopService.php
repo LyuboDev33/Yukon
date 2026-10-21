@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\ValidationException;
 
 class ShopService
 {
@@ -171,7 +172,7 @@ class ShopService
     }
 
     /**
-     * This function creates the session for last 10 viewed products
+     * Store the last 4 viewed products in the session.
      *
      * @param Product $product
      * @return void
@@ -180,17 +181,23 @@ class ShopService
     {
         $lastViewedProducts = Session::get('lastViewedProducts', []);
 
-        // If the product has already been viewed,
-        // remove it so we can place it at the beginning.
-        if (isset($lastViewedProducts[$product->id])) {
-            unset($lastViewedProducts[$product->id]);
-        }
+        // Remove the product if it has already been viewed.
+        unset($lastViewedProducts[$product->id]);
 
-        $finalPrice = $product->discount
-            ? $product->price - (($product->price * $product->discount) / 100)
-            : $product->price;
+        // Get the product's quantity-based prices.
+        $prices = $product->prices
+            ->sortBy('min_quantity')
+            ->map(function ($price) {
+                return [
+                    'min_quantity' => $price->min_quantity,
+                    'max_quantity' => $price->max_quantity,
+                    'price' => (float) $price->price,
+                ];
+            })
+            ->values()
+            ->toArray();
 
-        // Add the newest product to the beginning of the array.
+        // Add the newest product to the beginning.
         $lastViewedProducts = [
             $product->id => [
                 'id' => $product->id,
@@ -198,28 +205,23 @@ class ShopService
                 'slug' => $product->slug,
                 'url' => route('shop.show', $product->slug),
                 'image' => $product->main_image,
-                'price' => $product->price,
+                'prices' => $prices,
                 'discount' => $product->discount,
-                'final_price' => round($finalPrice, 2),
             ],
         ] + $lastViewedProducts;
 
         // Keep only the latest 4 viewed products.
-        $lastViewedProducts = array_slice(
-            $lastViewedProducts,
-            0,
-            4,
-            true
-        );
+        $lastViewedProducts = array_slice($lastViewedProducts, 0, 4, true);
 
         Session::put('lastViewedProducts', $lastViewedProducts);
     }
 
     /**
      * Apply the promo code
+     *
      * @param Request $request
+     * @return JsonResponse
      */
-
     public static function applyPromoCode($request): JsonResponse
     {
 
@@ -273,14 +275,17 @@ class ShopService
     }
 
     /**
-     * Get similar products.
+     * Get similar products based on the current product's category.
      *
      * @param Product $product
      * @return Collection
      */
-    public static function similarProducts(Product $product)
+    public static function similarProducts(Product $product): Collection
     {
-        $similarProducts = Product::with([
+        return Product::with([
+            'prices' => function ($query) {
+                $query->orderBy('min_quantity', 'asc');
+            },
             'categories',
             'attributeValues.type',
         ])
@@ -290,6 +295,7 @@ class ShopService
             ->take(4)
             ->get()
             ->map(function ($similarProduct) {
+
                 $brand = $similarProduct->attributeValues->first(
                     fn($attributeValue) =>
                     $attributeValue->type?->name === 'Марка'
@@ -299,7 +305,60 @@ class ShopService
 
                 return $similarProduct;
             });
+    }
 
-        return $similarProducts;
+
+    /**
+     * Calculate product pricing based on the requested quantity.
+     *
+     * The applicable price is determined by the highest
+     * min_quantity that is less than or equal to the quantity.
+     *
+     * @param Product $product
+     * @param int $quantity
+     * @return array
+     */
+    public static function calculateProductPrice(Product $product, int $quantity): array
+    {
+        if ($quantity < 1) {
+            throw new \InvalidArgumentException(
+                'Количеството трябва да бъде поне 1.'
+            );
+        }
+
+        // Find the applicable quantity-based price.
+        $priceTier = $product->prices()
+            ->where('min_quantity', '<=', $quantity)
+            ->orderByDesc('min_quantity')
+            ->first();
+
+        if (!$priceTier) {
+            throw new \InvalidArgumentException(
+                'Няма определена цена за избраното количество.'
+            );
+        }
+
+        // Original unit price from the database.
+        $originalUnitPrice = (float) $priceTier->price;
+
+        // Product discount percentage.
+        $discount = (float) ($product->discount ?? 0);
+
+        // Final unit price after discount.
+        $unitPrice = round(
+            $originalUnitPrice * (1 - $discount / 100),
+            2
+        );
+
+        // Total price for the requested quantity.
+        $totalPrice = round($unitPrice * $quantity, 2);
+
+        return [
+            'quantity' => $quantity,
+            'original_unit_price' => $originalUnitPrice,
+            'unit_price' => $unitPrice,
+            'total_price' => $totalPrice,
+            'discount' => $discount,
+        ];
     }
 }

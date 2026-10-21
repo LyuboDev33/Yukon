@@ -21,6 +21,7 @@
 
     <link rel="stylesheet" href="/assets/css/shop.css?v=<?php echo time(); ?>" />
 
+
     <link rel="icon" sizes="180x180" href="{{ asset('assets/images/favicon/favicon-yukon.png') }}?v={{ time() }}">
 
 

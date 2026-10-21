@@ -34,7 +34,6 @@ class UpdateProductRequest extends FormRequest
             'video_link'  => ['string', 'nullable'],
             'discount'    => ['nullable', 'numeric', 'min:0', 'max:99'],
             'stock'       => ['required', 'integer', 'min:0'],
-            'price'       => ['required', 'numeric', 'min:0'],
 
             'main_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp'],
             'gallery'    => ['nullable', 'array'],

@@ -12,20 +12,23 @@ use App\Models\AttributeValue;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\ProductPrice;
 use App\Services\ImageService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 class AdminProductsController extends Controller
 {
     /** Return all products */
     public function index()
     {
-        $products = Product::with(['categories', 'attributeValues'])
+        $products = Product::with(['categories', 'attributeValues', 'prices'])
             ->latest()
             ->paginate(15);
 
@@ -88,6 +91,7 @@ class AdminProductsController extends Controller
     public function show(string $slug)
     {
         $product = Product::with([
+            'prices',
             'categories',
             'attributeValues',
             'variants',
@@ -161,7 +165,6 @@ class AdminProductsController extends Controller
                 'video_link'  => $validated['video_link'],
                 'discount'    => $validated['discount'],
                 'description' => $validated['description'],
-                'price'       => $validated['price'],
                 'stock'       => $validated['stock'],
                 'main_image'  => $mainImageName,
                 'category_id' => $validated['category_id'],
@@ -206,10 +209,9 @@ class AdminProductsController extends Controller
                 );
             }
 
-            return back()->with(
-                'success',
-                'Продуктът беше добавен успешно!'
-            );
+            return redirect()
+                ->route('admin.products.show', $createdProduct->slug)
+                ->with('success', 'Продуктът беше добавен успешно!');
         } catch (\Throwable $e) {
             return back()
                 ->withInput()
@@ -251,14 +253,13 @@ class AdminProductsController extends Controller
             $galleryNames = $product->gallery ?? [];
 
             if ($request->hasFile('gallery')) {
-                foreach ($galleryNames as $oldGallery) {
-                    $oldPath = public_path('/assets/images/product_gallery/' . $oldGallery);
 
-                    if (file_exists($oldPath)) {
-                        @unlink($oldPath);
-                    }
-                }
-                $galleryNames = ImageService::uploadGalleryImages($request->file('gallery'), '/assets/images/product_gallery');
+                $newGalleryNames = ImageService::uploadGalleryImages(
+                    $request->file('gallery'),
+                    '/assets/images/product_gallery'
+                );
+
+                $galleryNames = array_merge($galleryNames, $newGalleryNames);
             }
 
             $product->update([
@@ -267,7 +268,6 @@ class AdminProductsController extends Controller
                 'slug'        => $slug,
                 'discount'    => $validated['discount'],
                 'description' => $validated['description'],
-                'price'       => $validated['price'],
                 'video_link'  => $validated['video_link'],
                 'stock'       => $validated['stock'],
                 'main_image'  => $mainImageName,
@@ -277,8 +277,7 @@ class AdminProductsController extends Controller
 
             $categoryIds = [];
 
-            $category = Category::with('parent')
-                ->findOrFail($validated['category_id']);
+            $category = Category::with('parent')->findOrFail($validated['category_id']);
 
             while ($category) {
                 $categoryIds[] = $category->id;
@@ -321,6 +320,112 @@ class AdminProductsController extends Controller
             ->route('admin.products.index')
             ->with('success', 'Продуктът беше изтрит.');
     }
+
+
+    /**
+     * Create a single quantity-based price for a product.
+     *
+     * @param Request $request
+     * @param Product $product
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function createPrice(Request $request, Product $product)
+    {
+        $validated = $request->validate([
+            'min_quantity' => 'required|integer|min:1',
+            'max_quantity' => 'nullable|integer|min:1',
+            'price' => 'required|numeric|min:0',
+        ]);
+
+        ProductPrice::create([
+            'product_id' => $product->id,
+            'min_quantity' => $validated['min_quantity'],
+            'max_quantity' => $validated['max_quantity'] ?? null,
+            'price' => $validated['price'],
+        ]);
+
+        $prices = ProductPrice::where('product_id', $product->id)
+            ->orderBy('min_quantity')
+            ->get();
+
+        $html = view('admin.components.create-product-pricing', ['prices' => $prices])->render();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Цената беше добавена успешно!',
+            'html' => $html,
+        ]);
+    }
+
+
+    /**
+     * Update an existing product price.
+     *
+     * Updates a single price record and returns the refreshed
+     * pricing component as HTML in a JSON response.
+     *
+     * @param Request $request
+     * @param ProductPrice $productPrice
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updatePrice(Request $request, ProductPrice $productPrice)
+    {
+        $validated = $request->validate([
+            'min_quantity' => 'required|integer|min:1',
+            'max_quantity' => 'nullable|integer|min:1',
+            'price' => 'required|numeric|min:0',
+        ]);
+
+        $productPrice->update($validated);
+
+        $prices = ProductPrice::where('product_id', $productPrice->product_id)
+            ->orderBy('min_quantity')
+            ->get();
+
+        $html = view('admin.components.create-product-pricing', [
+            'prices' => $prices,
+        ])->render();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Цената беше редактирана успешно!',
+            'html' => $html,
+        ]);
+    }
+
+
+    /**
+     * Delete an existing product price.
+     *
+     * Deletes a single price record and returns the refreshed
+     * pricing component as HTML in a JSON response.
+     *
+     * @param ProductPrice $productPrice
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function deletePrice(ProductPrice $productPrice)
+    {
+        $productId = $productPrice->product_id;
+
+        $productPrice->delete();
+
+        $prices = ProductPrice::where('product_id', $productId)
+            ->orderBy('min_quantity')
+            ->get();
+
+        $html = view('admin.components.create-product-pricing', [
+            'prices' => $prices,
+        ])->render();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Цената беше изтрита успешно!',
+            'html' => $html,
+        ]);
+    }
+
+
+
 
     /**
      * Delete an image from the gallery

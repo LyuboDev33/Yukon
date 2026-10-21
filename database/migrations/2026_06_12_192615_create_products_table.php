@@ -26,8 +26,6 @@ return new class extends Migration
                 ->constrained('categories')
                 ->cascadeOnDelete();
 
-            $table->decimal('price', 10, 2);
-
             $table->string('main_image');
             $table->json('gallery');
 

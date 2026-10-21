@@ -92,6 +92,7 @@
             </div>
         @endif
 
+
         <form method="POST" action="{{ route('admin.product.update', $product) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -138,19 +139,12 @@
                 <div class="col-lg-6">
                     <label>Видео линк</label>
                     <input type="text" name="video_link" class="form-control"
-                        value="{{ old('discount', $product->video_link) }}">
+                        value="{{ old('video_link', $product->video_link) }}">
                 </div>
 
                 <div class="col-lg-12">
                     <label>Описание на продукта</label>
                     <textarea name="description" rows="4" class="form-control">{{ old('description', $product->description) }}</textarea>
-                </div>
-
-                {{-- ================= PRICING ================= --}}
-                <div class="col-lg-4">
-                    <label>Цена</label>
-                    <input type="number" step="0.01" name="price" class="form-control"
-                        value="{{ old('price', $product->price) }}" required>
                 </div>
 
                 {{-- ================= MAIN IMAGE ================= --}}
@@ -172,25 +166,35 @@
                 <div class="col-lg-4">
                     <label>Галерия (множество снимки)</label>
 
+
                     @if (!empty($product->gallery))
                         <div class="mb-2 d-flex flex-wrap gap-2">
+
                             @foreach ($product->gallery as $galleryImage)
                                 <div class="gallery-img-bin">
-                                    <img src="/assets/images/product_gallery/{{ $galleryImage }}"
+
+                                    <img src="{{ asset('assets/images/product_gallery/' . $galleryImage) }}"
                                         alt="{{ $galleryImage }}">
 
-                                    <a href="/assets/images/product_gallery/{{ $galleryImage }}"
+                                    <a href="{{ asset('assets/images/product_gallery/' . $galleryImage) }}"
                                         download="{{ $galleryImage }}" class="gallery-image-download">
+
                                         <i class="fa-solid fa-download"></i>
+
                                     </a>
 
-                                    <button type="button" class="gallery-img-bin__delete">
+                                    <button type="button" class="gallery-img-bin__delete"
+                                        data-url="{{ route('product.gallery-image.delete', $product) }}"
+                                        data-image="{{ $galleryImage }}">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
+
                                 </div>
                             @endforeach
+
                         </div>
                     @endif
+
 
                     <input type="file" name="gallery[]" class="form-control" accept="image/*" multiple>
                     <small class="text-muted">Качването на нови снимки ще ги добави към съществуващите.</small>
@@ -239,6 +243,45 @@
             </div>
         </form>
 
+        {{-- ================= QUANTITY PRICING (SEPARATE AJAX FORM) ================= --}}
+        <div class="card shadow-sm border-0 my-4">
+            <div class="card-body">
+                <h5 class="mb-3">Цени според количеството</h5>
+
+                <div id="product-prices-list" class="mb-4">
+                    @include('admin.components.create-product-pricing', ['prices' => $product->prices])
+                </div>
+
+                <form id="create-product-price-form" method="POST"
+                    action="{{ route('admin.products.prices.store', $product->id) }}">
+                    @csrf
+                    <div class="row g-3 align-items-end">
+                        <div class="col-md-3">
+                            <label for="min_quantity" class="form-label">От (бр.)</label>
+                            <input type="number" min="1" step="1" id="min_quantity"
+                                name="min_quantity" class="form-control" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="max_quantity" class="form-label">До (бр.)</label>
+                            <input type="number" min="1" step="1" id="max_quantity"
+                                name="max_quantity" class="form-control" placeholder="Без ограничение">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="price" class="form-label">Цена за 1 бр. (€)</label>
+                            <input type="number" min="0" step="0.01" id="price" name="price"
+                                class="form-control" required>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="submit" id="create-price-button" class="btn btn-primary w-100">
+                                Добави цена
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <div id="price-form-message" class="mt-3" role="status" aria-live="polite"></div>
+            </div>
+        </div>
+
         <form method="POST" action="{{ route('admin.products.destroy', $product->slug) }}"
             onsubmit="return confirm('Сигурен ли си, че искаш да изтриеш този продукт?');" class="mt-3">
             @csrf
@@ -271,9 +314,135 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            openVariantSidebar()
-            deleteImage()
+            openVariantSidebar();
+            deleteImage();
+            createProductPrice();
+            updateProductPrice();
+            deleteProductPrice();
         });
+
+        /** Insert one price with AJAX and refresh the rendered prices component. */
+        function createProductPrice() {
+            const form = document.getElementById('create-product-price-form');
+            const list = document.getElementById('product-prices-list');
+            const message = document.getElementById('price-form-message');
+            const button = document.getElementById('create-price-button');
+
+            if (!form || !list || !message || !button) return;
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                button.disabled = true;
+                message.innerHTML = '';
+
+                $.ajax({
+                    url: form.action,
+                    type: 'POST',
+                    data: $(form).serialize(),
+                    success: function(response) {
+                        list.innerHTML = response.html;
+                        message.textContent = response.message;
+                        message.className = 'alert alert-success mt-3';
+                        form.reset();
+                    },
+                    error: function(xhr) {
+                        const errors = xhr.responseJSON?.errors;
+                        const errorText = errors ?
+                            Object.values(errors).flat().join(' ') :
+                            (xhr.responseJSON?.message || 'Грешка при добавяне на цена.');
+                        message.textContent = errorText;
+                        message.className = 'alert alert-danger mt-3';
+                    },
+                    complete: function() {
+                        button.disabled = false;
+                    }
+                });
+            });
+        }
+
+        /**
+         * Update an existing product price via AJAX.
+         */
+        function updateProductPrice() {
+            $(document).on('submit', '.update-product-price-form', function(event) {
+                event.preventDefault();
+
+                const form = $(this);
+                const button = $(`button[form="${this.id}"]`);
+                const pricesList = $('#product-prices-list');
+
+                button.prop('disabled', true);
+
+                $.ajax({
+                    url: form.attr('action'),
+                    type: 'POST',
+                    data: form.serialize(),
+
+                    success: function(response) {
+                        pricesList.html(response.html);
+
+                        alert(response.message);
+                    },
+
+                    error: function(xhr) {
+                        const errors = xhr.responseJSON?.errors;
+
+                        const errorText = errors ?
+                            Object.values(errors).flat().join(' ') :
+                            (xhr.responseJSON?.message || 'Грешка при редактиране на цената.');
+
+                        alert(errorText);
+                    },
+
+                    complete: function() {
+                        button.prop('disabled', false);
+                    }
+                });
+            });
+        }
+
+
+        /**
+         * Delete an existing product price via AJAX.
+         */
+        function deleteProductPrice() {
+            $(document).on('submit', '.delete-product-price-form', function(event) {
+                event.preventDefault();
+
+                if (!confirm('Сигурен ли си, че искаш да изтриеш тази цена?')) {
+                    return;
+                }
+
+                const form = $(this);
+                const button = form.find('button[type="submit"]');
+                const pricesList = $('#product-prices-list');
+
+                button.prop('disabled', true);
+
+                $.ajax({
+                    url: form.attr('action'),
+                    type: 'POST',
+                    data: form.serialize(),
+
+                    success: function(response) {
+                        pricesList.html(response.html);
+                    },
+
+                    error: function(xhr) {
+                        alert(
+                            xhr.responseJSON?.message ||
+                            'Възникна грешка при изтриването на цената.'
+                        );
+                    },
+
+                    complete: function() {
+                        button.prop('disabled', false);
+                    }
+                });
+            });
+        }
+
+
 
         /** Open the variant sidebar */
         function openVariantSidebar() {
@@ -304,60 +473,56 @@
             overlay.addEventListener('click', closeSidebar);
         }
 
-        /** Delete an image */
+
+        /**
+         * Delete a product gallery image via AJAX.
+         */
         function deleteImage() {
-            const deleteButtons = document.querySelectorAll('.gallery-img-bin__delete');
 
-            deleteButtons.forEach(button => {
-                button.addEventListener('click', function(event) {
-                    event.preventDefault();
+            $(document).on('click', '.gallery-img-bin__delete', function(event) {
 
-                    const confirmed = confirm(
-                        'Сигурен ли си, че искаш да изтриеш тази снимка?'
-                    );
+                event.preventDefault();
 
-                    if (!confirmed) {
-                        return;
+                const button = $(this);
+
+                const confirmed = confirm(
+                    'Сигурен ли си, че искаш да изтриеш тази снимка?'
+                );
+
+                if (!confirmed) {
+                    return;
+                }
+
+                const imageContainer = button.closest('.gallery-img-bin');
+
+                button.prop('disabled', true);
+
+                $.ajax({
+                    url: button.attr('data-url'),
+                    type: 'POST',
+
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        _method: 'DELETE',
+                        image: button.attr('data-image')
+                    },
+
+                    success: function(response) {
+                        imageContainer.remove();
+                    },
+
+                    error: function(xhr) {
+                        alert(
+                            xhr.responseJSON?.message ||
+                            'Възникна грешка при изтриването на снимката.'
+                        );
+                    },
+
+                    complete: function() {
+                        button.prop('disabled', false);
                     }
-
-                    const deleteButton = this;
-                    const buttonParent = deleteButton.parentElement;
-                    const imageElement = buttonParent.querySelector('img');
-
-                    if (!imageElement) {
-                        alert('Снимката не беше намерена.');
-
-                        return;
-                    }
-
-                    const deletionImage = imageElement.alt;
-
-                    deleteButton.disabled = true;
-
-                    $.ajax({
-                        url: "{{ route('product.gallery-image.delete', $product) }}",
-                        type: "DELETE",
-
-                        data: {
-                            _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                            image: deletionImage
-                        },
-
-                        success: function(response) {
-                            buttonParent.remove();
-                        },
-
-                        error: function(xhr) {
-                            alert(xhr.responseJSON?.message ??
-                                'Възникна грешка при изтриването на снимката.'
-                            );
-                        },
-
-                        complete: function() {
-                            deleteButton.disabled = false;
-                        }
-                    });
                 });
+
             });
         }
     </script>

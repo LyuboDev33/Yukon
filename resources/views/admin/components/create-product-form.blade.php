@@ -49,13 +49,6 @@
             <textarea name="description" rows="4" class="form-control">{{ old('description') }}</textarea>
         </div>
 
-        {{-- ================= PRICING ================= --}}
-        <div class="col-lg-4">
-            <label>Цена </label>
-            <input type="number" step="0.01" name="price" class="form-control" value="{{ old('price', 0) }}"
-                required>
-        </div>
-
         {{-- ================= IMAGES ================= --}}
         <div class="col-lg-4">
             <label>Главна снимка</label>

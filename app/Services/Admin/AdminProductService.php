@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Admin;
 
 use App\Models\Category;
 use App\Models\Product;
@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
-class ProductService
+class AdminProductService
 {
 
     /**
@@ -18,7 +18,8 @@ class ProductService
      * @param Request $request
      * @return Builder
      */
-    public static function filteredProducts(Builder $query, Request $request): Builder {
+    public static function filteredProducts(Builder $query, Request $request): Builder
+    {
 
         $filters = $request->except([
             'page',
@@ -32,9 +33,13 @@ class ProductService
                 continue;
             }
 
-            $query->whereHas('attributeValues', function ($query) use ($attributeTypeSlug, $attributeValueSlug) {
+            $query->whereHas(
+                'attributeValues',
+                function ($query) use ($attributeTypeSlug, $attributeValueSlug) {
                     $query->where('slug', $attributeValueSlug)
-                        ->whereHas('type', function ($query) use ($attributeTypeSlug) {
+                        ->whereHas(
+                            'type',
+                            function ($query) use ($attributeTypeSlug) {
                                 $query->where(
                                     'slug',
                                     $attributeTypeSlug
@@ -50,11 +55,9 @@ class ProductService
             $query->whereBetween('price', [0, $request->integer('price-range')]);
         }
 
-
         if ($request->stock === 'in_stock') {
             $query->where('stock', '>', 0);
         }
-
 
         if ($request->stock === 'out_of_stock') {
             $query->where('stock', '<=', 0);
@@ -64,23 +67,6 @@ class ProductService
         return $query;
     }
 
-    /** This method checks whether the product is Dioptric
-     *
-     * @param Product $product
-     * @return boolean
-     */
-    public static function isProductSunglasses(Product $product): bool
-    {
-        $categoryIds = [];
-
-        foreach ($product->categories as $category) {
-            $categoryIds = array_merge($categoryIds, self::getCategoryIds($category));
-        }
-
-        return Category::whereIn('id', array_unique($categoryIds))
-            ->where('slug', 'slunchevi-ochila')
-            ->exists();
-    }
 
     /** Return all ids of a given category
      *

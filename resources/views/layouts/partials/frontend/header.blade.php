@@ -79,9 +79,7 @@
                 <div class="container ct-container">
 
                     <!-- Logo -->
-                    <a href="/" class="navbar-brand">
-                        <img src="{{ asset('assets/images/logo-w.svg') }}" alt="Logo" class="img-fluid">
-                    </a>
+                    <x-logo width="250" mobileWidth="150"/>
 
                     <!-- Desktop Navigation -->
                     <div class="desktop-navigation d-none d-xl-flex flex-grow-1">
@@ -95,11 +93,16 @@
 
                         <div class="d-flex align-items-center gap-3">
 
-                            <a href="cart.html" class="icon-lg position-relative bg-light rounded-circle"><i
-                                    class="fa fa-shopping-cart"></i><sup>2</sup></a>
+                            <a href="{{ route('cart') }}" class="icon-lg position-relative bg-light rounded-circle">
+                                <i class="fa fa-shopping-cart"></i>
 
-                            <a href="quote.html" class="btn btn-primary btn-hover">
-                                Free Quote
+                                <sup>
+                                    {{ count(Session::get('products', [])) }}
+                                </sup>
+                            </a>
+
+                            <a href="{{ route('contact') }}" class="btn btn-primary btn-hover">
+                                Контакти
                                 <i class="fa fa-arrow-right"></i>
                                 <span></span>
                             </a>
@@ -111,7 +114,7 @@
                     <!-- Mobile Menu Button -->
                     <button class="navbar-toggler offcanvas-nav-btn d-xl-none" type="button"
                         aria-label="Open navigation" aria-controls="mobile-sidebar" aria-expanded="false">
-                        Menu
+                        МЕНЮ
                         <i class="fa fa-bars ms-2"></i>
                     </button>
 

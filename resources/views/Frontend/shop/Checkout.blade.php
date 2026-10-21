@@ -1,806 +1,488 @@
 <x-frontend>
-
     @section('SEO')
-        <title>Завършване на поръчката | ReLux TopShopping</title>
-
+        <title>Завършване на поръчката | ЮКОН ООД</title>
         <meta name="description"
-            content="Завършете своята поръчка в ReLux TopShopping. Въведете данни за доставка, изберете адрес или офис на Еконт и прегледайте продуктите преди потвърждение.">
-
+            content="Потвърдете поръчката си на кашони и опаковки от велпапе от ЮКОН ООД. Изберете доставка, въведете данните си и прегледайте стойността на продуктите.">
         <meta name="robots" content="noindex,nofollow">
-
         <meta name="googlebot" content="noindex,nofollow">
-
         <meta property="og:locale" content="bg_BG">
         <meta property="og:type" content="website">
-        <meta property="og:site_name" content="ReLux TopShopping">
-        <meta property="og:title" content="Завършване на поръчката | ReLux TopShopping">
-        <meta property="og:description"
-            content="Прегледайте своята поръчка, изберете начин на доставка и завършете покупката си в ReLux TopShopping.">
-
-        <meta name="twitter:card" content="summary_large_image">
-
-        <meta name="twitter:title" content="Завършване на поръчката | ReLux TopShopping">
-
-        <meta name="twitter:description"
-            content="Прегледайте продуктите, изберете начин на доставка и завършете своята поръчка в ReLux TopShopping.">
-
-        <meta name="author" content="ReLux TopShopping">
-
-        <meta name="application-name" content="ReLux TopShopping">
-
-        <meta name="theme-color" content="#171717">
+        <meta property="og:site_name" content="ЮКОН ООД">
+        <meta property="og:title" content="Завършване на поръчката | ЮКОН ООД">
+        <meta property="og:description" content="Прегледайте избраните продукти и завършете поръчката си в ЮКОН ООД.">
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="Завършване на поръчката | ЮКОН ООД">
+        <meta name="author" content="ЮКОН ООД">
+        <meta name="application-name" content="ЮКОН ООД">
+        <meta name="theme-color" content="#d18b36">
     @endsection
-    <!-- Main Content Wrapper Start -->
-    <div class="main-content-wrapper">
 
-        <!-- Checkout Area Start -->
-        <div class="checkout-area pt--40 pb--80 pt-md--30 pb-md--60">
-            <div class="container">
+    <section class="yk-checkout main-content-wrapper">
+        <div class="container">
+            <div class="yk-checkout__eyebrow">Последна стъпка</div>
+            <h1 class="yk-checkout__heading">Завършване на поръчката</h1>
+            <p class="yk-checkout__intro">Попълнете данните си и прегледайте поръчката преди потвърждение.</p>
 
-                @error('order')
-                    <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
+            @if ($errors->any())
+                <div class="alert alert-danger mb-4" role="alert">
+                    <strong>Моля, проверете въведените данни.</strong>
+                    <ul class="mb-0 mt-2">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-                        {{ $message }}
-
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Затвори">
-                        </button>
-                    </div>
-                @enderror
-
-                <form action="{{ route('order.create') }}" method="POST" class="checkout-form">
-
-                    @csrf
-
-                    <input type="hidden" name="promo_code" value="{{ old('promo_code') }}">
-
-                    <div class="checkout-wrapper bg--2">
-                        <div class="row">
-
-                            <!-- Delivery Information Start -->
-                            <div class="col-lg-6">
-
-                                <div class="checkout-title">
-                                    <h2>
-                                        Данни за доставка
-                                    </h2>
+            <form action="{{ route('order.create') }}" method="POST" id="yk-checkout-form">
+                @csrf
+                <input type="hidden" name="promo_code"
+                    value="{{ old('promo_code', session('promo_code.promo_code_name', '')) }}">
+                <div class="row g-4">
+                    <div class="col-lg-7">
+                        <div class="yk-checkout__card shadow">
+                            <div class="yk-checkout__section-heading"><span class="yk-checkout__number">01</span>
+                                <h2>Вашите данни</h2>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 yk-checkout__field">
+                                    <label class="yk-checkout__label" for="fname">Име <span
+                                            class="yk-checkout__required">*</span></label>
+                                    <input class="yk-checkout__input" type="text" name="fname" id="fname"
+                                        value="{{ old('fname') }}" placeholder="Вашето име" autocomplete="given-name"
+                                        required>
+                                    @error('fname')
+                                        <div class="yk-checkout__error">{{ $message }}</div>
+                                    @enderror
                                 </div>
-
-                                <div class="checkout-form">
-
-                                    <!-- Personal Information -->
-                                    <div class="row mb--30">
-
-                                        <div class="form__group col-md-6 mb-sm--30">
-                                            <label for="fname" class="form__label">
-
-                                                Име <span>*</span>
-                                            </label>
-
-                                            <input type="text" name="fname" id="fname"
-                                                class="form__input form__input--2" placeholder="Въведете първото си име"
-                                                value="{{ old('fname') }}">
-
-                                            @error('fname')
-                                                <div class="text-danger mt-2">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-
-                                        <div class="form__group col-md-6">
-                                            <label for="lname" class="form__label">
-
-                                                Фамилия <span>*</span>
-                                            </label>
-
-                                            <input type="text" name="lname" id="lname"
-                                                class="form__input form__input--2" placeholder="Въведете фамилията си"
-                                                value="{{ old('lname') }}">
-
-                                            @error('lname')
-                                                <div class="text-danger mt-2">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-
-                                    </div>
-
-                                    <div class="row mb--30">
-
-                                        <div class="form__group col-md-6 mb-sm--30">
-                                            <label for="phone" class="form__label">
-
-                                                Телефон <span>*</span>
-                                            </label>
-
-                                            <input type="tel" name="phone" id="phone"
-                                                class="form__input form__input--2"
-                                                placeholder="Въведете телефонен номер" value="{{ old('phone') }}">
-
-                                            @error('phone')
-                                                <div class="text-danger mt-2">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-
-                                        <div class="form__group col-md-6">
-                                            <label for="email" class="form__label">
-
-                                                Имейл <span>*</span>
-                                            </label>
-
-                                            <input type="email" name="email" id="email"
-                                                class="form__input form__input--2" placeholder="Въведете имейл адрес"
-                                                value="{{ old('email') }}">
-
-                                            @error('email')
-                                                <div class="text-danger mt-2">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-
-                                    </div>
-
-                                    <!-- Delivery Method Start -->
-                                    <div class="checkout-delivery mb--30">
-
-                                        <div class="checkout-title">
-                                            <h3>
-                                                Начин на доставка
-                                            </h3>
-                                        </div>
-
-                                        <div class="d-flex flex-wrap gap-3">
-
-                                            <div class="custom-radio">
-                                                <input type="radio" name="delivery_method" id="delivery-personal"
-                                                    value="personal"
-                                                    {{ old('delivery_method', 'personal') === 'personal' ? 'checked' : '' }}>
-
-                                                <label for="delivery-personal">
-                                                    <i class="fa-solid fa-house me-2"></i>
-                                                    До личен адрес
-                                                </label>
-                                            </div>
-
-                                            <div class="custom-radio">
-                                                <input type="radio" name="delivery_method" id="delivery-office"
-                                                    value="office"
-                                                    {{ old('delivery_method') === 'office' ? 'checked' : '' }}>
-
-                                                <label for="delivery-office">
-                                                    <i class="fa-solid fa-box me-2"></i>
-                                                    До офис на Еконт
-                                                </label>
-                                            </div>
-
-                                        </div>
-
-                                        @error('delivery_method')
-                                            <div class="text-danger mt-2">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-
-                                        @error('delivery')
-                                            <div class="text-danger mt-2">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-
-                                    </div>
-                                    <!-- Delivery Method End -->
-
-                                    <!-- Personal Address Start -->
-                                    <div id="personal-delivery"
-                                        class="{{ old('delivery_method', 'personal') === 'personal' ? '' : 'd-none' }}">
-
-                                        <div class="row mb--30">
-
-                                            <div class="form__group col-md-6 mb-sm--30">
-                                                <label for="city" class="form__label">
-
-                                                    Град <span>*</span>
-                                                </label>
-
-                                                <select name="city" id="city"
-                                                    class="form__input form__input--2 attribute-choice">
-
-                                                    <option value="">
-                                                        Напишете град и го изберете
-                                                    </option>
-
-                                                    @foreach ($cities as $city)
-                                                        <option value="{{ $city->name }}"
-                                                            {{ old('city') === $city->name ? 'selected' : '' }}>
-
-                                                            {{ $city->name }}
-                                                        </option>
-                                                    @endforeach
-
-                                                </select>
-
-                                                @error('city')
-                                                    <div class="text-danger mt-2">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-
-                                            <div class="form__group col-md-6">
-                                                <label for="billing_address" class="form__label">
-
-                                                    Адрес <span>*</span>
-                                                </label>
-
-                                                <input type="text" name="billing_address" id="billing_address"
-                                                    class="form__input form__input--2"
-                                                    placeholder="Улица, номер, вход, етаж и апартамент"
-                                                    value="{{ old('billing_address') }}">
-
-                                                @error('billing_address')
-                                                    <div class="text-danger mt-2">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                    <!-- Personal Address End -->
-
-                                    <!-- Econt Office Start -->
-                                    <div id="office-delivery"
-                                        class="{{ old('delivery_method') === 'office' ? '' : 'd-none' }}">
-
-                                        <div class="row mb--30">
-
-                                            <div class="form__group col-12">
-
-                                                <label for="office_list" class="form__label">
-                                                    Град / офис на Еконт <span>*</span>
-                                                </label>
-
-                                                <select name="office_list" id="office_list"
-                                                    class="form__input form__input--2 attribute-choice">
-
-                                                    <option value="">
-                                                        Изберете офис на Еконт
-                                                    </option>
-
-                                                    @foreach ($offices as $office)
-                                                        <option
-                                                            value="{{ $office->name }} [{{ $office->office_id }}]"
-                                                            {{ old('office_list') === $office->name . ' [' . $office->office_id . ']' ? 'selected' : '' }}>
-                                                            {{ $office->name }} [{{ $office->office_id }}] —
-                                                            {{ $office->city }} — {{ $office->full_address }}
-                                                        </option>
-                                                    @endforeach
-
-                                                </select>
-
-                                                @error('office_list')
-                                                    <div class="text-danger mt-2">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-
-                                                <small class="d-block mt-2 text-muted">
-                                                    Изберете най-удобния за вас офис на Еконт. В списъка са посочени
-                                                    градът и пълният адрес на всеки офис.
-                                                </small>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                    <!-- Econt Office End -->
-
-                                    <!-- Invoice Start -->
-                                    <div class="checkout-invoice">
-
-                                        <div class="custom-checkbox">
-
-                                            <input type="checkbox" name="request_invoice" id="request_invoice"
-                                                class="form__checkbox" value="1"
-                                                {{ old('request_invoice') ? 'checked' : '' }}>
-
-                                            <label for="request_invoice" class="form__checkbox--label">
-
-                                                Желая фактура
-                                            </label>
-
-                                        </div>
-
-                                        <div class="checkout-invoice__fields d-none mt--30">
-
-                                            <div class="row mb--30">
-
-                                                <div class="form__group col-md-6 mb-sm--30">
-                                                    <label for="company_name" class="form__label">
-
-                                                        Име на фирма <span>*</span>
-                                                    </label>
-
-                                                    <input type="text" name="company_name" id="company_name"
-                                                        class="form__input form__input--2"
-                                                        value="{{ old('company_name') }}">
-
-                                                    @error('company_name')
-                                                        <div class="text-danger mt-2">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="form__group col-md-6">
-                                                    <label for="company_mol" class="form__label">
-
-                                                        МОЛ <span>*</span>
-                                                    </label>
-
-                                                    <input type="text" name="company_mol" id="company_mol"
-                                                        class="form__input form__input--2"
-                                                        value="{{ old('company_mol') }}">
-
-                                                    @error('company_mol')
-                                                        <div class="text-danger mt-2">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-
-                                            </div>
-
-                                            <div class="row mb--30">
-
-                                                <div class="form__group col-md-6 mb-sm--30">
-                                                    <label for="company_bulstat" class="form__label">
-
-                                                        ЕИК / Булстат <span>*</span>
-                                                    </label>
-
-                                                    <input type="text" name="company_bulstat" id="company_bulstat"
-                                                        class="form__input form__input--2"
-                                                        value="{{ old('company_bulstat') }}">
-
-                                                    @error('company_bulstat')
-                                                        <div class="text-danger mt-2">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="form__group col-md-6">
-                                                    <label for="company_address" class="form__label">
-
-                                                        Адрес на фирма <span>*</span>
-                                                    </label>
-
-                                                    <input type="text" name="company_address" id="company_address"
-                                                        class="form__input form__input--2"
-                                                        value="{{ old('company_address') }}">
-
-                                                    @error('company_address')
-                                                        <div class="text-danger mt-2">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                        @error('company')
-                                            <div class="alert alert-danger mt-3">
-                                                Моля, въведете всички фирмени данни,
-                                                когато желаете фактура.
-                                            </div>
-                                        @enderror
-
-                                    </div>
-                                    <!-- Invoice End -->
-
+                                <div class="col-sm-6 yk-checkout__field">
+                                    <label class="yk-checkout__label" for="lname">Фамилия <span
+                                            class="yk-checkout__required">*</span></label>
+                                    <input class="yk-checkout__input" type="text" name="lname" id="lname"
+                                        value="{{ old('lname') }}" placeholder="Вашата фамилия"
+                                        autocomplete="family-name" required>
+                                    @error('lname')
+                                        <div class="yk-checkout__error">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-sm-6 yk-checkout__field">
+                                    <label class="yk-checkout__label" for="phone">Телефон <span
+                                            class="yk-checkout__required">*</span></label>
+                                    <input class="yk-checkout__input" type="tel" name="phone" id="phone"
+                                        value="{{ old('phone') }}" placeholder="08XXXXXXXX" autocomplete="tel"
+                                        required>
+                                    @error('phone')
+                                        <div class="yk-checkout__error">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-sm-6 yk-checkout__field">
+                                    <label class="yk-checkout__label" for="email">Имейл <span
+                                            class="yk-checkout__required">*</span></label>
+                                    <input class="yk-checkout__input" type="email" name="email" id="email"
+                                        value="{{ old('email') }}" placeholder="example@email.com" autocomplete="email"
+                                        required>
+                                    @error('email')
+                                        <div class="yk-checkout__error">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
-                            <!-- Delivery Information End -->
-
-                            <!-- Order Details Start -->
-                            <div class="col-lg-6 mt-md--30">
-
-                                <div class="order-details">
-
-                                    <h3 class="heading-tertiary">
-                                        Вашата поръчка
-                                    </h3>
-
-                                    <div class="order-table table-content table-responsive mb--30">
-
-                                        <table class="table">
-
-                                            <thead>
-                                                <tr>
-                                                    <th>Продукт</th>
-                                                    <th>Общо</th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-
-                                                @foreach ($products ?? [] as $product)
-                                                    <tr>
-
-                                                        <td>
-
-                                                            <div class="d-flex align-items-center gap-3">
-
-                                                                <a href="{{ route('shop.show', $product['slug']) }}">
-
-                                                                    <img src="{{ asset('assets/images/products/' . $product['image']) }}"
-                                                                        alt="{{ $product['name'] }}" width="75">
-                                                                </a>
-
-                                                                <div>
-
-                                                                    <h4 class="mb-1">
-
-                                                                        <a
-                                                                            href="{{ route('shop.show', $product['slug']) }}">
-                                                                            {{ $product['name'] }}
-                                                                        </a>
-                                                                    </h4>
-
-                                                                    <span>
-                                                                        Количество:
-                                                                        <strong>
-                                                                            {{ $product['quantity'] }}
-                                                                        </strong>
-                                                                    </span>
-
-                                                                    @if ((int) ($product['discount'] ?? 0) > 0)
-                                                                        <div class="mt-1">
-                                                                            <span class="badge bg-danger">
-                                                                                -{{ $product['discount'] }}%
-                                                                            </span>
-                                                                        </div>
-                                                                    @endif
-
-                                                                </div>
-
-                                                            </div>
-
-                                                        </td>
-
-                                                        <td>
-
-                                                            @if ((int) ($product['discount'] ?? 0) > 0)
-                                                                <del class="text-muted d-block">
-                                                                    {{ number_format($product['price'] * $product['quantity'], 2) }}
-                                                                    €
-                                                                </del>
-
-                                                                <strong class="text-danger">
-                                                                    {{ number_format($product['final_price'] * $product['quantity'], 2) }}
-                                                                    €
-                                                                </strong>
-                                                            @else
-                                                                <strong>
-                                                                    {{ number_format($product['final_price'] * $product['quantity'], 2) }}
-                                                                    €
-                                                                </strong>
-                                                            @endif
-
-                                                        </td>
-
-                                                    </tr>
-                                                @endforeach
-
-                                            </tbody>
-
-                                            <tfoot>
-
-                                                @if (!empty($promoCode))
-                                                    <tr class="cart-subtotal">
-
-                                                        <th>
-                                                            Промо код
-
-                                                            <span class="d-block text-success mt-1">
-                                                                {{ $promoCode['promo_code_name'] }}
-                                                            </span>
-                                                        </th>
-
-                                                        <td>
-                                                            <strong class="text-success">
-                                                                -{{ $promoCode['percentage_promo_code'] }}%
-                                                            </strong>
-                                                        </td>
-
-                                                    </tr>
-                                                @endif
-
-                                                <tr class="shipping">
-
-                                                    <th>
-                                                        Доставка
-                                                    </th>
-
-                                                    <td>
-                                                        Потвърждава се по телефона
-                                                    </td>
-
-                                                </tr>
-
-                                                <tr class="order-total">
-
-                                                    <th>
-                                                        Общо
-                                                    </th>
-
-                                                    <td>
-
-                                                        @if (!empty($promoCode))
-                                                            <del class="text-muted d-block">
-                                                                {{ number_format($subtotal + $promoDiscount, 2) }}
-                                                                €
-                                                            </del>
-
-                                                            <span class="order-total-ammount text-success">
-                                                                {{ number_format($subtotal, 2) }} €
-                                                            </span>
-                                                        @else
-                                                            <span class="order-total-ammount">
-                                                                {{ number_format($subtotal ?? 0, 2) }} €
-                                                            </span>
-                                                        @endif
-
-                                                    </td>
-
-                                                </tr>
-
-                                            </tfoot>
-
-                                        </table>
-
-                                    </div>
-
-                                    <!-- Promo Code Start -->
-                                    <div class="checkout-promo-code mb--30">
-
-                                        <h3 class="heading-tertiary">
-                                            Промо код
-                                        </h3>
-
-                                        <div class="form__group">
-
-                                            <label for="promo-code-input" class="form__label">
-
-                                                Код за отстъпка
-                                            </label>
-
-                                            <input type="text" id="promo-code-input"
-                                                class="form__input form__input--2" placeholder="Въведете промо код"
-                                                value="{{ session('promo_code.promo_code_name', '') }}"
-                                                autocomplete="off">
-
-                                        </div>
-
-                                        <button type="button" id="apply-promo-code"
-                                            class="btn btn-medium btn-style-3 mt--20">
-
-                                            {{ session()->has('promo_code') ? 'Промокодът е приложен' : 'Приложи промокода' }}
-                                        </button>
-
-                                        <div id="promo-code-message" class="mt-2" aria-live="polite">
-                                        </div>
-
-                                    </div>
-                                    <!-- Promo Code End -->
-
-                                    <!-- Payment Start -->
-                                    <div class="checkout-payment">
-
-                                        <div class="payment-group">
-
-                                            <h4 class="payment-group__title">
-                                                Начин на плащане
-                                            </h4>
-
-                                            <!-- Cash on Delivery -->
-                                            <div class="payment-option">
-
-                                                <input type="radio" name="payment_method" id="cash-on-delivery"
-                                                    value="cash_on_delivery" checked>
-
-                                                <label for="cash-on-delivery" class="payment-option__label">
-
-                                                    <div class="payment-option__left">
-
-                                                        <span class="payment-option__radio"></span>
-
-                                                        <div class="payment-option__content">
-
-                                                            <span class="payment-option__title">
-                                                                Плащане при получаване
-                                                            </span>
-
-                                                            <span class="payment-option__description">
-                                                                Платете в брой при получаване на пратката от куриера.
-                                                            </span>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="payment-option__icon">
-                                                        <i class="fa-solid fa-money-bill-wave"></i>
-                                                    </div>
-
-                                                </label>
-
-                                            </div>
-
-
-                                            <!-- UniCredit -->
-                                            <div class="payment-option">
-
-                                                <input type="radio" name="payment_method" id="unicredit" value="unicredit">
-
-                                                <label for="unicredit" class="payment-option__label">
-
-                                                    <div class="payment-option__left">
-
-                                                        <span class="payment-option__radio"></span>
-
-                                                        <div class="payment-option__content">
-
-                                                            <span class="payment-option__title">
-                                                                Покупка на изплащане
-                                                            </span>
-
-                                                            <span class="payment-option__description">
-                                                                Купете продуктите на изплащане чрез UniCredit Consumer
-                                                                Financing.
-                                                            </span>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="payment-option__logo">
-                                                        <img src="/assets/img/unicredit.png"
-                                                            alt="UniCredit Consumer Financing">
-                                                    </div>
-                                                </label>
-
-                                            </div>
-
-                                        </div>
-
-
-                                        <div class="payment-btn-group">
-                                            <button type="submit" class="btn btn-style-3">
-
-                                                <i class="fa-solid fa-check me-2"></i>
-
-                                                Завърши поръчката
-
-                                            </button>
-                                        </div>
-
-                                    </div>
-                                    <!-- Payment End -->
-
-                                </div>
-
+                        </div>
+
+                        <div class="yk-checkout__card checkout-delivery shadow">
+                            <div class="yk-checkout__section-heading"><span class="yk-checkout__number">02</span>
+                                <h2>Начин на доставка</h2>
                             </div>
-                            <!-- Order Details End -->
+                            <div class="yk-checkout__choices">
+                                <div class="yk-checkout__choice">
+                                    <input type="radio" name="delivery_method" id="delivery-personal"
+                                        value="personal"
+                                        {{ old('delivery_method', 'personal') === 'personal' ? 'checked' : '' }}>
+                                    <label for="delivery-personal"><span class="yk-checkout__choice-icon"><i
+                                                class="fa-solid fa-house"></i></span><span><strong>До личен
+                                                адрес</strong><small>Доставка до посочен адрес</small></span></label>
+                                </div>
+                                <div class="yk-checkout__choice">
+                                    <input type="radio" name="delivery_method" id="delivery-office" value="office"
+                                        {{ old('delivery_method') === 'office' ? 'checked' : '' }}>
+                                    <label for="delivery-office"><span class="yk-checkout__choice-icon"><i
+                                                class="fa-solid fa-box"></i></span><span><strong>До офис на
+                                                Еконт</strong><small>Вземане от избран офис</small></span></label>
+                                </div>
+                            </div>
+                            @error('delivery_method')
+                                <div class="yk-checkout__error">{{ $message }}</div>
+                            @enderror
+                            @error('delivery')
+                                <div class="yk-checkout__error">{{ $message }}</div>
+                            @enderror
+                            <div id="personal-delivery"
+                                class="yk-checkout__panel {{ old('delivery_method', 'personal') === 'personal' ? '' : 'd-none' }}">
+                                <div class="row">
+                                    <div class="col-sm-6 yk-checkout__field mb-sm-0">
+                                        <label class="yk-checkout__label" for="city">Град <span
+                                                class="yk-checkout__required">*</span></label>
+                                        <select name="city" id="city"
+                                            class="yk-checkout__input attribute-choice">
+                                            <option value="">Напишете град и го изберете</option>
+                                            @foreach ($cities as $city)
+                                                <option value="{{ $city->name }}"
+                                                    {{ old('city') === $city->name ? 'selected' : '' }}>
+                                                    {{ $city->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('city')
+                                            <div class="yk-checkout__error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-sm-6 yk-checkout__field mb-0">
+                                        <label class="yk-checkout__label" for="billing_address">Адрес <span
+                                                class="yk-checkout__required">*</span></label>
+                                        <input class="yk-checkout__input" type="text" name="billing_address"
+                                            id="billing_address" value="{{ old('billing_address') }}"
+                                            placeholder="Улица, номер, вход, етаж..." autocomplete="street-address">
+                                        @error('billing_address')
+                                            <div class="yk-checkout__error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="office-delivery"
+                                class="yk-checkout__panel {{ old('delivery_method') === 'office' ? '' : 'd-none' }}">
+                                <div class="yk-checkout__field mb-0">
+                                    <label class="yk-checkout__label" for="office_list">Град / офис на Еконт <span
+                                            class="yk-checkout__required">*</span></label>
+                                    <select name="office_list" id="office_list"
+                                        class="yk-checkout__input attribute-choice">
+                                        <option value="">Изберете офис на Еконт</option>
+                                        @foreach ($offices as $office)
+                                            @php $officeValue = $office->name . ' [' . $office->office_id . ']'; @endphp
+                                            <option value="{{ $officeValue }}"
+                                                {{ old('office_list') === $officeValue ? 'selected' : '' }}>
+                                                {{ $office->name }} [{{ $office->office_id }}] — {{ $office->city }}
+                                                — {{ $office->full_address }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <div class="yk-checkout__hint">Изберете удобен офис от списъка.</div>
+                                    @error('office_list')
+                                        <div class="yk-checkout__error">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="yk-checkout__card checkout-invoice shadow">
+                            <div class="yk-checkout__section-heading"><span class="yk-checkout__number">03</span>
+                                <h2>Фактура</h2>
+                            </div>
+                            <label class="yk-checkout__invoice-toggle" for="request_invoice">
+                                <span><strong>Желая фактура</strong><small>Добавете фирмени данни, ако поръчвате от
+                                        името на фирма.</small></span>
+                                <input type="checkbox" name="request_invoice" id="request_invoice" value="1"
+                                    {{ old('request_invoice') ? 'checked' : '' }}>
+                            </label>
+                            <div
+                                class="checkout-invoice__fields yk-checkout__invoice-fields {{ old('request_invoice') ? '' : 'd-none' }}">
+                                <div class="row">
+                                    <div class="col-sm-6 yk-checkout__field">
+                                        <label class="yk-checkout__label" for="company_name">Име на фирма <span
+                                                class="yk-checkout__required">*</span></label>
+                                        <input class="yk-checkout__input" name="company_name" id="company_name"
+                                            value="{{ old('company_name') }}" type="text">
+                                        @error('company_name')
+                                            <div class="yk-checkout__error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-sm-6 yk-checkout__field">
+                                        <label class="yk-checkout__label" for="company_mol">МОЛ <span
+                                                class="yk-checkout__required">*</span></label>
+                                        <input class="yk-checkout__input" name="company_mol" id="company_mol"
+                                            value="{{ old('company_mol') }}" type="text">
+                                        @error('company_mol')
+                                            <div class="yk-checkout__error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-sm-6 yk-checkout__field mb-sm-0">
+                                        <label class="yk-checkout__label" for="company_bulstat">ЕИК / Булстат <span
+                                                class="yk-checkout__required">*</span></label>
+                                        <input class="yk-checkout__input" name="company_bulstat" id="company_bulstat"
+                                            value="{{ old('company_bulstat') }}" type="text" inputmode="numeric">
+                                        @error('company_bulstat')
+                                            <div class="yk-checkout__error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-sm-6 yk-checkout__field mb-0">
+                                        <label class="yk-checkout__label" for="company_address">Адрес на фирма <span
+                                                class="yk-checkout__required">*</span></label>
+                                        <input class="yk-checkout__input" name="company_address" id="company_address"
+                                            value="{{ old('company_address') }}" type="text">
+                                        @error('company_address')
+                                            <div class="yk-checkout__error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            @error('company')
+                                <div class="yk-checkout__error">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
 
-                </form>
+                    <div class="col-lg-5">
+                        <aside class="yk-checkout__summary">
+                            <details class="yk-checkout__mobile-review" id="yk-mobile-review">
+                                <summary><span><i class="fa-solid fa-chevron-down me-2"></i> Прегледай
+                                        поръчката</span><span
+                                        class="yk-checkout__mobile-total">{{ number_format((float) ($subtotal ?? 0), 2, '.', ' ') }}
+                                        €</span></summary>
+                                <div class="yk-checkout__mobile-review-body">
+                                    @foreach ($products ?? [] as $product)
+                                        <div class="yk-checkout__item">
+                                            <img class="yk-checkout__item-img"
+                                                src="{{ asset('assets/images/products/' . $product['image']) }}"
+                                                alt="{{ $product['name'] }}" loading="lazy">
+                                            <div class="yk-checkout__item-main"><span
+                                                    class="yk-checkout__item-name">{{ $product['name'] }}</span>
+                                                <div class="yk-checkout__item-meta">{{ $product['quantity'] }} бр. ×
+                                                    {{ number_format((float) $product['final_price'], 2, '.', ' ') }} €
+                                                    / бр.</div>
+                                            </div>
+                                            <span
+                                                class="yk-checkout__item-total">{{ number_format((float) $product['final_price'] * (int) $product['quantity'], 2, '.', ' ') }}
+                                                €</span>
+                                        </div>
+                                    @endforeach
+                                    @if (!empty($promoCode))
+                                        <div class="yk-checkout__row"><span>Промо код:
+                                                {{ $promoCode['promo_code_name'] }}</span><strong>-{{ $promoCode['percentage_promo_code'] }}%</strong>
+                                        </div>
+                                    @endif
+                                    <div class="yk-checkout__row"><span>Доставка</span><strong>Уточнява се</strong>
+                                    </div>
+                                    <div class="yk-checkout__row yk-checkout__grand"><span>Общо за
+                                            продуктите</span><strong>{{ number_format((float) ($subtotal ?? 0), 2, '.', ' ') }}
+                                            €</strong></div>
+                                </div>
+                            </details>
 
-            </div>
+                            <div class="yk-checkout__card shadow">
+                                <div class="yk-checkout__desktop-items">
+                                    <h2 class="yk-checkout__summary-title">Вашата поръчка</h2>
+                                    @foreach ($products ?? [] as $product)
+                                        <div class="yk-checkout__item">
+                                            <a href="{{ route('shop.show', $product['slug']) }}"><img
+                                                    class="yk-checkout__item-img"
+                                                    src="{{ asset('assets/images/products/' . $product['image']) }}"
+                                                    alt="{{ $product['name'] }}" loading="lazy"></a>
+                                            <div class="yk-checkout__item-main">
+                                                <a class="yk-checkout__item-name"
+                                                    href="{{ route('shop.show', $product['slug']) }}">{{ $product['name'] }}</a>
+                                                <div class="yk-checkout__item-meta">{{ $product['quantity'] }} бр. ×
+                                                    {{ number_format((float) $product['final_price'], 2, '.', ' ') }} €
+                                                    / бр.</div>
+                                                @if ((float) ($product['discount'] ?? 0) > 0)
+                                                    <span class="yk-checkout__discount">-{{ $product['discount'] }}%
+                                                        отстъпка</span>
+                                                @endif
+                                            </div>
+                                            <span
+                                                class="yk-checkout__item-total">{{ number_format((float) $product['final_price'] * (int) $product['quantity'], 2, '.', ' ') }}
+                                                €</span>
+                                        </div>
+                                    @endforeach
+                                    @if (!empty($promoCode))
+                                        <div class="yk-checkout__row"><span>Промо код:
+                                                {{ $promoCode['promo_code_name'] }}</span><strong>-{{ $promoCode['percentage_promo_code'] }}%</strong>
+                                        </div>
+                                        @if (isset($promoDiscount))
+                                            <div class="yk-checkout__row"><span>Отстъпка с промо
+                                                    код</span><strong>-{{ number_format((float) $promoDiscount, 2, '.', ' ') }}
+                                                    €</strong></div>
+                                        @endif
+                                    @endif
+                                    <div class="yk-checkout__row"><span>Доставка</span><strong>Уточнява се</strong>
+                                    </div>
+                                    <div class="yk-checkout__row yk-checkout__grand"><span>Общо за
+                                            продуктите</span><strong>{{ number_format((float) ($subtotal ?? 0), 2, '.', ' ') }}
+                                            €</strong></div>
+                                    <p class="yk-checkout__note">Доставката се уточнява при потвърждаване на поръчката.
+                                    </p>
+                                </div>
+
+                                <div class="yk-checkout__promo">
+                                    <h3>Имате промо код?</h3>
+                                    <div class="yk-checkout__promo-row">
+                                        <input class="yk-checkout__input" type="text" id="promo-code-input"
+                                            value="{{ session('promo_code.promo_code_name', '') }}"
+                                            placeholder="Въведете промо код" autocomplete="off">
+                                        <button class="yk-checkout__promo-btn" type="button"
+                                            id="apply-promo-code">{{ session()->has('promo_code') ? 'Приложен' : 'Приложи' }}</button>
+                                    </div>
+                                    <div id="promo-code-message" class="yk-checkout__hint" role="status"
+                                        aria-live="polite"></div>
+                                </div>
+
+                                <div class="yk-checkout__promo">
+                                    <h3>Начин на плащане</h3>
+                                    <label class="yk-checkout__payment" for="cash-on-delivery">
+                                        <input type="radio" name="payment_method" id="cash-on-delivery"
+                                            value="cash_on_delivery" checked>
+                                        <span><strong><i class="fa-solid fa-money-bill-wave me-2"></i> Плащане при
+                                                получаване</strong><small>Заплащате при получаване на
+                                                пратката.</small></span>
+                                    </label>
+                                </div>
+                                <button class="yk-checkout__submit" type="submit" id="yk-submit-order"><i
+                                        class="fa-solid fa-check"></i> Завърши поръчката <i
+                                        class="fa-solid fa-arrow-right"></i></button>
+                                <p class="yk-checkout__note text-center"><i class="fa-solid fa-lock me-1"></i> Данните
+                                    се използват за обработка на поръчката.</p>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </form>
         </div>
-        <!-- Checkout Area End -->
-
-    </div>
-    <!-- Main Content Wrapper End -->
+    </section>
 
     <script>
-        $(document).ready(function() {
-            applyPromoCode();
+        document.addEventListener('DOMContentLoaded', function() {
+            checkoutInvoice();
+            checkoutDelivery();
+            checkoutPromo();
+            checkoutSubmit();
         });
 
-        function applyPromoCode() {
-            $('#apply-promo-code').on('click', function() {
-                const button = $(this);
-                const promoCode = $('#promo-code-input').val().trim();
-                const messageBox = $('#promo-code-message');
+        function checkoutInvoice() {
+            const checkbox = document.getElementById('request_invoice');
+            const fields = document.querySelector('.checkout-invoice__fields');
+            if (!checkbox || !fields) return;
+            const inputs = fields.querySelectorAll('input, select, textarea');
 
-                messageBox
-                    .removeClass('text-danger text-success')
-                    .text('');
+            function sync() {
+                fields.classList.toggle('d-none', !checkbox.checked);
+                inputs.forEach(input => {
+                    input.disabled = !checkbox.checked;
+                    input.required = checkbox.checked;
+                });
+            }
+            checkbox.addEventListener('change', sync);
+            sync();
+        }
 
-                if (!promoCode) {
-                    messageBox
-                        .addClass('text-danger')
-                        .text('Моля, въведете промо код.');
 
-                    return;
+
+        function checkoutDelivery() {
+
+            const personalRadio = document.getElementById('delivery-personal');
+            const officeRadio = document.getElementById('delivery-office');
+
+            const personalDelivery = document.getElementById('personal-delivery');
+            const officeDelivery = document.getElementById('office-delivery');
+
+            if (
+                !personalRadio ||
+                !officeRadio ||
+                !personalDelivery ||
+                !officeDelivery
+            ) {
+                return;
+            }
+
+            function toggleDeliveryFields() {
+
+                const isPersonal = personalRadio.checked;
+
+                // Show the selected delivery method.
+                personalDelivery.classList.toggle('d-none', !isPersonal);
+                officeDelivery.classList.toggle('d-none', isPersonal);
+
+                // Update required fields without disabling Choices.js.
+                const city = document.getElementById('city');
+                const address = document.getElementById('billing_address');
+                const office = document.getElementById('office_list');
+
+                if (city) {
+                    city.required = isPersonal;
                 }
 
-                button
-                    .prop('disabled', true)
-                    .text('Проверка...');
+                if (address) {
+                    address.required = isPersonal;
+                }
 
-                $.ajax({
-                    url: "{{ route('checkout.promo.apply') }}",
-                    type: "POST",
+                if (office) {
+                    office.required = !isPersonal;
+                }
+            }
 
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        promo_code: promoCode
-                    },
+            personalRadio.addEventListener('change', toggleDeliveryFields);
+            officeRadio.addEventListener('change', toggleDeliveryFields);
 
-                    success: function(response) {
-                        messageBox
-                            .addClass('text-success')
-                            .text(response.message);
+            toggleDeliveryFields();
+        }
 
-                        sessionStorage.setItem(
-                            'scrollToCheckoutTotal',
-                            'true'
-                        );
 
-                        window.location.reload();
-                    },
 
-                    error: function(xhr) {
-                        let message =
+        function checkoutPromo() {
+            const button = document.getElementById('apply-promo-code');
+            const input = document.getElementById('promo-code-input');
+            const message = document.getElementById('promo-code-message');
+            if (!button || !input || !message) return;
+            async function apply() {
+                const code = input.value.trim();
+                message.textContent = '';
+                if (!code) {
+                    message.textContent = 'Моля, въведете промо код.';
+                    message.style.color = '#bd3838';
+                    return;
+                }
+                button.disabled = true;
+                button.textContent = 'Проверка...';
+                try {
+                    const response = await fetch(@json(route('checkout.promo.apply')), {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': @json(csrf_token()),
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        body: JSON.stringify({
+                            promo_code: code
+                        })
+                    });
+                    const data = await response.json();
+                    if (!response.ok) {
+                        const error = data.errors?.promo_code?.[0] || data.message ||
                             'Промо кодът не можа да бъде приложен.';
-
-                        if (
-                            xhr.responseJSON &&
-                            xhr.responseJSON.errors &&
-                            xhr.responseJSON.errors.promo_code
-                        ) {
-                            message =
-                                xhr.responseJSON.errors.promo_code[0];
-                        } else if (
-                            xhr.responseJSON &&
-                            xhr.responseJSON.message
-                        ) {
-                            message =
-                                xhr.responseJSON.message;
-                        }
-
-                        messageBox.addClass('text-danger').text(message);
-                    },
-
-                    complete: function() {
-                        button
-                            .prop('disabled', false)
-                            .text('Приложи');
+                        throw new Error(error);
                     }
-                });
-            });
-
-            $('#promo-code-input').on('keydown', function(event) {
-                if (event.key === 'Enter') {
-                    event.preventDefault();
-
-                    $('#apply-promo-code').trigger('click');
+                    window.location.reload();
+                } catch (error) {
+                    message.textContent = error.message || 'Възникна грешка. Опитайте отново.';
+                    message.style.color = '#bd3838';
+                    button.disabled = false;
+                    button.textContent = 'Приложи';
+                }
+            }
+            button.addEventListener('click', apply);
+            input.addEventListener('keydown', e => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    apply();
                 }
             });
         }
-    </script>
 
+        function checkoutSubmit() {
+            const form = document.getElementById('yk-checkout-form');
+            const button = document.getElementById('yk-submit-order');
+            if (!form || !button) return;
+            form.addEventListener('submit', function() {
+                if (!form.checkValidity()) return;
+                button.disabled = true;
+                button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Обработваме поръчката...';
+            });
+        }
+    </script>
 </x-frontend>

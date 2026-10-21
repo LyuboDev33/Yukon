@@ -17,7 +17,6 @@ class Product extends Model
         'discount',
         'category_id',
         'description',
-        'price',
         'main_image',
         'gallery',
     ];
@@ -57,6 +56,8 @@ class Product extends Model
         );
     }
 
-
-
+    public function prices()
+    {
+        return $this->hasMany(ProductPrice::class);
+    }
 }

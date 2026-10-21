@@ -1,9 +1,10 @@
 <?php
 
 use App\Models\API\City;
+use App\Services\Admin\EkontService;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
-
+use App\Services\Admin\SpeedyService;
 
 
 Route::prefix('admin/api')
@@ -32,4 +33,13 @@ Route::prefix('admin/api')
 
             return redirect(route('dashboard'));
         });
+
+        Route::get('/ekont', function () {
+            EkontService::insertOffices();
+        });
+
+        Route::get('/speedy', function () {
+            SpeedyService::insertOffices();
+        });
+
     });

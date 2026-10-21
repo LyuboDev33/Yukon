@@ -2,27 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Constants\PrescriptionOptions;
 use App\Models\Admin\EkontOffice;
-use App\Models\Admin\Glass;
-use App\Models\Admin\SpeedyOffice;
 use App\Models\API\City;
-use App\Models\AttributeType;
 use App\Models\Category;
 use App\Models\Product;
-use App\Services\EkontService;
-use App\Services\ProductService;
+use App\Services\Admin\AdminProductService;
 use App\Services\ShopService;
-use App\Services\SpeedyService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class ShopController extends Controller
 {
-    /** Show all products */
     /** Show all products */
     public function index(Request $request)
     {
@@ -31,11 +25,12 @@ class ShopController extends Controller
         }
 
         $query = Product::with([
+            'prices',
             'categories',
             'attributeValues.type',
         ]);
 
-        $filteredProducts = ProductService::filteredProducts($query, $request);
+        $filteredProducts = AdminProductService::filteredProducts($query, $request);
 
         $products = $filteredProducts
             ->orderByDesc('id')
@@ -53,7 +48,7 @@ class ShopController extends Controller
         return view('Frontend.shop.Shop', [
             'products' => $products,
             'category' => null,
-            'categoriesTree' => ProductService::buildCategoriesTree(),
+            'categoriesTree' => AdminProductService::buildCategoriesTree(),
             'filters' => ShopService::filters(),
         ]);
     }
@@ -73,7 +68,7 @@ class ShopController extends Controller
 
         $category = Category::where('slug', $category_slug)->firstOrFail();
 
-        $categoryIds = ProductService::getCategoryIds($category);
+        $categoryIds = AdminProductService::getCategoryIds($category);
 
         $query = Product::with([
             'categories',
@@ -82,7 +77,7 @@ class ShopController extends Controller
             $query->whereIn('category_id', $categoryIds);
         });
 
-        $filteredProducts = ProductService::filteredProducts($query, $request);
+        $filteredProducts = AdminProductService::filteredProducts($query, $request);
 
         $products = $filteredProducts
             ->orderByDesc('id')
@@ -97,9 +92,9 @@ class ShopController extends Controller
             $product->brand = $brand?->value;
         }
 
-        $categoriesTree = ProductService::buildCategoriesTree();
+        $categoriesTree = AdminProductService::buildCategoriesTree();
 
-        $breadcrumbs = ProductService::getCategoryBreadcrumbs(
+        $breadcrumbs = AdminProductService::getCategoryBreadcrumbs(
             $categoriesTree,
             $category->slug
         );
@@ -138,11 +133,7 @@ class ShopController extends Controller
             );
 
             if ($promoPercentage > 0 && $promoPercentage <= 100) {
-                $promoDiscount = round(
-                    ($subtotal * $promoPercentage) / 100,
-                    2
-                );
-
+                $promoDiscount = round(($subtotal * $promoPercentage) / 100, 2);
                 $subtotal = round($subtotal - $promoDiscount, 2);
             }
         }
@@ -218,6 +209,7 @@ class ShopController extends Controller
     public function show(string $slug)
     {
         $product = Product::with([
+            'prices',
             'categories.parent',
             'categories.children',
             'attributeValues.type',
@@ -231,10 +223,9 @@ class ShopController extends Controller
             return view('errors.ProductNotFound');
         }
 
-        // Add each product to last viewed
         ShopService::lastViewedProducts($product);
-        $similarProducts = ShopService::similarProducts($product);
 
+        $similarProducts = ShopService::similarProducts($product);
 
         $category = $product->categories->first();
 
@@ -242,13 +233,47 @@ class ShopController extends Controller
             $category = $category->parent;
         }
 
+        $prices = $product->prices
+            ->sortBy('min_quantity')
+            ->values();
+
+        $discount = (float) ($product->discount ?? 0);
+
+        $priceTiers = $prices->map(function ($price) use ($discount) {
+            $originalPrice = (float) $price->price;
+
+            return [
+                'min_quantity' => $price->min_quantity,
+                'max_quantity' => $price->max_quantity,
+                'original_price' => number_format($originalPrice, 2, '.', ''),
+                'price' => number_format(
+                    round($originalPrice * (1 - $discount / 100), 2),
+                    2,
+                    '.',
+                    ''
+                ),
+            ];
+        });
+
+        $galleryImages = collect();
+
+        if ($product->main_image) {
+            $galleryImages->push(
+                asset('assets/images/products/' . $product->main_image)
+            );
+        }
+
+        foreach ($product->gallery ?? [] as $image) {
+            $galleryImages->push(
+                asset('assets/images/product_gallery/' . $image)
+            );
+        }
+
         return view('Frontend.shop.Show', [
-            'product'             => $product,
-            'similarProducts'     => $similarProducts,
-            'productFinalPrice'   => $product->discount
-                ? $product->price
-                - ($product->price * $product->discount) / 100
-                : $product->price,
+            'product' => $product,
+            'similarProducts' => $similarProducts,
+            'priceTiers' => $priceTiers,
+            'galleryImages' => $galleryImages,
         ]);
     }
 

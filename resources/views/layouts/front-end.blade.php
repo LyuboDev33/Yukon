@@ -25,9 +25,6 @@
     <link rel="stylesheet"
         href="{{ asset('assets/css/bootstrap.min.css') }}?v={{ filemtime(public_path('assets/css/bootstrap.min.css')) }}">
 
-    <!-- Fancybox Local CSS -->
-    <link rel="stylesheet"
-        href="{{ asset('assets/css/fancybox.css') }}?v={{ filemtime(public_path('assets/css/fancybox.css')) }}">
 
     <!-- Jarallax CSS -->
     <link rel="stylesheet"
@@ -46,10 +43,26 @@
     <link rel="stylesheet"
         href="{{ asset('assets/css/style.css') }}?v={{ filemtime(public_path('assets/css/style.css')) }}">
 
+        <!-- Main Shop CSS -->
+    <link rel="stylesheet"
+        href="{{ asset('assets/css/shop.css') }}?v={{ time() }}">
+
             <!-- Main Template CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}?v={{ time() }}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+
+     <!-- Fancybox JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.umd.js" defer></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+
+
+    <!-- jQuery -->
+    <script
+        src="{{ asset('assets/js/jquery-3.7.1.min.js') }}?v={{ time() }}">
+    </script>
 
 </head>
 
@@ -88,10 +101,6 @@
     </div>
 
 
-    <!-- jQuery -->
-    <script
-        src="{{ asset('assets/js/jquery-3.7.1.min.js') }}?v={{ filemtime(public_path('assets/js/jquery-3.7.1.min.js')) }}">
-    </script>
 
 
     <!-- jQuery Marquee -->
@@ -107,6 +116,11 @@
     <!-- Bootstrap Datepicker -->
     <script
         src="{{ asset('assets/js/bootstrap-datepicker.js') }}?v={{ filemtime(public_path('assets/js/bootstrap-datepicker.js')) }}">
+    </script>
+
+    <!-- Bootstrap Datepicker -->
+    <script
+        src="{{ asset('assets/js/bootstrap.bundle.min.js') }}?v={{ time() }}">
     </script>
 
 

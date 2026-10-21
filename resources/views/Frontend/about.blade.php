@@ -1,479 +1,549 @@
+
 <x-frontend>
 
     @section('SEO')
-        <title>За нас | ReLux TopShopping – Луксозни часовници и премиум аксесоари</title>
+        <title>За нас | ЮКОН ООД – Производство на кашони и опаковки от велпапе</title>
 
         <meta name="description"
-            content="Научете повече за ReLux TopShopping – доверено място за 100% автентични луксозни часовници и премиум аксесоари. Подбрана селекция, качество, персонализирано отношение и сигурно пазаруване.">
+            content="ЮКОН ООД е производител на кашони и опаковки от велпапе от 1996 г. в Кюстендил. Изработваме транспортни, щанцови, каширани и луксозни опаковки по нуждите на клиентите.">
 
         <meta name="keywords"
-            content="за нас ReLux TopShopping, луксозни часовници, премиум часовници, автентични часовници, оригинални часовници, луксозни аксесоари, маркови часовници, часовници за колекционери, премиум аксесоари">
+            content="ЮКОН ООД, Юкон Кюстендил, производство на кашони, производство на опаковки, кашони от велпапе, опаковки от велпапе, транспортни опаковки, щанцови опаковки, каширани опаковки, луксозни опаковки, картонени кутии, производител на кашони, велпапе Кюстендил">
 
         <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-
         <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 
         <link rel="canonical" href="{{ url('/about') }}">
+
         <meta property="og:locale" content="bg_BG">
         <meta property="og:type" content="website">
-        <meta property="og:site_name" content="ReLux TopShopping">
-        <meta property="og:title" content="За нас | ReLux TopShopping – Луксозни часовници и премиум аксесоари">
-
+        <meta property="og:site_name" content="ЮКОН ООД">
+        <meta property="og:title" content="За нас | ЮКОН ООД – Кашони и опаковки от велпапе">
         <meta property="og:description"
-            content="ReLux TopShopping предлага внимателно подбрана селекция от 100% автентични премиум часовници и луксозни аксесоари, съчетани с персонализирано отношение, качество и сигурност.">
-
+            content="От 1996 г. ЮКОН ООД произвежда качествени кашони, картонени кутии и опаковки от велпапе. Разгледайте нашата дейност и решения за опаковане.">
         <meta property="og:url" content="{{ url('/about') }}">
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="За нас | ReLux TopShopping – Премиум часовници и аксесоари">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="ЮКОН ООД – Производство на кашони и опаковки">
         <meta name="twitter:description"
-            content="Открийте повече за ReLux TopShopping – автентични луксозни часовници, премиум аксесоари, внимателна селекция и персонализирано обслужване.">
-        <meta name="author" content="ReLux TopShopping">
+            content="Производство на кашони, транспортни, щанцови, каширани и луксозни опаковки от велпапе. ЮКОН ООД, Кюстендил, от 1996 г.">
 
-        <meta name="application-name" content="ReLux TopShopping">
+        <meta name="author" content="ЮКОН ООД">
+        <meta name="application-name" content="ЮКОН ООД">
+        <meta name="theme-color" content="#f59e0b">
 
-        <meta name="theme-color" content="#171717">
+
     @endsection
 
 
-    <!-- About ReLux Start -->
-    <section class="about-five relux-about-section">
+    <!-- Breadcrumb Section Start -->
+    <section class="promo-sec bg-cover jarallax" data-jarallax data-speed=".4">
+        <div class="parallax-overly"></div>
+
         <div class="container">
-            <div class="row relux-about-section__row">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="promo-wrap">
 
-                <div class="col-lg-6">
-                    <div class="about-five__left relux-about-section__content">
+                        <h1 class="display-2 text-info">За нас</h1>
 
-                        <div class="section-title text-left sec-title-animation animation-style2">
-                            <div class="section-title__tagline-box">
-                                <span class="section-title__tagline">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+
+                                <li class="breadcrumb-item">
+                                    <a href="{{ url('/') }}">Начало</a>
+                                </li>
+
+                                <li class="breadcrumb-item active" aria-current="page">
                                     За нас
-                                </span>
-                            </div>
+                                </li>
 
-                            <h2 class="section-title__title title-animation">
-                                Добре дошли в ReLux TopShopping
-                            </h2>
-                        </div>
-
-                        <p class="about-five__text-1">
-                            <strong>ReLux TopShopping</strong> е вашето доверено пространство за висша
-                            часовникарска подборка, доказан стил и безкомпромисно качество.
-                        </p>
-
-                        <p class="about-five__text-1">
-                            Ние сме динамично и бързо развиваща се компания в сферата на луксозните
-                            аксесоари и модата. Вярваме, че един премиум часовник или аксесоар е много
-                            повече от допълнение към тоалета — той е история, статус, инвестиция и
-                            израз на индивидуалност.
-                        </p>
-
-                        <h3>
-                            Нашата мисия
-                        </h3>
-
-                        <p class="about-five__text-1">
-                            Основният ни фокус е да предоставяме внимателно подбрана премиум селекция
-                            от <strong>100% автентични часовници и аксесоари</strong> от
-                            световноутвърдени марки.
-                        </p>
-
-                        <p class="about-five__text-1">
-                            В свят, преситен от масово производство и имитации, нашата цел е да
-                            осигурим на клиентите си пълна сигурност, спокойствие и удовлетворение
-                            при всяка покупка.
-                        </p>
+                            </ol>
+                        </nav>
 
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+
+    <!-- About Section Start -->
+    <section class="about-details sec-padding">
+        <div class="container">
+            <div class="row align-items-center gy-5">
+
+                <div class="col-lg-6">
+
+                    <div class="about-thumb me-lg-4">
+
+                        <img class="img-fluid"
+                            src="{{ asset('/assets/images/about-d.jpg') }}"
+                            alt="ЮКОН ООД – производство на кашони и опаковки от велпапе"
+                            loading="lazy">
+
+                        <h2 class="display-2">
+                            Производство на кашони и опаковки от велпапе
+                        </h2>
+
+                        <a href="{{ url('/contacts') }}" class="btn btn-primary">
+                            Свържете се с нас
+                            <i class="fa fa-arrow-right"></i>
+                            <span></span>
+                        </a>
+
+                    </div>
+
                 </div>
 
                 <div class="col-lg-6">
-                    <div class="about-five__right relux-about-section__image-column">
-                        <div class="relux-about-section__image-box">
-                            <img src="/assets/img/about/picture-elegant-young-fashion-man.jpg"
-                                alt="ReLux TopShopping – премиум часовници и аксесоари">
+
+                    <div class="row gy-4 abs-info-wrap">
+
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="abs-info">
+
+                                <h3 class="display-5">Основана през</h3>
+
+                                <div class="d-flex align-items-center justify-content-between border-bottom">
+                                    <img src="{{ asset('/assets/images/icons/time.svg') }}"
+                                        alt="Година на основаване"
+                                        loading="lazy">
+
+                                    <span class="display-1">1996г.</span>
+                                </div>
+
+                                <p>
+                                    Дългогодишен опит в производството на
+                                    опаковки от велпапе.
+                                </p>
+
+                            </div>
                         </div>
+
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="abs-info">
+
+                                <h3 class="display-5">Местоположение</h3>
+
+                                <div class="d-flex align-items-center justify-content-between border-bottom">
+                                    <img src="{{ asset('/assets/images/icons/location.svg') }}"
+                                        alt="Местоположение"
+                                        loading="lazy">
+
+                                    <span class="h4 mb-0">Кюстендил</span>
+                                </div>
+
+                                <p>
+                                    Българска компания с производство
+                                    в град Кюстендил.
+                                </p>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="abs-info">
+
+                                <h3 class="display-5">Нашите клиенти</h3>
+
+                                <div class="d-flex align-items-center justify-content-between border-bottom">
+                                    <img src="{{ asset('/assets/images/icons/employee.svg') }}"
+                                        alt="Нашите клиенти"
+                                        loading="lazy">
+
+                                    <span class="h4 mb-0">Бизнеси</span>
+                                </div>
+
+                                <p>
+                                    Работим с малки, средни и големи
+                                    клиенти от различни сфери.
+                                </p>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="abs-info">
+
+                                <h3 class="display-5">Нашата специализация</h3>
+
+                                <div class="d-flex align-items-center justify-content-between border-bottom">
+                                    <img src="{{ asset('/assets/images/icons/revenue.svg') }}"
+                                        alt="Опаковки от велпапе"
+                                        loading="lazy">
+
+                                    <span class="h4 mb-0">Велпапе</span>
+                                </div>
+
+                                <p>
+                                    Изработваме различни видове кашони,
+                                    кутии и картонени опаковки.
+                                </p>
+
+                            </div>
+                        </div>
+
                     </div>
+
                 </div>
 
             </div>
         </div>
     </section>
-    <!-- About ReLux End -->
+    <!-- About Section End -->
 
-    <!-- Brand Marquee Start -->
-    <section class="brand-marquee">
-        <div class="brand-marquee__viewport">
-            <div class="brand-marquee__track">
 
-                <div class="brand-marquee__group">
-                    @foreach ($brands as $brand)
-                        <div class="brand-marquee__item">
-                            <img src="{{ asset('assets/img/brands/' . $brand->getFilename()) }}"
-                                alt="{{ pathinfo($brand->getFilename(), PATHINFO_FILENAME) }}">
-                        </div>
-                    @endforeach
-                </div>
+    <!-- Working Process Section Start -->
+    <section class="process-sec bg-shade sec-padding position-relative overflow-hidden">
 
-                <div class="brand-marquee__group" aria-hidden="true">
-                    @foreach ($brands as $brand)
-                        <div class="brand-marquee__item">
-                            <img src="{{ asset('assets/img/brands/' . $brand->getFilename()) }}" alt="">
-                        </div>
-                    @endforeach
-                </div>
-
-            </div>
-        </div>
-    </section>
-    <!-- Brand Marquee End -->
-
-    <!-- Brand Marquee Start -->
-    <section class="brand-marquee">
-        <div class="brand-marquee__viewport">
-            <div class="brand-marquee__track-backwards">
-
-                <div class="brand-marquee__group">
-                    @foreach ($brands2 as $brand)
-                        <div class="brand-marquee__item">
-                            <img src="{{ asset('assets/img/brands_2/' . $brand->getFilename()) }}"
-                                alt="{{ pathinfo($brand->getFilename(), PATHINFO_FILENAME) }}">
-                        </div>
-                    @endforeach
-                </div>
-
-                <div class="brand-marquee__group" aria-hidden="true">
-                    @foreach ($brands2 as $brand)
-                        <div class="brand-marquee__item">
-                            <img src="{{ asset('assets/img/brands_2/' . $brand->getFilename()) }}"
-                                alt="{{ pathinfo($brand->getFilename(), PATHINFO_FILENAME) }}">
-                        </div>
-                    @endforeach
-                </div>
-
-            </div>
-        </div>
-    </section>
-    <!-- Brand Marquee End -->
-
-    <!-- About ReLux Vision Start -->
-    <section class="about-five relux-about-section">
         <div class="container">
-            <div class="row flex-row-reverse relux-about-section__row">
 
-                <div class="col-xl-6">
-                    <div class="about-five__left relux-about-section__content">
+            <div class="sec-intro mx-auto text-center">
 
-                        <div class="section-title text-left sec-title-animation animation-style2">
-                            <div class="section-title__tagline-box">
-                                <span class="section-title__tagline">
-                                    ReLux TopShopping
-                                </span>
+                <span class="sub-title fadeInUp">
+                    НАШИЯТ ПОДХОД
+                </span>
+
+                <h2 class="sec-title">
+                    Качествени опаковки, съобразени с Вашите нужди
+                </h2>
+
+                <p>
+                    Подхождаме индивидуално към всяко запитване,
+                    за да предложим подходящо решение за опаковане.
+                </p>
+
+            </div>
+
+            <div class="process-wrapper d-flex justify-content-between flex-wrap mt-5">
+
+                <div class="process-card text-center fadeInUp" data-delay=".2">
+
+                    <span class="count mx-auto icon-lg bg-shade rounded-circle">
+                        01
+                    </span>
+
+                    <div class="process-thumb rounded-circle d-flex align-items-center justify-content-center">
+                        <img src="{{ asset('/assets/images/st1.png') }}"
+                            alt="Обсъждане на нуждите от опаковки"
+                            loading="lazy">
+                    </div>
+
+                    <h3 class="display-4">
+                        Обсъждане на нуждите
+                    </h3>
+
+                    <p>
+                        Запознаваме се с Вашите изисквания за вид,
+                        размери и предназначение на опаковката.
+                    </p>
+
+                </div>
+
+                <div class="process-card text-center fadeInUp" data-delay=".4">
+
+                    <span class="count mx-auto icon-lg bg-shade rounded-circle">
+                        02
+                    </span>
+
+                    <div class="process-thumb rounded-circle d-flex align-items-center justify-content-center">
+                        <img src="{{ asset('/assets/images/st2.png') }}"
+                            alt="Избор на материали и опаковки"
+                            loading="lazy">
+                    </div>
+
+                    <h3 class="display-4">
+                        Подходящо решение
+                    </h3>
+
+                    <p>
+                        Подбираме подходящ вид велпапе и конструкция
+                        според характеристиките на продукта.
+                    </p>
+
+                </div>
+
+                <div class="process-card text-center fadeInUp" data-delay=".6">
+
+                    <span class="count mx-auto icon-lg bg-shade rounded-circle">
+                        03
+                    </span>
+
+                    <div class="process-thumb rounded-circle d-flex align-items-center justify-content-center">
+                        <img src="{{ asset('/assets/images/st3.png') }}"
+                            alt="Производство на кашони и опаковки"
+                            loading="lazy">
+                    </div>
+
+                    <h3 class="display-4">
+                        Производство
+                    </h3>
+
+                    <p>
+                        Изработваме кашони и опаковки от велпапе
+                        с внимание към качеството и детайлите.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <!-- Working Process Section End -->
+
+
+    <!-- Company Information Section Start -->
+    <section class="about-sec3 sec-padding">
+
+        <div class="container">
+
+            <div class="row align-items-center gy-5">
+
+                <div class="col-xl-5 col-lg-7 mx-lg-auto">
+
+                    <div class="about-media3 position-relative">
+
+                        <div class="feat-img position-relative">
+
+                            <img src="{{ asset('/assets/images/about-ft.jpg') }}"
+                                class="img-fluid round"
+                                alt="ЮКОН ООД – производство на опаковки"
+                                loading="lazy">
+
+                            <div class="experien-stat">
+
+                                <p class="text-info m-0">
+                                    35г. в производството на опаковки
+                                </p>
+
                             </div>
 
-                            <h2 class="section-title__title title-animation">
-                                Защо да изберете ReLux TopShopping?
-                            </h2>
                         </div>
 
-                        <ul class="list-unstyled relux-about-points">
+                        <div class="d-flex ab-sm-ft align-items-center gap-4">
 
-                            <li>
-                                <div class="text">
-                                    <p>
-                                        <b>Гарантирана автентичност</b>
+                            <img class="round img-fluid"
+                                src="{{ asset('/assets/images/about-ft2.png') }}"
+                                alt="Картонени кашони и кутии"
+                                loading="lazy">
 
-                                        Всеки артикул в нашия каталог преминава през прецизна
-                                        проверка на произхода и състоянието, преди да стигне до вас.
-                                    </p>
-                                </div>
+                            <img class="img-fluid"
+                                src="{{ asset('/assets/images/about-ft3.png') }}"
+                                alt="Опаковки от велпапе"
+                                loading="lazy">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-7">
+
+                    <div class="about-content3">
+
+                        <span class="sub-title fadeInUp">
+                            ЗА ЮКОН ООД
+                        </span>
+
+                        <h2 class="sec-title">
+                            Надежден партньор в производството на кашони и опаковки
+                        </h2>
+
+                        <p>
+                            ЮКОН ООД е основана през 1996 година.
+                            През всички тези години работим на българския пазар,
+                            като произвеждаме качествени кашони и опаковки
+                            от велпапе според нуждите на нашите клиенти.
+                        </p>
+
+                        <p>
+                            Специализирани сме в производството на опаковки
+                            от вълнообразен картон (велпапе), включително
+                            транспортни кашони, рекламни кутии, рекламни дисплеи,
+                            касетки за плодове и зеленчуци, луксозни опаковки,
+                            кутии за пици и торти, кутии за обувки и други.
+                        </p>
+
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active"
+                                    id="mission-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#mission"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="mission"
+                                    aria-selected="true">
+                                    Нашата мисия
+                                </button>
                             </li>
 
-                            <li>
-
-                                <div class="text">
-                                    <p>
-                                        <b>Селектиран асортимент</b>
-
-                                        Предлагаме както класически и вечни модели, така и модерни
-                                        премиум находки за ценители и колекционери.
-                                    </p>
-                                </div>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link"
+                                    id="vission-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#vission"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="vission"
+                                    aria-selected="false">
+                                    Защо нас?
+                                </button>
                             </li>
 
-                            <li>
-                                <div class="text">
-                                    <p>
-                                        <b>Персонализирано отношение</b>
-
-                                        За нас всеки клиент е специален. Помагаме ви да откриете
-                                        точния модел, който подхожда най-добре на вашия стил или
-                                        инвестиционни намерения.
-                                    </p>
-                                </div>
-                            </li>
-
-                            <li>
-
-                                <div class="text">
-                                    <p>
-                                        <b>Бързина и коректност</b>
-
-                                        Като бързо развиваща се фирма, залагаме на високи стандарти
-                                        в обслужването, прозрачна комуникация и сигурна доставка.
-                                    </p>
-                                </div>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link"
+                                    id="history-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#history"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="history"
+                                    aria-selected="false">
+                                    Нашият опит
+                                </button>
                             </li>
 
                         </ul>
 
-                        <h3>
-                            Нашата визия
-                        </h3>
+                        <div class="tab-content" id="myTabContent">
 
-                        <p class="about-five__text-1">
-                            Продължаваме да разширяваме нашето портфолио и да надграждаме услугите си,
-                            за да поддържаме мястото си сред предпочитаните дестинации за премиум
-                            пазаруване.
-                        </p>
+                            <div class="tab-pane fade show active"
+                                id="mission"
+                                role="tabpanel"
+                                aria-labelledby="mission-tab">
 
-                        <p class="about-five__text-1">
-                            В <strong>ReLux TopShopping</strong> не просто продаваме часовници —
-                            ние изграждаме дългосрочни взаимоотношения, базирани на доверие.
-                        </p>
+                                <div class="d-sm-flex gap-4 mb-3">
 
-                        <p class="relux-about-section__quote">
-                            <b>
-                                „Времето е най-ценният лукс — инвестирайте го със стил.“
-                            </b>
-                        </p>
+                                    <div class="tab-txt">
 
-                    </div>
-                </div>
+                                        <p>
+                                            Нашата цел е да произвеждаме
+                                            качествени и функционални опаковки
+                                            от велпапе, съобразени с индивидуалните
+                                            нужди на всеки клиент.
+                                        </p>
 
-                <div class="col-xl-6">
-                    <div class="relux-about-section__image-column">
-                        <div class="relux-about-section__image-box">
-                            <img src="/assets/img/about/man-fashion.jpg"
-                                alt="ReLux TopShopping – луксозни часовници и стил">
+                                        <p>
+                                            Стремим се да предлагаме подходящи
+                                            решения за съхранение, транспортиране
+                                            и представяне на различни продукти.
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="tab-pane fade"
+                                id="vission"
+                                role="tabpanel"
+                                aria-labelledby="vission-tab">
+
+                                <div class="d-sm-flex gap-4 mb-3">
+
+                                    <div class="tab-txt">
+
+                                        <p>
+                                            Избирайки ЮКОН ООД, Вие се доверявате
+                                            на надежден партньор, на когото
+                                            можете да разчитате за добре
+                                            свършена работа.
+                                        </p>
+
+                                        <p>
+                                            Разполагаме със силен и отговорен
+                                            екип от професионалисти, специализирани
+                                            в изработката на опаковки от велпапе.
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="tab-pane fade"
+                                id="history"
+                                role="tabpanel"
+                                aria-labelledby="history-tab">
+
+                                <div class="d-sm-flex gap-4 mb-3">
+
+                                    <div class="tab-txt">
+
+                                        <p>
+                                            От 1996 година работим с малки,
+                                            средни и големи клиенти.
+                                            Независимо от поставената задача,
+                                            винаги подхождаме професионално.
+                                        </p>
+
+                                        <p>
+                                            Няма по-голямо признание от доволните
+                                            клиенти. Това ни насърчава постоянно
+                                            да развиваме своите способности
+                                            и да повишаваме качеството на
+                                            нашите продукти.
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
                         </div>
+
+                        <div class="d-sm-flex align-items-center about-cta gap-5 mt-5">
+
+                            <a href="{{ url('/contacts') }}" class="btn btn-primary">
+                                Свържете се с нас
+                                <i class="fa fa-arrow-right"></i>
+                                <span></span>
+                            </a>
+
+                            <div class="quick-call d-flex align-items-center">
+
+                                <span class="bg-dark icon-lg rounded-circle text-info">
+                                    <i class="fa-solid fa-phone-volume"></i>
+                                </span>
+
+                                <div class="conn-txt ms-3">
+
+                                    <p class="m-0">
+                                        Свържете се с нас:
+                                    </p>
+
+                                    <a class="h6 text-primary" href="tel:+359888886103">
+                                        0888 886 103
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
                     </div>
+
                 </div>
 
             </div>
+
         </div>
+
     </section>
-    <!-- About ReLux Vision End -->
+    <!-- Company Information Section End -->
 
-    <!-- Testimonial Two Start -->
-    <section class="testimonial-showcase">
-        <div class="container">
-            <div class="testimonial-showcase__wrapper">
 
-                <div class="testimonial-showcase__content">
-                    <div class="testimonial-showcase__heading">
 
-                        <span class="testimonial-showcase__eyebrow">
-                            Мнения за нас
-                        </span>
-
-                        <h3 class="testimonial-showcase__title">
-                            Отзиви от нашите клиенти
-                        </h3>
-
-                    </div>
-
-                    <div class="splide testimonial-showcase__splide" id="testimonialSplide"
-                        aria-label="Отзиви от клиенти">
-
-                        <div class="splide__track">
-                            <ul class="splide__list">
-
-                                <li class="splide__slide">
-                                    <div class="testimonial-showcase__single">
-
-                                        <div class="testimonial-showcase__quote">
-                                            <i class="fa-solid fa-quote-right"></i>
-                                        </div>
-
-                                        <p class="testimonial-showcase__text">
-                                            Изключително съм доволен от покупката си. Часовникът пристигна
-                                            в отлично състояние и напълно отговаряше на описанието.
-                                            Професионално отношение и коректност от началото до края.
-                                        </p>
-
-                                        <div class="testimonial-showcase__author">
-
-                                            <div class="testimonial-showcase__author-icon">
-                                                <i class="fa-solid fa-user"></i>
-                                            </div>
-
-                                            <div class="testimonial-showcase__author-content">
-                                                <h4 class="testimonial-showcase__name">
-                                                    Николай Петров
-                                                </h4>
-
-                                                <p class="testimonial-showcase__location">
-                                                    Доволен клиент
-                                                </p>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </li>
-
-                                <li class="splide__slide">
-                                    <div class="testimonial-showcase__single">
-
-                                        <div class="testimonial-showcase__quote">
-                                            <i class="fa-solid fa-quote-right"></i>
-                                        </div>
-
-                                        <p class="testimonial-showcase__text">
-                                            Поръчката пристигна бързо и беше опакована с изключително
-                                            внимание. Получих точно това, което очаквах, а комуникацията
-                                            с екипа на ReLux TopShopping беше отлична.
-                                        </p>
-
-                                        <div class="testimonial-showcase__author">
-
-                                            <div class="testimonial-showcase__author-icon">
-                                                <i class="fa-solid fa-user"></i>
-                                            </div>
-
-                                            <div class="testimonial-showcase__author-content">
-                                                <h4 class="testimonial-showcase__name">
-                                                    Мария Георгиева
-                                                </h4>
-
-                                                <p class="testimonial-showcase__location">
-                                                    Клиент, София
-                                                </p>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </li>
-
-                                <li class="splide__slide">
-                                    <div class="testimonial-showcase__single">
-
-                                        <div class="testimonial-showcase__quote">
-                                            <i class="fa-solid fa-quote-right"></i>
-                                        </div>
-
-                                        <p class="testimonial-showcase__text">
-                                            Търсех конкретен модел часовник и получих подробно съдействие
-                                            при избора. Всичко беше обяснено ясно, а продуктът изглежда
-                                            дори по-добре на живо. С удоволствие бих пазарувал отново.
-                                        </p>
-
-                                        <div class="testimonial-showcase__author">
-
-                                            <div class="testimonial-showcase__author-icon">
-                                                <i class="fa-solid fa-user"></i>
-                                            </div>
-
-                                            <div class="testimonial-showcase__author-content">
-                                                <h4 class="testimonial-showcase__name">
-                                                    Александър Димитров
-                                                </h4>
-
-                                                <p class="testimonial-showcase__location">
-                                                    Редовен клиент
-                                                </p>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </li>
-
-                                <li class="splide__slide">
-                                    <div class="testimonial-showcase__single">
-
-                                        <div class="testimonial-showcase__quote">
-                                            <i class="fa-solid fa-quote-right"></i>
-                                        </div>
-
-                                        <p class="testimonial-showcase__text">
-                                            За мен доверието е най-важно при покупката на луксозен часовник.
-                                            Останах впечатлен от вниманието към детайла, обслужването и
-                                            цялостното отношение. Определено бих препоръчал ReLux TopShopping.
-                                        </p>
-
-                                        <div class="testimonial-showcase__author">
-
-                                            <div class="testimonial-showcase__author-icon">
-                                                <i class="fa-solid fa-user"></i>
-                                            </div>
-
-                                            <div class="testimonial-showcase__author-content">
-                                                <h4 class="testimonial-showcase__name">
-                                                    Георги Иванов
-                                                </h4>
-
-                                                <p class="testimonial-showcase__location">
-                                                    Доволен клиент
-                                                </p>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </li>
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-showcase__image" role="img"
-                    aria-label="Доволен клиент на ReLux TopShopping">
-
-                    <div class="testimonial-showcase__image-content">
-                        <div class="testimonial-showcase__image-badge">
-
-                            <i class="fa-solid fa-star"></i>
-
-                            <span>
-                                Доверие и професионализъм
-                            </span>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-    <!-- Testimonial Two End -->
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const testimonialSplide = document.getElementById(
-                'testimonialSplide'
-            );
-
-            if (!testimonialSplide) {
-                return;
-            }
-
-            new Splide(testimonialSplide, {
-                type: 'loop',
-                perPage: 1,
-                perMove: 1,
-                gap: '20px',
-                arrows: true,
-                pagination: true,
-                autoplay: false,
-                interval: 5000,
-                pauseOnHover: false,
-                pauseOnFocus: false,
-                speed: 800,
-            }).mount();
-        });
-    </script>
 
 </x-frontend>

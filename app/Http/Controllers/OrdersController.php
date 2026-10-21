@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateOrderRequest;
 use App\Mail\OrderCreated;
 use App\Models\Admin\Promocode;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Product;
+use App\Services\ShopService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,8 +22,12 @@ class OrdersController extends Controller
 
 
 
+
     /**
      * Add a product to the session cart.
+     *
+     * Validates stock availability and calculates pricing
+     * entirely on the server using quantity-based prices.
      *
      * @param Request $request
      * @param Product $product
@@ -29,6 +35,7 @@ class OrdersController extends Controller
      */
     public function addProduct(Request $request, Product $product): RedirectResponse
     {
+        // Validate the requested quantity.
         $validated = $request->validate([
             'quantity' => [
                 'required',
@@ -44,6 +51,7 @@ class OrdersController extends Controller
         $quantity = (int) $validated['quantity'];
         $stock = (int) $product->stock;
 
+        // Check whether the product is available.
         if ($stock <= 0) {
             return back()
                 ->withErrors([
@@ -52,32 +60,39 @@ class OrdersController extends Controller
                 ->withInput();
         }
 
+        // Check the requested quantity against stock.
         if ($quantity > $stock) {
             return back()
                 ->withErrors([
-                    'quantity' => 'Няма достатъчна наличност за желаното количество.',
+                    'quantity' => 'Няма повече количество от това, което сте поискали.',
                 ])
                 ->withInput();
         }
-
-        $finalPrice = $product->discount
-            ? $product->price - (($product->price * $product->discount) / 100)
-            : $product->price;
 
         $products = Session::get('products', []);
 
         $productKey = (string) $product->id;
 
-        $existingQuantity = isset($products[$productKey])
-            ? (int) $products[$productKey]['quantity']
-            : 0;
+        $existingQuantity = isset($products[$productKey]) ? (int) $products[$productKey]['quantity'] : 0;
 
         $newQuantity = $existingQuantity + $quantity;
 
         if ($newQuantity > $stock) {
             return back()
                 ->withErrors([
-                    'quantity' => 'Няма достатъчна наличност за желаното количество.',
+                    'quantity' => 'Няма повече количество от това, което сте поискали.',
+                ])
+                ->withInput();
+        }
+
+        // Calculate the correct price entirely on the backend.
+        try {
+            $pricing = ShopService::calculateProductPrice($product, $newQuantity);
+        } catch (\InvalidArgumentException $exception) {
+
+            return back()
+                ->withErrors([
+                    'quantity' => $exception->getMessage(),
                 ])
                 ->withInput();
         }
@@ -86,10 +101,11 @@ class OrdersController extends Controller
             'product_id' => $product->id,
             'name' => $product->name,
             'slug' => $product->slug,
-            'price' => (float) $product->price,
-            'discount' => $product->discount,
-            'final_price' => (float) $finalPrice,
-            'quantity' => $newQuantity,
+            'price' => $pricing['original_unit_price'],
+            'discount' => $pricing['discount'],
+            'final_price' => $pricing['unit_price'],
+            'total_price' => $pricing['total_price'],
+            'quantity' => $pricing['quantity'],
             'image' => $product->main_image,
         ];
 
@@ -100,6 +116,7 @@ class OrdersController extends Controller
             'Продуктът беше добавен успешно в количката!'
         );
     }
+
 
     /** Remove a product from the cart
      *
@@ -130,121 +147,16 @@ class OrdersController extends Controller
         );
     }
 
+
     /**
      * Create a new order.
      *
-     * @param Request $request
+     * @param CreateOrderRequest $request
      * @return RedirectResponse
      */
-    public function create(Request $request): RedirectResponse
+    public function create(CreateOrderRequest $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'fname' => ['required', 'string', 'max:255'],
-            'lname' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255'],
-
-            'delivery_method' => ['required', 'in:personal,office'],
-
-            'payment_method' => [
-                'required',
-                'in:cash_on_delivery,unicredit',
-            ],
-
-            'city' => [
-                'required_if:delivery_method,personal',
-                'nullable',
-                'string',
-                'max:255',
-            ],
-
-            'billing_address' => [
-                'required_if:delivery_method,personal',
-                'nullable',
-                'string',
-                'max:255',
-            ],
-
-            'office_list' => [
-                'required_if:delivery_method,office',
-                'nullable',
-                'string',
-                'max:255',
-            ],
-
-            'request_invoice' => [
-                'nullable',
-                'boolean',
-            ],
-
-            'company_name' => [
-                'nullable',
-                'required_if:request_invoice,1',
-                'string',
-                'max:255',
-            ],
-
-            'company_mol' => [
-                'nullable',
-                'required_if:request_invoice,1',
-                'string',
-                'max:255',
-            ],
-
-            'company_bulstat' => [
-                'nullable',
-                'required_if:request_invoice,1',
-                'string',
-                'max:255',
-            ],
-
-            'company_address' => [
-                'nullable',
-                'required_if:request_invoice,1',
-                'string',
-                'max:255',
-            ],
-        ], [
-            'fname.required' => 'Моля, въведете вашето име.',
-            'fname.max' => 'Името не може да бъде по-дълго от 255 символа.',
-
-            'lname.required' => 'Моля, въведете вашата фамилия.',
-            'lname.max' => 'Фамилията не може да бъде по-дълга от 255 символа.',
-
-            'phone.required' => 'Моля, въведете телефонен номер.',
-            'phone.max' => 'Телефонният номер не може да бъде по-дълъг от 255 символа.',
-
-            'email.required' => 'Моля, въведете имейл адрес.',
-            'email.email' => 'Моля, въведете валиден имейл адрес.',
-            'email.max' => 'Имейл адресът не може да бъде по-дълъг от 255 символа.',
-
-            'delivery_method.required' => 'Моля, изберете начин на доставка.',
-            'delivery_method.in' => 'Избраният начин на доставка е невалиден.',
-
-            'payment_method.required' => 'Моля, изберете начин на плащане.',
-            'payment_method.in' => 'Избраният начин на плащане е невалиден.',
-
-            'city.required_if' => 'Моля, изберете град.',
-            'city.max' => 'Градът не може да бъде по-дълъг от 255 символа.',
-
-            'billing_address.required_if' => 'Моля, въведете адрес за доставка.',
-            'billing_address.max' => 'Адресът не може да бъде по-дълъг от 255 символа.',
-
-            'office_list.required_if' => 'Моля, изберете офис на Speedy.',
-            'office_list.max' => 'Избраният офис не може да бъде по-дълъг от 255 символа.',
-
-            'company_name.required_if' => 'Моля, въведете името на фирмата.',
-            'company_name.max' => 'Името на фирмата не може да бъде по-дълго от 255 символа.',
-
-            'company_mol.required_if' => 'Моля, въведете името на МОЛ.',
-            'company_mol.max' => 'Името на МОЛ не може да бъде по-дълго от 255 символа.',
-
-            'company_bulstat.required_if' => 'Моля, въведете ЕИК / Булстат.',
-            'company_bulstat.max' => 'Булстатът не може да бъде по-дълъг от 255 символа.',
-
-            'company_address.required_if' => 'Моля, въведете адреса на фирмата.',
-            'company_address.max' => 'Адресът на фирмата не може да бъде по-дълъг от 255 символа.',
-        ]);
+        $validated = $request->validated();
 
         $cartProducts = Session::get('products', []);
 
@@ -264,19 +176,125 @@ class OrdersController extends Controller
                 $cartProducts,
                 $sessionPromoCode
             ) {
-                $subtotal = 0;
+                $verifiedProducts = [];
+                $subtotalCents = 0;
 
-                foreach ($cartProducts as $product) {
-                    $subtotal +=
-                        (float) $product['final_price'] *
-                        (int) $product['quantity'];
+                $cartProducts = collect($cartProducts)
+                    ->sortBy(fn($item) => (int) ($item['product_id'] ?? 0));
+
+                foreach ($cartProducts as $cartProduct) {
+
+                    $productId = filter_var(
+                        $cartProduct['product_id'] ?? null,
+                        FILTER_VALIDATE_INT
+                    );
+
+                    $quantity = filter_var(
+                        $cartProduct['quantity'] ?? null,
+                        FILTER_VALIDATE_INT
+                    );
+
+                    if (
+                        $productId === false ||
+                        $productId === null ||
+                        $quantity === false ||
+                        $quantity === null ||
+                        $quantity < 1
+                    ) {
+                        throw new \InvalidArgumentException(
+                            'Невалиден продукт или количество в количката.'
+                        );
+                    }
+
+                    $databaseProduct = Product::query()
+                        ->whereKey($productId)
+                        ->lockForUpdate()
+                        ->first();
+
+                    if (!$databaseProduct) {
+                        throw new \InvalidArgumentException(
+                            'Един от продуктите в количката вече не е наличен.'
+                        );
+                    }
+
+                    if ((int) $databaseProduct->stock < $quantity) {
+                        throw new \InvalidArgumentException(
+                            'Няма достатъчна наличност за продукт: '
+                                . $databaseProduct->name
+                        );
+                    }
+
+                    // Always use the current database quantity tier.
+                    $pricing = ShopService::calculateProductPrice(
+                        $databaseProduct,
+                        $quantity
+                    );
+
+                    // Convert to cents to avoid float accumulation.
+                    $unitPriceCents = (int) round(
+                        $pricing['unit_price'] * 100
+                    );
+
+                    $originalPriceCents = (int) round(
+                        $pricing['original_unit_price'] * 100
+                    );
+
+                    $lineTotalCents = $unitPriceCents * $quantity;
+
+                    $subtotalCents += $lineTotalCents;
+
+                    $verifiedProducts[] = [
+                        'model' => $databaseProduct,
+                        'quantity' => $quantity,
+                        'original_price_cents' => $originalPriceCents,
+                        'unit_price_cents' => $unitPriceCents,
+                        'line_total_cents' => $lineTotalCents,
+                        'discount' => $pricing['discount'],
+                    ];
                 }
 
-                $promoCodeName = $sessionPromoCode['promo_code_name'] ?? null;
+                $promoCode = null;
+                $promoCodeName = null;
+                $promoDiscountCents = 0;
+
+                if (!empty($sessionPromoCode['promo_code_name'])) {
+
+                    $promoCode = Promocode::query()
+                        ->where(
+                            'promo_code_name',
+                            $sessionPromoCode['promo_code_name']
+                        )
+                        ->first();
+
+                    if (!$promoCode) {
+                        throw new \InvalidArgumentException(
+                            'Промокодът вече не е валиден.'
+                        );
+                    }
+
+                    $percentage = (float) $promoCode->percentage_promo_code;
+
+                    if ($percentage < 0 || $percentage > 100) {
+                        throw new \InvalidArgumentException(
+                            'Промокодът има невалидна отстъпка.'
+                        );
+                    }
+
+                    $promoDiscountCents = (int) round(
+                        $subtotalCents * $percentage / 100
+                    );
+
+                    $promoCodeName = $promoCode->promo_code_name;
+                }
+
+                $totalCents = max(
+                    0,
+                    $subtotalCents - $promoDiscountCents
+                );
+
 
                 $order = Order::create([
-                    'order_number' =>
-                    'ORD-' . date('dmy') . '-' . random_int(1000, 9999),
+                    'order_number' => 'ORD-' . date('dmy') . '-' . random_int(1000, 9999),
 
                     'first_name' => $validated['fname'],
                     'last_name' => $validated['lname'],
@@ -285,116 +303,75 @@ class OrdersController extends Controller
 
                     'delivery_method' => $validated['delivery_method'],
 
-                    'city' =>
-                    $validated['delivery_method'] === 'personal'
-                        ? ($validated['city'] ?? null)
+                    'city' => $validated['delivery_method'] === 'personal'
+                        ? $validated['city']
                         : null,
 
-                    'personal_address' =>
-                    $validated['delivery_method'] === 'personal'
-                        ? ($validated['billing_address'] ?? null)
+                    'personal_address' => $validated['delivery_method'] === 'personal'
+                        ? $validated['billing_address']
                         : null,
 
-                    'courier' =>
-                    $validated['delivery_method'] === 'office'
-                        ? 'speedy'
+                    'courier' => $validated['delivery_method'] === 'office'
+                        ? 'econt'
                         : null,
 
-                    'office_list' =>
-                    $validated['delivery_method'] === 'office'
-                        ? ($validated['office_list'] ?? null)
+                    'office_list' => $validated['delivery_method'] === 'office'
+                        ? $validated['office_list']
                         : null,
 
-                    'request_invoice' =>
-                    (bool) ($validated['request_invoice'] ?? false),
+                    'request_invoice' => (bool) (
+                        $validated['request_invoice'] ?? false
+                    ),
 
-                    'company_name' =>
-                    $validated['company_name'] ?? null,
+                    'company_name' => !empty($validated['request_invoice'])
+                        ? $validated['company_name']
+                        : null,
 
-                    'company_mol' =>
-                    $validated['company_mol'] ?? null,
+                    'company_mol' => !empty($validated['request_invoice'])
+                        ? $validated['company_mol']
+                        : null,
 
-                    'company_bulstat' =>
-                    $validated['company_bulstat'] ?? null,
+                    'company_bulstat' => !empty($validated['request_invoice'])
+                        ? $validated['company_bulstat']
+                        : null,
 
-                    'company_address' =>
-                    $validated['company_address'] ?? null,
+                    'company_address' => !empty($validated['request_invoice'])
+                        ? $validated['company_address']
+                        : null,
 
-                    'subtotal' => $subtotal,
-
+                    'subtotal' => $subtotalCents / 100,
                     'promo_code' => $promoCodeName,
-
                     'delivery_price' => 0,
-
-                    'total' => $subtotal,
+                    'total' => $totalCents / 100,
 
                     'payment_option' => $validated['payment_method'],
-
                     'status' => Order::STATUS_PENDING,
                 ]);
 
                 $orderProducts = [];
 
-                foreach ($cartProducts as $product) {
-                    $databaseProduct = Product::query()
-                        ->whereKey($product['product_id'])
-                        ->lockForUpdate()
-                        ->first();
+                foreach ($verifiedProducts as $item) {
 
-                    if (! $databaseProduct) {
-                        throw new \Exception(
-                            'Продуктът не съществува: '
-                                . $product['name']
-                        );
-                    }
-
-                    $currentStock = (int) $databaseProduct->stock;
-
-                    $orderedQuantity =
-                        (int) $product['quantity'];
-
-                    if ($currentStock < $orderedQuantity) {
-                        throw new \Exception(
-                            'Няма достатъчна наличност за продукт: '
-                                . $product['name']
-                        );
-                    }
-
-                    $databaseProduct->update([
-                        'stock' =>
-                        $currentStock - $orderedQuantity,
-                    ]);
+                    $databaseProduct = $item['model'];
+                    $quantity = $item['quantity'];
 
                     $orderProduct = OrderProduct::create([
                         'order_id' => $order->id,
+                        'product_id' => $databaseProduct->id,
+                        'product_name' => $databaseProduct->name,
+                        'product_slug' => $databaseProduct->slug,
+                        'product_image' => $databaseProduct->main_image,
 
-                        'product_id' =>
-                        $databaseProduct->id,
+                        'price' => $item['original_price_cents'] / 100,
+                        'discount' => $item['discount'],
 
-                        'product_name' =>
-                        $product['name'],
+                        'base_price' => $item['original_price_cents'] / 100,
+                        'final_price' => $item['unit_price_cents'] / 100,
 
-                        'product_slug' =>
-                        $product['slug'],
-
-                        'product_image' =>
-                        $product['image'] ?? null,
-
-                        'price' =>
-                        (float) $product['price'],
-
-                        'discount' =>
-                        $product['discount'] ?? null,
-
-                        'base_price' =>
-                        (float) $product['final_price'],
-
-                        'final_price' =>
-                        (float) $product['final_price'],
-
-                        'quantity' =>
-                        $orderedQuantity,
+                        'quantity' => $quantity,
                     ]);
+
+                    $databaseProduct->decrement('stock', $quantity);
 
                     $orderProducts[] = $orderProduct;
                 }
@@ -402,42 +379,48 @@ class OrdersController extends Controller
                 return [
                     'order' => $order,
                     'orderProducts' => collect($orderProducts),
+                    'promoCode' => $promoCode,
                 ];
-            });
-        } catch (\Throwable $exception) {
+            }, 3);
+
+        } catch (\InvalidArgumentException $exception) {
+
             return back()
                 ->withErrors([
                     'order' => $exception->getMessage(),
+                ])
+                ->withInput();
+        } catch (\Throwable $exception) {
+
+            report($exception);
+
+            return back()
+                ->withErrors([
+                    'order' => 'Възникна грешка при създаването на поръчката. Моля, опитайте отново.',
                 ])
                 ->withInput();
         }
 
         $newOrder = $transactionResult['order'];
         $orderProducts = $transactionResult['orderProducts'];
+        $promoCode = $transactionResult['promoCode'];
 
         Session::forget([
             'products',
             'promo_code',
         ]);
 
-        $promoCode = null;
-
-        if ($sessionPromoCode) {
-            $promoCode = Promocode::query()
-                ->where(
-                    'promo_code_name',
-                    $sessionPromoCode['promo_code_name']
+        try {
+            Mail::to($newOrder->email)->send(
+                new OrderCreated(
+                    $newOrder,
+                    $orderProducts,
+                    $promoCode
                 )
-                ->first();
+            );
+        } catch (\Throwable $exception) {
+            report($exception);
         }
-
-        Mail::to($newOrder->email)->send(
-            new OrderCreated(
-                $newOrder,
-                $orderProducts,
-                $promoCode
-            )
-        );
 
         return redirect()->route('checkout.succes');
     }

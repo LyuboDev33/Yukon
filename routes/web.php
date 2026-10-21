@@ -4,7 +4,6 @@ use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShopController;
-use App\Services\EkontService;
 use Illuminate\Support\Facades\Route;
 use GuzzleHttp\Client;
 
@@ -29,6 +28,8 @@ Route::prefix('/shop')->group(function () {
     Route::get('/', [ShopController::class, 'index'])->name('shop.index');
     Route::get('/category/{category_slug}', [ShopController::class, 'category'])->name('shop.category');
     Route::get('/product/{slug}', [ShopController::class, 'show'])->name('shop.show');
+    Route::get('/products/{product}/calculate-price', [ShopController::class, 'calculatePrice'])
+          ->name('product.price.calculate');
 
 });
 

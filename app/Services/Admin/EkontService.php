@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Admin;
 
 use App\Models\Admin\EkontOffice;
 use Illuminate\Support\Facades\Http;
@@ -59,5 +59,5 @@ class EkontService
     }
 
 
-    
+
 }

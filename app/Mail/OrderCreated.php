@@ -29,7 +29,7 @@ class OrderCreated extends Mailable
         return new Envelope(
             from: new Address(
                 'contact@reluxtop.com',
-                'Relux Top Shopping - Потвърждение за поръчка'
+                'ЮКОН ЕООД - Потвърждение за поръчка'
             ),
             subject:
                 'Потвърждение на поръчка #' .
