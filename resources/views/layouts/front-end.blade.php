@@ -133,6 +133,7 @@
         <!-- Form JS -->
     <script src="{{ asset('assets/js/custom-codes.js') }}?v={{ time() }}"></script>
 
+        <script src="https://cdn.jsdelivr.net/npm/tom-select@2.6.2/dist/js/tom-select.complete.min.js"></script>
 
     <!-- ======================================= -->
     <!-- CUSTOM INITIALIZATION -->
