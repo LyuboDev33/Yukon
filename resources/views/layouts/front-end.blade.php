@@ -50,6 +50,9 @@
             <!-- Main Template CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}?v={{ time() }}">
 
+                <!-- Main Template CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/catalog.css') }}?v={{ time() }}">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
 
      <!-- Fancybox JS -->
@@ -57,6 +60,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js" defer></script>
     <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+
+            <script src="https://cdn.jsdelivr.net/npm/tom-select@2.6.2/dist/js/tom-select.complete.min.js"></script>
+
 
 
     <!-- jQuery -->
@@ -133,7 +139,6 @@
         <!-- Form JS -->
     <script src="{{ asset('assets/js/custom-codes.js') }}?v={{ time() }}"></script>
 
-        <script src="https://cdn.jsdelivr.net/npm/tom-select@2.6.2/dist/js/tom-select.complete.min.js"></script>
 
     <!-- ======================================= -->
     <!-- CUSTOM INITIALIZATION -->

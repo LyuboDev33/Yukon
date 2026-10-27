@@ -14,349 +14,517 @@
         <link href="/assets/css/tom-select.css" rel="stylesheet">
     @endsection
 
-
-    {{-- New template: products left, sidebar right --}}
-    <section class="shop-section">
+    <section class="catalog">
         <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-9 pe-lg-4">
-                    <div class="shop-wrapper">
-                        <div class="shop-filters d-flex flex-wrap justify-content-between align-items-center gap-3">
-                            <div class="result d-flex align-items-center gap-2">
-                                <p class="m-0">
-                                    Показване на {{ $products->firstItem() ?? 0 }}–{{ $products->lastItem() ?? 0 }}
-                                    от {{ $products->total() }} продукта
-                                </p>
-                            </div>
-                            <button type="button" class="btn btn-outline-dark d-lg-none" id="shopSidebarToggle"
-                                aria-controls="shopFiltersSidebar" aria-expanded="false">
-                                <i class="fa-solid fa-sliders me-2"></i> Филтри и категории
-                            </button>
-                        </div>
 
-                        <div class="row products mt-4 g-4">
+            {{-- Toolbar --}}
+            <div class="catalog-toolbar">
 
-                            @forelse ($products as $product)
+                <div class="catalog-toolbar__summary">
+                    <span class="catalog-toolbar__search-icon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
 
-                                @php
-                                    $prices = $product->prices->sortBy('min_quantity');
-                                @endphp
-
-                                <div class="col-xl-4 col-md-6 col-sm-6">
-
-                                    <div class="product-entry shadow h-100 d-flex flex-column">
-
-                                        <div class="product-thumb position-relative">
-
-                                            @if ($product->discount)
-                                                <div class="badge text-uppercase">
-                                                    -{{ $product->discount }}%
-                                                </div>
-                                            @endif
-
-                                            <a href="{{ route('shop.show', $product->slug) }}">
-                                                <img class="img-fluid"
-                                                    src="{{ $product->main_image
-                                                        ? asset('assets/images/products/' . $product->main_image)
-                                                        : asset('assets/images/shop/shop-product-1-1.jpg') }}"
-                                                    alt="{{ $product->name }}" loading="lazy">
-                                            </a>
-
-                                            <div class="product-cta">
-
-                                                <a href="{{ route('shop.show', $product->slug) }}"
-                                                    title="Разгледай продукта"
-                                                    aria-label="Разгледай {{ $product->name }}">
-                                                    <i class="fa-regular fa-eye"></i>
-                                                </a>
-
-                                                {{-- @php
-                                                    $wishlist = Session::get('wishlist', []);
-                                                    $isInWishlist = isset($wishlist[$product->id]);
-                                                @endphp
-
-                                                <form action="{{ route('wishlist.add', $product) }}" method="POST"
-                                                    class="wishlist-form m-0">
-
-                                                    @csrf
-
-                                                    <button type="submit" title="Добави в любими"
-                                                        aria-label="Добави {{ $product->name }} в любими"
-                                                        class="wishlist-btn">
-
-                                                        <i
-                                                            class="{{ $isInWishlist ? 'fa-solid' : 'fa-regular' }} fa-heart"></i>
-
-                                                    </button>
-
-                                                </form> --}}
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="product-txt d-flex flex-column flex-grow-1">
-
-                                            @if ($product->categories->isNotEmpty())
-                                                <p class="small text-muted mb-2">
-                                                    {{ $product->categories->pluck('name')->join(' · ') }}
-                                                </p>
-                                            @endif
-
-                                            <h3>
-                                                <a href="{{ route('shop.show', $product->slug) }}">
-                                                    {{ $product->name }}
-                                                </a>
-                                            </h3>
-
-                                            @if ($product->brand)
-                                                <p class="small text-muted mb-2">
-                                                    Марка: <strong>{{ $product->brand }}</strong>
-                                                </p>
-                                            @endif
-
-                                            {{-- Quantity-based pricing --}}
-                                            <div class="product-prices mt-3 mb-3">
-
-
-                                                @if ($prices->isNotEmpty())
-                                                    <div class="product-tier-prices mt-3">
-
-                                                        <p class="fw-semibold small mb-2">
-                                                            Цени според количеството:
-                                                        </p>
-
-                                                        <div class="d-flex flex-column gap-2">
-
-                                                            @foreach ($prices as $price)
-                                                                <div class="product-tier-price">
-
-                                                                    <span class="product-tier-price__quantity">
-                                                                        @if ($price->max_quantity)
-                                                                            {{ $price->min_quantity }}–{{ $price->max_quantity }}
-                                                                            бр.
-                                                                        @else
-                                                                            {{ $price->min_quantity }}+ бр.
-                                                                        @endif
-                                                                    </span>
-
-                                                                    <span class="product-tier-price__value">
-
-                                                                        @if ($product->discount)
-                                                                            <strong>
-                                                                                {{ number_format($price->price * (1 - $product->discount / 100), 2) }}
-                                                                                €
-                                                                            </strong>
-
-                                                                            <del>
-                                                                                {{ number_format($price->price, 2) }} €
-                                                                            </del>
-                                                                        @else
-                                                                            <strong>
-                                                                                {{ number_format($price->price, 2) }} €
-                                                                            </strong>
-                                                                        @endif
-
-                                                                    </span>
-
-                                                                </div>
-                                                            @endforeach
-
-                                                        </div>
-
-                                                    </div>
-                                                @else
-                                                    <p class="text-muted small mb-0">
-                                                        Цена при запитване
-                                                    </p>
-                                                @endif
-
-
-                                            </div>
-
-                                            @if ($product->stock <= 0)
-                                                <div class="mb-3">
-                                                    <span class="badge bg-danger">
-                                                        Няма наличност
-                                                    </span>
-                                                </div>
-                                            @endif
-
-                                            {{-- View product button --}}
-                                            <div>
-
-                                                <a href="{{ route('shop.show', $product->slug) }}"
-                                                    class="btn btn-primary w-100 rounded-3">
-
-                                                    Разгледай
-                                                    <i class="fa-solid fa-arrow-right ms-2"></i>
-
-                                                </a>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            @empty
-
-                                <div class="col-12">
-                                    <div class="alert alert-info text-center">
-                                        {{ $category ? 'Няма налични продукти с избраните филтри.' : 'Все още няма налични продукти.' }}
-                                    </div>
-                                </div>
-
-                            @endforelse
-
-                        </div>
-
-                        @if ($products->hasPages())
-                            <div class="mt-5 d-flex justify-content-center overflow-auto">
-                                {{ $products->onEachSide(1)->withQueryString()->links() }}
-                            </div>
-                        @endif
-                    </div>
+                    <span>
+                        Показване на
+                        <strong>{{ $products->firstItem() ?? 0 }}–{{ $products->lastItem() ?? 0 }}</strong>
+                        от
+                        <strong>{{ $products->total() }}</strong>
+                        продукта
+                    </span>
                 </div>
 
-                <div class="col-lg-3">
-                    <div class="shop-sidebar-overlay" id="shopSidebarOverlay"></div>
-                    <aside class="sidebar product-sidebar" id="shopFiltersSidebar" aria-label="Филтри и категории">
-                        <div class="d-lg-none d-flex justify-content-between align-items-center mb-3">
-                            <strong>Филтри</strong>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" id="shopSidebarClose"
-                                aria-label="Затвори филтрите">
-                                <i class="fa-solid fa-xmark"></i>
-                            </button>
-                        </div>
+                <div class="catalog-toolbar__actions">
 
-                        <div class="widget search-widget">
-                            <h3 class="widget-title">Филтри</h3>
-                            <div class="widget-inner">
-                                <form method="GET" action="{{ url()->current() }}" id="shopFiltersForm">
-                                    @foreach ($filters as $filter)
-                                        <div class="mb-3">
-                                            <label class="form-label"
-                                                for="filter-{{ $filter['slug'] }}">{{ $filter['name'] }}</label>
-                                            <select id="filter-{{ $filter['slug'] }}" name="{{ $filter['slug'] }}"
-                                                class="form-select attribute-choice">
-                                                <option value="">Всички</option>
-                                                @foreach ($filter['values'] as $value)
-                                                    <option value="{{ $value['slug'] }}" @selected(request()->filled($filter['slug']) && request($filter['slug']) === $value['slug'])>
-                                                        {{ $value['name'] }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    @endforeach
+                    {{-- Desktop categories dropdown --}}
+                    <div class="catalog-dropdown" data-catalog-dropdown>
+                        <button type="button" class="catalog-pill catalog-pill--outline catalog-dropdown__trigger"
+                            aria-expanded="false" aria-controls="catalogCategoriesDropdown">
+                            <i class="fa-solid fa-layer-group"></i>
+                            Категории
+                            <i class="fa-solid fa-chevron-down catalog-pill__chevron"></i>
+                        </button>
 
-                                    <div class="mb-3">
-                                        <label class="form-label" for="stock">Наличност</label>
-                                        <select id="stock" name="stock" class="form-select attribute-choice">
-                                            <option value="">Всички продукти</option>
-                                            <option value="in_stock" @selected(request('stock') === 'in_stock')>В наличност</option>
-                                            <option value="out_of_stock" @selected(request('stock') === 'out_of_stock')>Изчерпани
-                                            </option>
-                                        </select>
-                                    </div>
-
-                                    <div class="price-filter mb-4">
-                                        <div class="price-filter__header d-flex flex-column mb-2">
-                                            <label for="priceRange">Максимална цена</label>
-                                            <span>До <strong
-                                                    id="priceRangeValue">{{ request('price-range', 10000) }}</strong>
-                                                €</span>
-                                        </div>
-                                        <input type="range" id="priceRange" name="price-range" min="0"
-                                            max="10000" step="10"
-                                            value="{{ request('price-range', 10000) }}" class="w-100">
-                                        <div class="price-filter__limits d-flex justify-content-between">
-                                            <span>0 €</span><span>10 000 €</span>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex gap-2 flex-wrap">
-                                        <button type="submit" class="btn btn-primary">Филтрирай</button>
-                                        <a href="{{ url()->current() }}"
-                                            class="btn btn-outline-secondary">Изчисти</a>
-                                    </div>
-                                </form>
+                        <div class="catalog-dropdown__panel catalog-categories-panel" id="catalogCategoriesDropdown"
+                            hidden>
+                            <div class="catalog-panel__heading">
+                                <span>Категории</span>
+                                <a href="{{ route('shop.index') }}">Всички продукти</a>
                             </div>
+
+                            <ul class="catalog-category-tree">
+                                @foreach ($categoriesTree as $node)
+                                    @include('Frontend.shop.partials.category-tree', [
+                                        'node' => $node,
+                                        'activeSlug' => $category?->slug,
+                                    ])
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+
+                    {{-- Desktop filters dropdown --}}
+                    <div class="catalog-dropdown" data-catalog-dropdown>
+                        <button type="button" class="catalog-pill catalog-dropdown__trigger" aria-expanded="false"
+                            aria-controls="catalogFiltersDropdown">
+                            <i class="fa-solid fa-sliders"></i>
+                            Филтри
+                            <i class="fa-solid fa-chevron-down catalog-pill__chevron"></i>
+                        </button>
+
+                        <div class="catalog-dropdown__panel catalog-filters-panel" id="catalogFiltersDropdown" hidden>
+                            <div class="catalog-panel__heading">
+                                <span>Филтрирай продуктите</span>
+                            </div>
+
+                            @include('Frontend.shop.partials.catalog-filters')
                         </div>
 
-                        <div class="widget category-widget">
-                            <h3 class="widget-title">Категории</h3>
-                            <div class="widget-inner">
-                                <ul class="list-unstyled shop-category__tree">
-                                    <li class="{{ $category ? '' : 'active' }}">
-                                        <a href="{{ route('shop.index') }}">Всички продукти</a>
-                                    </li>
-                                    @foreach ($categoriesTree as $node)
-                                        @include('Frontend.shop.partials.category-tree', [
-                                            'node' => $node,
-                                            'activeSlug' => $category?->slug,
-                                        ])
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-                    </aside>
+                    </div>
+
+                    {{-- Mobile sidebar trigger --}}
+                    <button type="button" class="catalog-pill catalog-pill--mobile" id="catalogSidebarOpen"
+                        aria-controls="catalogSidebar" aria-expanded="false">
+                        <i class="fa-solid fa-sliders"></i>
+                        Категории и филтри
+                    </button>
+
+
+                        {{-- Currently applied filters: outside the dropdown --}}
+                        @include('Frontend.shop.partials.applied-filters')
+
                 </div>
             </div>
+
+            {{-- Active category / results --}}
+            @if ($category)
+                <div class="catalog-current-category">
+                    <span>Категория:</span>
+                    <strong>{{ $category->name }}</strong>
+                    <a href="{{ route('shop.index') }}" aria-label="Премахни категорията">
+                        <i class="fa-solid fa-xmark"></i>
+                    </a>
+                </div>
+            @endif
+
+            {{-- Products --}}
+            <div class="catalog-products">
+
+                @forelse ($products as $product)
+                    @php
+                        $prices = $product->prices->sortBy('min_quantity');
+                    @endphp
+
+                    <article class="catalog-product">
+
+                        <div class="catalog-product__image">
+                            @if ($product->discount)
+                                <span class="catalog-product__discount">
+                                    -{{ $product->discount }}%
+                                </span>
+                            @endif
+
+                            <a href="{{ route('shop.show', $product->slug) }}">
+                                <img src="{{ $product->main_image
+                                    ? asset('assets/images/products/' . $product->main_image)
+                                    : asset('assets/images/shop/shop-product-1-1.jpg') }}"
+                                    alt="{{ $product->name }}" loading="lazy">
+                            </a>
+
+                            <a href="{{ route('shop.show', $product->slug) }}" class="catalog-product__quick-view"
+                                aria-label="Разгледай {{ $product->name }}">
+                                <i class="fa-regular fa-eye"></i>
+                            </a>
+                        </div>
+
+                        <div class="catalog-product__body">
+
+                            @if ($product->categories->isNotEmpty())
+                                <div class="catalog-product__categories">
+                                   <p class="text-xl-start"> {{ $product->categories->pluck('name')->join(' > ') }}</p>
+                                </div>
+                            @endif
+
+                            <h2 class="catalog-product__title">
+                                <a href="{{ route('shop.show', $product->slug) }}">
+                                    {{ $product->name }}
+                                </a>
+                            </h2>
+
+                            @if ($product->brand)
+                                <p class="catalog-product__brand">
+                                    Марка: <strong>{{ $product->brand }}</strong>
+                                </p>
+                            @endif
+
+                            <div class="catalog-product__prices">
+                                @if ($prices->isNotEmpty())
+                                    <div class="catalog-product__prices-title">
+                                        Цени според количеството
+                                    </div>
+
+                                    @foreach ($prices as $price)
+                                        <div class="catalog-price-row">
+                                            <span>
+                                                @if ($price->max_quantity)
+                                                    {{ $price->min_quantity }}–{{ $price->max_quantity }} бр.
+                                                @else
+                                                    {{ $price->min_quantity }}+ бр.
+                                                @endif
+                                            </span>
+
+                                            <span class="catalog-price-row__amount">
+                                                @if ($product->discount)
+                                                    <strong>
+                                                        {{ number_format($price->price * (1 - $product->discount / 100), 2) }}
+                                                        €
+                                                    </strong>
+                                                    <del>{{ number_format($price->price, 2) }} €</del>
+                                                @else
+                                                    <strong>{{ number_format($price->price, 2) }} €</strong>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <p class="catalog-product__unpriced">
+                                        Цена при запитване
+                                    </p>
+                                @endif
+                            </div>
+
+                            @if ($product->stock <= 0)
+                                <span class="catalog-product__stock">
+                                    Няма наличност
+                                </span>
+                            @endif
+
+                            <a href="{{ route('shop.show', $product->slug) }}" class="catalog-product__button">
+                                Разгледай
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+
+                        </div>
+                    </article>
+
+                @empty
+                    <div class="catalog-empty">
+                        <i class="fa-solid fa-box-open"></i>
+                        <h3>Няма намерени продукти</h3>
+                        <p>
+                            {{ $category ? 'Няма налични продукти с избраните филтри.' : 'Все още няма налични продукти.' }}
+                        </p>
+                        <a href="{{ route('shop.index') }}" class="catalog-product__button">
+                            Покажи всички продукти
+                        </a>
+                    </div>
+                @endforelse
+
+            </div>
+
+            @if ($products->hasPages())
+                <div class="catalog-pagination">
+                    {{ $products->onEachSide(1)->withQueryString()->links() }}
+                </div>
+            @endif
+
         </div>
     </section>
 
+    {{-- Mobile sidebar --}}
+    <div class="catalog-overlay" id="catalogOverlay"></div>
+
+    <aside class="catalog-sidebar" id="catalogSidebar" aria-label="Категории и филтри" aria-hidden="true" inert>
+        <div class="catalog-sidebar__header">
+
+            <button type="button" id="catalogSidebarClose" aria-label="Затвори">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="catalog-sidebar__content">
+
+            <div class="catalog-sidebar__section">
+                <h3>Категории</h3>
+
+                <a href="{{ route('shop.index') }}" class="catalog-sidebar__all {{ $category ? '' : 'is-active' }}">
+                    Всички продукти
+                </a>
+
+                <ul class="catalog-category-tree">
+                    @foreach ($categoriesTree as $node)
+                        @include('Frontend.shop.partials.category-tree', [
+                            'node' => $node,
+                            'activeSlug' => $category?->slug,
+                        ])
+                    @endforeach
+                </ul>
+            </div>
+
+            <hr>
+
+            <div class="catalog-sidebar__section">
+                <h3>Филтри</h3>
+                @include('Frontend.shop.partials.catalog-filters')
+            </div>
+
+        </div>
+    </aside>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const toggle = document.getElementById('shopSidebarToggle');
-            const close = document.getElementById('shopSidebarClose');
-            const sidebar = document.getElementById('shopFiltersSidebar');
-            const overlay = document.getElementById('shopSidebarOverlay');
-            const priceRange = document.getElementById('priceRange');
-            const priceValue = document.getElementById('priceRangeValue');
+        $(document).ready(function() {
+            initCatalogDropdowns();
+            initCatalogSidebar();
+            initCatalogOutsideClick();
+            initCatalogKeyboardEvents();
+            initCatalogCategoryTree();
+            initCatalogFilters();
+        });
 
-            function setSidebar(open) {
-                if (!sidebar || !overlay) return;
-                sidebar.classList.toggle('active', open);
-                overlay.classList.toggle('active', open);
-                document.body.classList.toggle('shop-sidebar-open', open);
-                if (toggle) toggle.setAttribute('aria-expanded', String(open));
-            }
+        /**
+         * Desktop categories and filters dropdowns.
+         */
+        function initCatalogDropdowns() {
+            $('[data-catalog-dropdown]').each(function() {
+                const dropdown = $(this);
+                const trigger = dropdown.find('.catalog-dropdown__trigger').first();
+                const panel = dropdown.find('.catalog-dropdown__panel').first();
 
-            if (toggle) toggle.addEventListener('click', () => setSidebar(true));
-            if (close) close.addEventListener('click', () => setSidebar(false));
-            if (overlay) overlay.addEventListener('click', () => setSidebar(false));
-            document.addEventListener('keydown', function(event) {
-                if (event.key === 'Escape') setSidebar(false);
-            });
+                if (!trigger.length || !panel.length) return;
 
-            function updatePriceRange() {
-                if (!priceRange || !priceValue) return;
-                const percent = (Number(priceRange.value) / Number(priceRange.max || 1)) * 100;
-                priceValue.textContent = Number(priceRange.value).toLocaleString('bg-BG');
-                priceRange.style.background =
-                    `linear-gradient(to right, #fc5523 0%, #fc5523 ${percent}%, #e6e6e6 ${percent}%, #e6e6e6 100%)`;
-            }
+                trigger.on('click', function(event) {
+                    event.stopPropagation();
 
-            if (priceRange) {
-                priceRange.addEventListener('input', updatePriceRange);
-                updatePriceRange();
-            }
+                    const willOpen = panel.attr('hidden') !== undefined;
 
-            // Initialize Tom Select only when available; avoid initializing a select twice.
-            if (typeof TomSelect !== 'undefined') {
-                document.querySelectorAll('#shopFiltersForm select.attribute-choice').forEach(function(select) {
-                    if (!select.tomselect) {
-                        new TomSelect(select, {
-                            allowEmptyOption: true,
-                            create: false,
-                            maxOptions: 200,
-                            placeholder: 'Избери...',
-                        });
+                    closeCatalogDropdowns(dropdown);
+
+                    if (willOpen) {
+                        panel.removeAttr('hidden');
+                        dropdown.addClass('is-open');
+                        trigger.attr('aria-expanded', 'true');
+                    } else {
+                        panel.attr('hidden', '');
+                        dropdown.removeClass('is-open');
+                        trigger.attr('aria-expanded', 'false');
                     }
                 });
+            });
+        }
+
+        function closeCatalogDropdowns(except = null) {
+            $('[data-catalog-dropdown]').each(function() {
+                const dropdown = $(this);
+
+                if (except && dropdown[0] === except[0]) return;
+
+                dropdown.find('.catalog-dropdown__panel').first().attr('hidden', '');
+                dropdown.find('.catalog-dropdown__trigger').first().attr('aria-expanded', 'false');
+                dropdown.removeClass('is-open');
+            });
+        }
+
+        /**
+         * Mobile sidebar.
+         */
+        function initCatalogSidebar() {
+            const sidebar = $('#catalogSidebar');
+            const overlay = $('#catalogOverlay');
+            const openButton = $('#catalogSidebarOpen');
+            const closeButton = $('#catalogSidebarClose');
+
+            function setSidebarOpen(open) {
+                if (!sidebar.length || !overlay.length) return;
+
+                sidebar.toggleClass('is-open', open);
+                overlay.toggleClass('is-visible', open);
+                $('body').toggleClass('catalog-sidebar-open', open);
+
+                sidebar.attr('aria-hidden', String(!open));
+                sidebar.prop('inert', !open);
+                openButton.attr('aria-expanded', String(open));
+
+                if (open) {
+                    closeCatalogDropdowns();
+                    closeButton.trigger('focus');
+                } else {
+                    openButton.trigger('focus');
+                }
             }
-        });
+
+            openButton.on('click', function() {
+                setSidebarOpen(true);
+            });
+
+            closeButton.on('click', function() {
+                setSidebarOpen(false);
+            });
+
+            overlay.on('click', function() {
+                setSidebarOpen(false);
+            });
+
+            window.setCatalogSidebarOpen = setSidebarOpen;
+        }
+
+        /**
+         * Close desktop dropdowns when clicking outside.
+         */
+        function initCatalogOutsideClick() {
+            $(document).on('click', function(event) {
+                if (!$(event.target).closest('[data-catalog-dropdown]').length) {
+                    closeCatalogDropdowns();
+                }
+
+                // Close individual filter panels when clicking outside their form.
+                if (!$(event.target).closest('.catalog-filter-form').length) {
+                    closeCatalogFilterPanels();
+                }
+            });
+        }
+
+        /**
+         * Escape closes dropdowns, filter panels, and the mobile sidebar.
+         */
+        function initCatalogKeyboardEvents() {
+            $(document).on('keydown', function(event) {
+                if (event.key !== 'Escape') return;
+
+                closeCatalogDropdowns();
+                closeCatalogFilterPanels();
+
+                if ($('#catalogSidebar').hasClass('is-open')) {
+                    window.setCatalogSidebarOpen?.(false);
+                }
+            });
+        }
+
+        /**
+         * Category tree.
+         */
+        function initCatalogCategoryTree() {
+            $('.catalog-category-tree').each(function() {
+                const tree = $(this);
+                const activeItem = tree.find('.shop-category__item.active').first();
+
+                if (activeItem.length) {
+                    let item = activeItem;
+
+                    while (item.length) {
+                        item.addClass('open');
+
+                        item.children('.shop-category__row')
+                            .find('.category-toggle')
+                            .first()
+                            .attr('aria-expanded', 'true');
+
+                        item = item.parent().closest('.shop-category__item');
+                    }
+                }
+
+                tree.on('click', '.category-toggle', function(event) {
+                    event.preventDefault();
+
+                    const button = $(this);
+                    const item = button.closest('.shop-category__item');
+                    const willOpen = !item.hasClass('open');
+
+                    item.toggleClass('open', willOpen);
+                    button.attr('aria-expanded', String(willOpen));
+                });
+            });
+        }
+
+        /**
+         * Individual attribute filter dropdowns.
+         * Explicitly removes and restores the hidden attribute.
+         */
+        function initCatalogFilters() {
+            $(document).on('click', '.catalog-filter-trigger', function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                const trigger = $(this);
+                const panelId = trigger.attr('aria-controls');
+
+                if (!panelId) return;
+
+                // Search by ID directly. This also works when the partial
+                // is rendered in both the desktop dropdown and mobile sidebar.
+                const panel = document.getElementById(panelId);
+
+                if (!panel) {
+                    console.error('Catalog filter panel not found:', panelId);
+                    return;
+                }
+
+                const willOpen = panel.hasAttribute('hidden');
+
+                // Close all filter panels first.
+                closeCatalogFilterPanels();
+
+                if (willOpen) {
+                    // THE IMPORTANT PART: remove the actual HTML attribute.
+                    panel.removeAttribute('hidden');
+
+                    trigger.attr('aria-expanded', 'true');
+                    trigger.closest('.catalog-filter-item').addClass('is-open');
+                } else {
+                    panel.setAttribute('hidden', '');
+
+                    trigger.attr('aria-expanded', 'false');
+                    trigger.closest('.catalog-filter-item').removeClass('is-open');
+                }
+            });
+
+            // Update the selected value displayed in the filter heading.
+            $(document).on('change', '.catalog-filter-select', function() {
+                const select = $(this);
+                const selectedValue = select.val();
+                const selectedText = select.find('option:selected').text();
+                const item = select.closest('.catalog-filter-item');
+
+                item.find('.catalog-filter-trigger__selected')
+                    .text(selectedValue ? selectedText : 'Всички');
+            });
+
+            // Initialize Choices.js if it is loaded.
+            if (typeof Choices !== 'undefined') {
+                $('.catalog-filter-select').each(function() {
+                    if (this.choicesInstance) return;
+
+                    this.choicesInstance = new Choices(this, {
+                        searchEnabled: true,
+                        searchPlaceholderValue: 'Търси...',
+                        itemSelectText: '',
+                        shouldSort: false,
+                        allowHTML: false,
+                        placeholder: true,
+                        placeholderValue: 'Изберете от падащото меню',
+                        searchResultLimit: 200,
+                        renderChoiceLimit: -1,
+                        noResultsText: 'Няма намерени резултати',
+                        noChoicesText: 'Няма налични опции'
+                    });
+                });
+            }
+        }
+
+        /**
+         * Hide all individual filter panels.
+         */
+        function closeCatalogFilterPanels() {
+            document.querySelectorAll('.catalog-filter-panel').forEach(function(panel) {
+                panel.setAttribute('hidden', '');
+            });
+
+            document.querySelectorAll('.catalog-filter-trigger').forEach(function(trigger) {
+                trigger.setAttribute('aria-expanded', 'false');
+            });
+
+            document.querySelectorAll('.catalog-filter-item').forEach(function(item) {
+                item.classList.remove('is-open');
+            });
+        }
     </script>
 </x-frontend>

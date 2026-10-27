@@ -61,8 +61,7 @@
                             <!-- Gallery Thumbnails -->
                             @if ($galleryImages->count() > 1)
 
-                                <div class="product-gallery d-flex flex-column gap-2">
-
+                                <div class="product-gallery gap-2">
                                     @foreach ($galleryImages->skip(1) as $image)
                                         <a href="{{ $image }}" data-fancybox="product-gallery"
                                             class="product-gallery__item">
@@ -72,7 +71,6 @@
 
                                         </a>
                                     @endforeach
-
                                 </div>
 
                             @endif

@@ -197,6 +197,44 @@ class ShopService
             ->values()
             ->toArray();
 
+        // Build each assigned category with its complete parent path.
+        $categories = $product->categories
+            ->map(function ($category) {
+                $path = [];
+                $currentCategory = $category;
+
+                while ($currentCategory) {
+                    array_unshift($path, [
+                        'id' => $currentCategory->id,
+                        'name' => $currentCategory->name,
+                        'slug' => $currentCategory->slug,
+                    ]);
+
+                    $currentCategory = $currentCategory->parent;
+                }
+
+                return [
+                    'id' => $category->id,
+                    'name' => $category->name,
+                    'slug' => $category->slug,
+                    'ancestors' => array_slice($path, 0, -1),
+                    'path' => $path,
+                ];
+            })
+            ->values()
+            ->toArray();
+
+        // Remove parent categories when a deeper assigned category includes them.
+        $categories = collect($categories)
+            ->reject(function ($category) use ($categories) {
+                return collect($categories)->contains(function ($otherCategory) use ($category) {
+                    return $otherCategory['id'] !== $category['id']
+                        && collect($otherCategory['path'])->contains('id', $category['id']);
+                });
+            })
+            ->values()
+            ->toArray();
+
         // Add the newest product to the beginning.
         $lastViewedProducts = [
             $product->id => [
@@ -207,6 +245,7 @@ class ShopService
                 'image' => $product->main_image,
                 'prices' => $prices,
                 'discount' => $product->discount,
+                'categories' => $categories,
             ],
         ] + $lastViewedProducts;
 

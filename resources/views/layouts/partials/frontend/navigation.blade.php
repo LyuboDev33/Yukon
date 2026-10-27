@@ -9,15 +9,15 @@
 
     <!-- Projects -->
     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="{{ route('shop.index') }}" aria-expanded="false">
+        <a class="nav-link " href="{{ route('shop.index') }}" aria-expanded="false">
             Магазин
         </a>
 
-        <ul class="dropdown-menu">
+        {{-- <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{{ route('shop.index') }}">Всички продукти</a></li>
             <li><a class="dropdown-item" href="case-studies-2.html">Projects 2</a></li>
             <li><a class="dropdown-item" href="single-casestudy.html">Project Details</a></li>
-        </ul>
+        </ul> --}}
     </li>
 
 
