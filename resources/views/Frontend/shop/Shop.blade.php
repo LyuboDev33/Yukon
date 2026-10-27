@@ -96,6 +96,9 @@
                 </div>
             </div>
 
+                                                                        @include('Frontend.shop.partials.breadcrumb', $breadcrumbs ?? [])
+
+
             {{-- Active category / results --}}
             @if ($category)
                 <div class="catalog-current-category">
