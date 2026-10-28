@@ -21,7 +21,7 @@ class FrontEndController extends Controller
 
         foreach ($products as $product) {
             $brand = $product->attributeValues->first(
-                fn ($attribute) => $attribute->type->name === 'Марка'
+                fn($attribute) => $attribute->type->name === 'Марка'
             );
 
             $product->brand = $brand?->value;
@@ -75,6 +75,35 @@ class FrontEndController extends Controller
         }
 
         return view($view);
+    }
+
+    /** Return the view of the machiens seection */
+    public function machines()
+    {
+        return view('Frontend.machines.index');
+    }
+
+    /** Return the single machine view
+     *
+     * @param string $name
+     */
+    public function machine(string $name)
+    {
+        $view = 'Frontend.machines.' . $name;
+
+        if (!view()->exists($view)) {
+            abort(404);
+        }
+
+        $imagePath = public_path('assets/images/machines/' . $name);
+
+        $images = collect(File::files($imagePath))
+            ->map(fn($file) => asset(
+                'assets/images/machines/' . $name . '/' . $file->getFilename()
+            ))
+            ->values();
+
+        return view($view, compact('images'));
     }
 
     /**

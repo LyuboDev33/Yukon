@@ -124,10 +124,10 @@ Notes:
     color: #535353 !important
 }
 
-.h1,
+/* .h1,
 h1 {
     font-size: 74px
-}
+} */
 
 .h1,
 .h2,
@@ -916,7 +916,7 @@ ul.ct-list li:before {
 }
 
 .sec-padding {
-    padding: 120px 0
+    padding: 150px 0
 }
 
 @media (min-width:992px) and (max-width:1199.98px) {
@@ -5010,15 +5010,20 @@ section.promo-sec .breadcrumb-item+.breadcrumb-item:before {
 
 .service-card {
     padding: 30px;
-    mask-image: url(../images/s-mask.png);
+    /* mask-image: url(../images/s-mask.png); */
     mask-repeat: no-repeat
 }
 
 .service-card .service-thumb {
-    margin: 30px 0 25px;
-    mask-image: url(../images/serv-shape.png);
+    margin: 10px 0 25px;
+    /* mask-image: url(../images/serv-shape.png); */
     mask-size: contain;
-    mask-repeat: no-repeat
+    mask-repeat: no-repeat;
+}
+
+.service-card .service-thumb img{
+    border-radius: 30px;
+    width: 100%;
 }
 
 .service-card .service-footer span {

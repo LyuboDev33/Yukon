@@ -1,0 +1,712 @@
+/* ========================================
+   Machine Details Page
+======================================== */
+
+.machine-hero {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    min-height: 280px;
+    padding: 141px 0 50px;
+    overflow: hidden;
+    background: #111827;
+}
+
+.machine-hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.25;
+}
+
+.machine-hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+        110deg,
+        rgba(10, 20, 35, 0.98) 0%,
+        rgba(10, 20, 35, 0.82) 60%,
+        rgba(10, 20, 35, 0.6) 100%
+    );
+}
+
+.machine-hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.machine-eyebrow {
+    display: inline-block;
+    margin-bottom: 14px;
+    color: #70d6c5;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.machine-hero h1 {
+    margin: 0 0 20px;
+    color: #fff;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -1.5px;
+}
+
+.machine-hero .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+}
+
+.machine-hero .breadcrumb-item,
+.machine-hero .breadcrumb-item span,
+.machine-hero .breadcrumb-item.active {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+}
+
+.machine-hero .breadcrumb-item a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.machine-hero .breadcrumb-item a:hover {
+    color: #70d6c5;
+}
+
+.machine-hero .breadcrumb-item + .breadcrumb-item::before {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+
+/* Main layout */
+
+.machine-details-section {
+    padding: 55px 0 85px;
+    background: #f5f7fa;
+}
+
+.machine-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.machine-category {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: #fd5523;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+}
+
+.machine-heading h2 {
+    margin: 0 0 10px;
+    color: #172333;
+    font-size: clamp(25px, 3vw, 36px);
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -0.8px;
+}
+
+.machine-subtitle {
+    margin: 0;
+    color: #778394;
+    font-size: 14px;
+}
+
+.machine-price {
+    flex-shrink: 0;
+    padding: 17px 22px;
+    border: 1px solid #dce8e7;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 5px 20px rgba(23, 35, 51, 0.04);
+}
+
+.machine-price span,
+.machine-sidebar-price span {
+    display: block;
+    margin-bottom: 4px;
+    color: #7b8795;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.machine-price strong {
+    display: block;
+    color: #fd5523;
+    font-size: 26px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+
+/* Main article card */
+
+.machine-main-card {
+    overflow: hidden;
+    border: 1px solid #e8edf2;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 8px 35px rgba(23, 35, 51, 0.045);
+}
+
+
+/* Image gallery */
+
+.machine-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    padding: 10px;
+    background: #fff;
+}
+
+.machine-gallery-item {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    border-radius: 9px;
+    background: #edf1f5;
+}
+
+.machine-gallery-item:first-child {
+    grid-column: span 3;
+    aspect-ratio: 16 / 8;
+}
+
+.machine-gallery-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+}
+
+.machine-gallery-item:hover img {
+    transform: scale(1.045);
+}
+
+.machine-image-zoom {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 50%;
+    background: rgba(15, 27, 41, 0.75);
+    color: #fff;
+    opacity: 0;
+    transform: translateY(5px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.machine-gallery-item:hover .machine-image-zoom,
+.machine-gallery-item:focus-visible .machine-image-zoom {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.machine-gallery-empty {
+    grid-column: 1 / -1;
+    padding: 55px 20px;
+    color: #8a96a5;
+    text-align: center;
+}
+
+.machine-gallery-empty i {
+    margin-bottom: 12px;
+    font-size: 34px;
+}
+
+.machine-gallery-empty p {
+    margin: 0;
+}
+
+
+/* Article content */
+
+.machine-content-section {
+    padding: 32px 34px;
+    border-top: 1px solid #edf0f4;
+}
+
+.machine-section-heading {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 22px;
+}
+
+.machine-section-number {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #fd562344;
+    color: #fd5523;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.machine-section-heading h3 {
+    margin: 0;
+    color: #172333;
+    font-size: 23px;
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+.machine-content-section > p {
+    margin: 0 0 16px;
+    color: #566274;
+    font-size: 15px;
+    line-height: 1.85;
+}
+
+.machine-content-section > p:last-child {
+    margin-bottom: 0;
+}
+
+.machine-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 22px;
+    padding: 17px;
+    border: 1px solid #d9e9f8;
+    border-radius: 10px;
+    background: #f2f8fd;
+}
+
+.machine-notice > i {
+    margin-top: 4px;
+    color: #327bb5;
+    font-size: 18px;
+}
+
+.machine-notice p {
+    margin: 0;
+    color: #52677b;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.machine-disclaimer {
+    margin-top: 22px !important;
+    padding: 15px 17px;
+    border-radius: 9px;
+    background: #f6f7f9;
+    color: #778394 !important;
+    font-size: 12px !important;
+    line-height: 1.8 !important;
+}
+
+.machine-disclaimer i {
+    margin-right: 7px;
+    color: #fd5523;
+}
+
+
+/* Specifications */
+
+.machine-specifications {
+    overflow: hidden;
+    border: 1px solid #e8edf2;
+    border-radius: 10px;
+}
+
+.machine-spec-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 15px 18px;
+    border-bottom: 1px solid #edf0f4;
+}
+
+.machine-spec-row:last-child {
+    border-bottom: 0;
+}
+
+.machine-spec-row:nth-child(odd) {
+    background: #fafbfd;
+}
+
+.machine-spec-row span {
+    color: #778394;
+    font-size: 13px;
+}
+
+.machine-spec-row strong {
+    color: #263547;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: right;
+}
+
+
+/* FAQ */
+
+.machine-faq {
+    border-top: 1px solid #e8edf2;
+}
+
+.machine-faq details {
+    border-bottom: 1px solid #e8edf2;
+}
+
+.machine-faq summary {
+    position: relative;
+    padding: 18px 32px 18px 0;
+    color: #243246;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.6;
+    cursor: pointer;
+    list-style: none;
+}
+
+.machine-faq summary::-webkit-details-marker {
+    display: none;
+}
+
+.machine-faq summary::after {
+    position: absolute;
+    top: 50%;
+    right: 4px;
+    color: #fd5523;
+    content: "+";
+    font-size: 23px;
+    font-weight: 400;
+    transform: translateY(-50%);
+}
+
+.machine-faq details[open] summary::after {
+    content: "−";
+}
+
+.machine-faq details p {
+    margin: 0;
+    padding: 0 20px 18px 0;
+    color: #667386;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+
+/* Sidebar */
+
+.machine-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.machine-sidebar-card {
+    padding: 25px;
+    border: 1px solid #e8edf2;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 8px 30px rgba(23, 35, 51, 0.04);
+}
+
+.machine-sidebar-title {
+    margin: 0 0 22px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #edf0f4;
+    color: #172333;
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.machine-info-item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 20px;
+}
+
+.machine-info-item:last-of-type {
+    margin-bottom: 0;
+}
+
+.machine-info-icon {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
+    background: #fd562344;
+    color: #fd5523;
+    font-size: 16px;
+}
+
+.machine-info-item > div {
+    min-width: 0;
+}
+
+.machine-info-label {
+    display: block;
+    margin-bottom: 4px;
+    color: #8792a0;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.machine-info-item strong {
+    display: block;
+    color: #263547;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.machine-sidebar-price {
+    margin-top: 24px;
+    padding: 19px;
+    border-radius: 11px;
+    background: #fd562344;
+}
+
+.machine-sidebar-price strong {
+    display: block;
+    color: #fd5523;
+    font-size: 28px;
+    font-weight: 800;
+}
+
+
+/* Contact card */
+
+.machine-contact-description {
+    margin: -5px 0 20px;
+    color: #6d7989;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.machine-contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    margin-bottom: 16px;
+    color: #526174;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.machine-contact-item i {
+    width: 17px;
+    margin-top: 3px;
+    color: #fd5523;
+    text-align: center;
+}
+
+.machine-contact-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    margin-top: 22px;
+    padding: 15px 17px;
+    border: 0;
+    border-radius: 9px;
+    background: #fd5523;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.machine-contact-button:hover {
+    background: #fd562344;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+
+/* Documentation */
+
+.machine-document-note {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    border: 1px solid #e8edf2;
+    border-radius: 9px;
+    background: #fafbfd;
+    color: #344255;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.machine-document-note i {
+    color: #fd5523;
+    font-size: 22px;
+}
+
+.machine-small-note {
+    margin: 14px 0 0;
+    color: #8792a0;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+
+/* Responsive layout */
+
+@media (max-width: 991.98px) {
+    .machine-details-section {
+        padding: 40px 0 60px;
+    }
+
+    .machine-heading {
+        align-items: flex-start;
+    }
+
+    .machine-sidebar {
+        margin-top: 5px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .machine-hero {
+        min-height: 230px;
+        padding: 120px 0px 50px;
+    }
+
+    .machine-hero h1 {
+        letter-spacing: -0.7px;
+    }
+
+    .machine-details-section {
+        padding: 28px 0 45px;
+    }
+
+    .machine-heading {
+        flex-direction: column;
+        gap: 18px;
+        margin-bottom: 22px;
+    }
+
+    .machine-price {
+        width: 100%;
+        padding: 15px 18px;
+    }
+
+    .machine-price strong {
+        font-size: 24px;
+    }
+
+    .machine-gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+        padding: 7px;
+    }
+
+    .machine-gallery-item:first-child {
+        grid-column: span 2;
+        aspect-ratio: 4 / 3;
+    }
+
+    .machine-gallery-item {
+        aspect-ratio: 4 / 3;
+    }
+
+    .machine-content-section {
+        padding: 25px 20px;
+    }
+
+    .machine-section-heading {
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .machine-section-heading h3 {
+        padding-top: 4px;
+        font-size: 20px;
+    }
+
+    .machine-spec-row {
+        align-items: flex-start;
+        gap: 12px;
+        padding: 13px;
+    }
+
+    .machine-spec-row span,
+    .machine-spec-row strong {
+        flex: 1;
+        font-size: 12px;
+    }
+
+    .machine-sidebar-card {
+        padding: 21px;
+    }
+}
+
+@media (max-width: 420px) {
+    .machine-gallery {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .machine-image-zoom {
+        right: 7px;
+        bottom: 7px;
+        width: 32px;
+        height: 32px;
+        opacity: 1;
+        transform: none;
+    }
+
+    .machine-content-section {
+        padding: 22px 16px;
+    }
+
+    .machine-section-number {
+        width: 33px;
+        height: 33px;
+    }
+
+    .machine-section-heading h3 {
+        font-size: 18px;
+    }
+
+    .machine-spec-row {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .machine-spec-row strong {
+        text-align: left;
+    }
+}

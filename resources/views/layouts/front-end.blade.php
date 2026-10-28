@@ -53,6 +53,9 @@
                 <!-- Main Template CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/catalog.css') }}?v={{ time() }}">
 
+        <link rel="stylesheet" href="{{ asset('assets/css/machines.css') }}?v={{ time() }}">
+
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
 
      <!-- Fancybox JS -->

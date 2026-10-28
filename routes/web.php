@@ -21,6 +21,9 @@ Route::get('/contact', [FrontEndController::class, 'contact'])->name('contact');
 Route::get('/about', [FrontEndController::class, 'about'])->name('about');
 Route::get('/obshti-usloviya', [FrontEndController::class, 'conditions'])->name('conditions');
 Route::get('/politika-za-poveritelnost', [FrontEndController::class, 'privacy'])->name('privacy');
+Route::get('/machines', [FrontEndController::class, 'machines'])->name('machines');
+Route::get('/machine/{name}', [FrontEndController::class, 'machine'])->name('machine');
+
 
 /** All routes for the shop*/
 Route::prefix('/shop')->group(function () {

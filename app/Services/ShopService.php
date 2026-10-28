@@ -323,7 +323,7 @@ class ShopService
     {
         return Product::with([
             'prices' => function ($query) {
-                $query->orderBy('min_quantity', 'asc');
+                $query->orderBy('min_quantity');
             },
             'categories',
             'attributeValues.type',
@@ -334,7 +334,6 @@ class ShopService
             ->take(4)
             ->get()
             ->map(function ($similarProduct) {
-
                 $brand = $similarProduct->attributeValues->first(
                     fn($attributeValue) =>
                     $attributeValue->type?->name === 'Марка'
@@ -345,6 +344,7 @@ class ShopService
                 return $similarProduct;
             });
     }
+
 
 
     /**

@@ -10,17 +10,13 @@ use Illuminate\Http\Request;
 
 class AdminProductService
 {
-
     /**
-     * Apply product attribute and price filters to the given query.
-     *
-     * @param Builder $query
-     * @param Request $request
-     * @return Builder
+     * Apply product attribute and price filters.
      */
-    public static function filteredProducts(Builder $query, Request $request): Builder
-    {
-
+    public static function filteredProducts(
+        Builder $query,
+        Request $request
+    ): Builder {
         $filters = $request->except([
             'page',
             'price-range',
@@ -28,31 +24,32 @@ class AdminProductService
         ]);
 
         foreach ($filters as $attributeTypeSlug => $attributeValueSlug) {
-
             if (empty($attributeValueSlug)) {
                 continue;
             }
 
             $query->whereHas(
                 'attributeValues',
-                function ($query) use ($attributeTypeSlug, $attributeValueSlug) {
+                function ($query) use (
+                    $attributeTypeSlug,
+                    $attributeValueSlug
+                ) {
                     $query->where('slug', $attributeValueSlug)
                         ->whereHas(
                             'type',
                             function ($query) use ($attributeTypeSlug) {
-                                $query->where(
-                                    'slug',
-                                    $attributeTypeSlug
-                                );
+                                $query->where('slug', $attributeTypeSlug);
                             }
                         );
                 }
             );
         }
 
-
         if ($request->filled('price-range')) {
-            $query->whereBetween('price', [0, $request->integer('price-range')]);
+            $query->whereBetween('price', [
+                0,
+                $request->integer('price-range'),
+            ]);
         }
 
         if ($request->stock === 'in_stock') {
@@ -63,80 +60,102 @@ class AdminProductService
             $query->where('stock', '<=', 0);
         }
 
-
         return $query;
     }
 
-
-    /** Return all ids of a given category
-     *
+    /**
+     * Return the IDs of a category and all its descendants.
+     * 
      * @param Collection $category
      * @return array[]
+     * Fetches categories once instead of querying children recursively.
      */
-    public static function getCategoryIds($category)
+    public static function getCategoryIds($category): array
     {
-        $ids = [$category->id];
+        $categories = Category::query()
+            ->select(['id', 'category_parent_id'])
+            ->get();
 
-        if ($category->children) {
-            foreach ($category->children as $child) {
-                $ids = array_merge($ids, self::getCategoryIds($child));
+        $childrenByParent = $categories->groupBy('category_parent_id');
+
+        $ids = [];
+
+        $collectIds = function ($categoryId) use (
+            &$collectIds,
+            &$ids,
+            $childrenByParent
+        ) {
+            $ids[] = $categoryId;
+
+            foreach (
+                $childrenByParent->get($categoryId, collect())
+                as $child
+            ) {
+                $collectIds($child->id);
             }
-        }
+        };
+
+        $collectIds($category->id);
 
         return $ids;
     }
 
-    /** Shared base query — eager loads + ordering */
-    public static function productsQuery()
+    /**
+     * Shared base product query.
+     */
+    public static function productsQuery(): Builder
     {
-        return Product::with(['categories', 'attributeValues'])->latest();
+        return Product::with([
+            'categories',
+            'attributeValues',
+        ])->latest();
     }
 
-    /** Build the categories tree from root nodes (recursive via Category->children) */
+    /**
+     * Build the complete category tree using one database query.
+     */
     public static function buildCategoriesTree(): array
     {
-        $roots = Category::whereNull('category_parent_id')
-            ->with('children')
+        $categories = Category::query()
             ->orderBy('name')
             ->get();
 
-        return self::buildTree($roots);
+        $categoriesByParent = $categories->groupBy('category_parent_id');
+
+        $buildTree = function ($parentId) use (
+            &$buildTree,
+            $categoriesByParent
+        ): array {
+            return $categoriesByParent
+                ->get($parentId, collect())
+                ->map(function ($category) use (&$buildTree) {
+                    return [
+                        'id' => $category->id,
+                        'name' => $category->name,
+                        'slug' => $category->slug,
+                        'children' => $buildTree($category->id),
+                    ];
+                })
+                ->values()
+                ->toArray();
+        };
+
+        return $buildTree(null);
     }
 
-    /** Recursive helper used by buildCategoriesTree
-     *
-     * @param Collection $categories
-     * @return array[]
+    /**
+     * Flatten a category tree into a list with full category paths.
      */
-    private static function buildTree($categories): array
-    {
+    public static function flattenCategoryTree(
+        $categories,
+        $parentPath = ''
+    ): array {
         $tree = [];
 
         foreach ($categories as $category) {
-            $tree[] = [
-                'id'       => $category->id,
-                'name'     => $category->name,
-                'slug'     => $category->slug,
-                'children' => self::buildTree($category->children),
-            ];
-        }
-
-        return $tree;
-    }
-
-    /** Return the category tree
-     *
-     * @param Collection $categories
-     * @param string $parentPath
-     * @return array[]
-     */
-    public static function flattenCategoryTree($categories, $parentPath = ''): array
-    {
-        $tree = [];
-
-        foreach ($categories as $category) {
-
-            $currentPath = $parentPath ? $parentPath . ' → ' . $category->name : $category->name;
+            $currentPath = $parentPath
+                ? $parentPath . ' → ' . $category->name
+                : $category->name;
 
             $tree[] = [
                 'id' => $category->id,
@@ -145,7 +164,13 @@ class AdminProductService
             ];
 
             if ($category->children && $category->children->count()) {
-                $tree = array_merge($tree, self::flattenCategoryTree($category->children, $currentPath));
+                $tree = array_merge(
+                    $tree,
+                    self::flattenCategoryTree(
+                        $category->children,
+                        $currentPath
+                    )
+                );
             }
         }
 
@@ -153,17 +178,13 @@ class AdminProductService
     }
 
     /**
-     * Find the breadcrumb path for a category inside the category tree.
-     *
-     * @param array $categoriesTree
-     * @param string $activeSlug
-     * @return array
+     * Find the breadcrumb path for a category in the category tree.
      */
-    public static function getCategoryBreadcrumbs(array $categoriesTree, string $activeSlug): array
-    {
-
+    public static function getCategoryBreadcrumbs(
+        array $categoriesTree,
+        string $activeSlug
+    ): array {
         foreach ($categoriesTree as $category) {
-
             if ($category['slug'] === $activeSlug) {
                 return [[
                     'name' => $category['name'],
@@ -171,13 +192,13 @@ class AdminProductService
                 ]];
             }
 
-            if (! empty($category['children'])) {
+            if (!empty($category['children'])) {
                 $childPath = self::getCategoryBreadcrumbs(
                     $category['children'],
                     $activeSlug
                 );
 
-                if (! empty($childPath)) {
+                if (!empty($childPath)) {
                     return array_merge(
                         [[
                             'name' => $category['name'],
