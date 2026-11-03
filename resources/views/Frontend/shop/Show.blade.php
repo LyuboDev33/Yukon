@@ -14,7 +14,7 @@
         <meta property="og:site_name" content="ЮКОН">
         <meta property="og:title" content="{{ $product->name }} | ЮКОН">
         <meta property="og:description"
-            content="{{ \Illuminate\Support\Str::limit(strip_tags($product->description ?? ''), 155) }}">
+            content="{{ $product->description ?? '' }}">
         <meta property="og:url" content="{{ route('shop.show', $product->slug) }}">
 
         @if ($product->main_image)
@@ -92,6 +92,10 @@
                         <h1 class="display-3 yukon-product-title">
                             {{ $product->name }}
                         </h1>
+                        <div>
+                        <h3>Описание на продукта: </h3>
+                        {!! $product->description !!}
+                        </div>
 
 
                         <!-- Quantity Pricing Table -->

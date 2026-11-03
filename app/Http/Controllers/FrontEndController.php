@@ -77,6 +77,11 @@ class FrontEndController extends Controller
         return view($view);
     }
 
+    /** Show the materials page  */
+    public function materials (){
+        return view('Frontend.materials');
+    }
+
     /** Return the view of the machiens seection */
     public function machines()
     {

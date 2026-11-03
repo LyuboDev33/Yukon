@@ -1,7 +1,7 @@
 
 <!-- Footer Start -->
 <footer class="footer bg-cover jarallax" data-jarallax data-speed=".2">
-   <img src="/assets/images/footer-bg.jpg" alt="Фон на футъра" class="jarallax-img">
+   <img src="/assets/images/footer-yukon-bg.jpg" alt="Фон на футъра" class="jarallax-img">
    <div class="parallax-overly"></div>
    <div class="container">
 

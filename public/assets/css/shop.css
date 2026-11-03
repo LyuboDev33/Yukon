@@ -3467,11 +3467,10 @@ body.product-variant-sidebar-open {
     padding: 13px 28px;
     border: 0;
     border-radius: 999px;
-    background: var(--yukon-orange);
+    background: #C49A57;
     color: #fff;
     font-size: 16px;
     font-weight: 750;
-    box-shadow: 0 10px 24px rgba(255, 84, 36, .22);
     transition: transform .2s ease, background .2s ease;
 }
 

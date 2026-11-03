@@ -41,8 +41,8 @@
     <!-- Sidebar Footer -->
     <div class="mobile-sidebar-footer">
 
-        <a href="quote.html" class="btn btn-primary">
-            Get a Free Quote
+        <a href="{{ route('contact') }}" class="btn btn-primary">
+            Към контакти
             <i class="fa fa-arrow-right"></i>
             <span></span>
         </a>

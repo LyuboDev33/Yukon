@@ -3,12 +3,12 @@
 ========================================== */
 
 .catalog {
-    --catalog-text: #282d29;
-    --catalog-muted: #fd5523;
-    --catalog-border: #e5e8e2;
-    --catalog-soft: #f0f1ee;
-    --catalog-accent: #fd5523;
-    --catalog-accent-dark: #fd5523;
+    --catalog-text: #242B2D;
+    --catalog-muted: #8B6547;
+    --catalog-border: #E1D7C8;
+    --catalog-soft: #FAF7F1;
+    --catalog-accent: #C49A57;
+    --catalog-accent-dark: #A67D3F;
     --catalog-radius: 18px;
 
     padding: 160px 0 70px;

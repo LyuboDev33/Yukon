@@ -20,9 +20,13 @@
         </ul> --}}
     </li>
 
-        <!-- Contact -->
+    <!-- Contact -->
     <li class="nav-item">
         <a class="nav-link" href="{{ route('about') }}">За нас</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('materials') }}">Материали</a>
     </li>
 
     <!-- Contact -->

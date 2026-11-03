@@ -23,7 +23,7 @@ Route::get('/obshti-usloviya', [FrontEndController::class, 'conditions'])->name(
 Route::get('/politika-za-poveritelnost', [FrontEndController::class, 'privacy'])->name('privacy');
 Route::get('/machines', [FrontEndController::class, 'machines'])->name('machines');
 Route::get('/machine/{name}', [FrontEndController::class, 'machine'])->name('machine');
-
+Route::get('/materials', [FrontEndController::class, 'materials'])->name('materials');
 
 /** All routes for the shop*/
 Route::prefix('/shop')->group(function () {

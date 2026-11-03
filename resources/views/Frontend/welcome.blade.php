@@ -30,21 +30,26 @@
     <section class="slider-sec2 position-relative">
         <div class="hero-slider2">
             <div class="slide-item position-relative">
-                <div class="item-bg" style="background-image: url('/assets/images/welcome/slider1-boxes.jpg');"></div>
+                {{-- <div class="item-bg" style="background-image: url('/assets/images/welcome/slider1-boxes.jpg');"></div> --}}
+                <div class="item-bg" style="background-image: url('/assets/images/welcome/2149128335.jpg');"></div>
+
                 <div class="slide-content">
                     <span class="sub-title h5">ЮКОН ООД • КЮСТЕНДИЛ • ОТ 1996 Г.</span>
                     <h1 class="display-1 fw-bold">Кашони и опаковки от велпапе, създадени за вашия продукт</h1>
                     <p>Произвеждаме транспортни, щанцови, каширани и рекламни опаковки според нуждите на вашия бизнес.
                         Изберете подходящо решение за защита, съхранение и представяне на продуктите си.</p>
                     <div class="d-sm-flex slide-cta gap-4">
-                        <a href="#produkti" class="btn btn-hover btn-primary">Разгледайте продуктите <i
-                                class="fa fa-arrow-right"></i><span></span></a>
-                        <a href="#kontakti" class="btn btn-outline">Изпратете запитване <i
-                                class="fa fa-arrow-right"></i><span></span></a>
+                        <a href="{{ route('shop.index') }}" class="btn btn-hover btn-primary">Разгледайте продуктите
+                            <i class="fa fa-arrow-right"></i><span></span>
+                        </a>
+                        <a href="{{ route('contact') }}" class="btn btn-outline">Изпратете запитване
+                            <i class="fa fa-arrow-right"></i>
+                            <span></span>
+                        </a>
                     </div>
                 </div>
-                <img src="/assets/images/slide-anim.png" class="abs-img start-0 bottom-0 d-none d-sm-block"
-                    alt="Картонени опаковки от велпапе">
+                {{-- <img src="/assets/images/slide-anim.png" class="abs-img start-0 bottom-0 d-none d-sm-block"
+                    alt="Картонени опаковки от велпапе"> --}}
             </div>
         </div>
     </section>
@@ -52,10 +57,10 @@
 
     <!-- About Section Start -->
     <section id="za-nas" class="about-sec2 overflow-hidden">
-        <img src="/assets/images/container.png" alt="container" class="position-absolute top-0">
+        {{-- <img src="/assets/images/container.png" alt="container" class="position-absolute top-0"> --}}
         <div class="container">
             <div class="row align-items-end">
-                <div class="col-xl-6 col-sm-8 ms-sm-auto">
+                <div class="col-xl-6 col-sm-8 ms-sm-auto ">
                     <div class="about-media-box position-relative">
                         <div class="ab-main-img">
                             <img src="/assets/images/about-m.jpg" class="img-fluid" alt="">
@@ -73,10 +78,9 @@
                 <div class="col-xl-6 ps-xl-4">
                     <div class="about-content">
                         <span class="sub-title2 fadeInUp single">За ЮКОН ООД</span>
-                        <h2 class="sec-title">Опит в производството на опаковки от 1996 година</h2>
+                        <h2 class="sec-title">Производството на опаковки от велпапе</h2>
                         <p class="lead">ЮКОН ООД е основана през 1996 година. Вече десетилетия произвеждаме качествени
-                            кашони и опаковки от велпапе за малки, средни и големи клиенти. Предлагаме решения за
-                            транспорт, съхранение, реклама и представяне на различни продукти.</p>
+                            кашони и опаковки от велпапе за малки, средни и големи клиенти.</p>
                         <ul class="check">
                             <li>Опаковки според нуждите на клиента</li>
                             <li>Разнообразие от видове велпапе</li>
@@ -120,8 +124,10 @@
     </section>
     <!-- About Section End -->
 
-    <div class="text-slide-sec sec-padding overflow-hidden">
+
+    <div class="text-slide-sec sec-padding overflow-hidden mt-5">
         <div class="marque-active">
+
             <div class="text-slide-wrap">
                 <div class="text-item">
                     <img src="/assets/images/star-1.png" alt="">
@@ -143,10 +149,80 @@
                     <img src="/assets/images/star-1.png" alt="">
                     <h3 class="display-1">Производство</h3>
                 </div>
+
+                <div class="text-item">
+                    <img src="/assets/images/star-1.png" alt="">
+                    <h3 class="display-1">Кашони</h3>
+                </div>
+                <div class="text-item">
+                    <img src="/assets/images/star-1.png" alt="">
+                    <h3 class="display-1">Велпапе</h3>
+                </div>
+                <div class="text-item">
+                    <img src="/assets/images/star-1.png" alt="">
+                    <h3 class="display-1">Опаковки</h3>
+                </div>
+                <div class="text-item">
+                    <img src="/assets/images/star-1.png" alt="">
+                    <h3 class="display-1">Транспортни кашони</h3>
+                </div>
+                <div class="text-item">
+                    <img src="/assets/images/star-1.png" alt="">
+                    <h3 class="display-1">Производство</h3>
+                </div>
             </div>
+
+            <div class="text-slide-wrap" aria-hidden="true">
+                <div class="text-item">
+                    <img src="/assets/images/star-1.png" alt="">
+                    <h3 class="display-1">Кашони</h3>
+                </div>
+                <div class="text-item">
+                    <img src="/assets/images/star-1.png" alt="">
+                    <h3 class="display-1">Велпапе</h3>
+                </div>
+                <div class="text-item">
+                    <img src="/assets/images/star-1.png" alt="">
+                    <h3 class="display-1">Опаковки</h3>
+                </div>
+                <div class="text-item">
+                    <img src="/assets/images/star-1.png" alt="">
+                    <h3 class="display-1">Транспортни кашони</h3>
+                </div>
+                <div class="text-item">
+                    <img src="/assets/images/star-1.png" alt="">
+                    <h3 class="display-1">Производство</h3>
+                </div>
+
+                <img src="/assets/images/star-1.png" alt="">
+                <h3 class="display-1">Кашони</h3>
+
+                <div class="text-item">
+                    <img src="/assets/images/star-1.png" alt="">
+                    <h3 class="display-1">Велпапе</h3>
+                </div>
+                <div class="text-item">
+                    <img src="/assets/images/star-1.png" alt="">
+                    <h3 class="display-1">Опаковки</h3>
+                </div>
+                <div class="text-item">
+                    <img src="/assets/images/star-1.png" alt="">
+                    <h3 class="display-1">Транспортни кашони</h3>
+                </div>
+                <div class="text-item">
+                    <img src="/assets/images/star-1.png" alt="">
+                    <h3 class="display-1">Производство</h3>
+                </div>
+            </div>
+
         </div>
+
     </div>
-    <!-- Services Section Start -->
+    </div>
+
+
+
+
     <section id="produkti" class="services-sec2 sec-padding overflow-hidden bg-cover jarallax" data-jarallax
         data-speed=".2">
         <img src="/assets/images/service2-bg.jpg" alt="Фон на секцията с продукти" class="jarallax-img">
@@ -176,7 +252,7 @@
                                 <li class="splide__slide">
                                     <div class="service-card2 round bg-info">
                                         <div class="serv-thumb"
-                                            style="background-image: url('/assets/images/serv-s1.png');"><span
+                                            style="background-image: url('/assets/images/welcome/serv-s1.png');"><span
                                                 class="icon round-2"><img src="/assets/images/icons/bus.png"
                                                     alt=""></span></div>
                                         <h3 class="display-4"><a href="#kontakti">Транспортни опаковки</a></h3>
@@ -190,7 +266,7 @@
                                 <li class="splide__slide">
                                     <div class="service-card2 round bg-info">
                                         <div class="serv-thumb"
-                                            style="background-image: url('/assets/images/serv-s2.png');"><span
+                                            style="background-image: url('/assets/images/welcome/serv-s2.png');"><span
                                                 class="icon round-2"><img src="/assets/images/icons/bus-gear.png"
                                                     alt=""></span></div>
                                         <h3 class="display-4"><a href="#kontakti">Щанцови опаковки</a></h3>
@@ -204,7 +280,7 @@
                                 <li class="splide__slide">
                                     <div class="service-card2 round bg-info">
                                         <div class="serv-thumb"
-                                            style="background-image: url('/assets/images/serv-s3.png');"><span
+                                            style="background-image: url('/assets/images/welcome/serv-s3.jpg');"><span
                                                 class="icon round-2"><img src="/assets/images/icons/plane-lg.png"
                                                     alt=""></span></div>
                                         <h3 class="display-4"><a href="#kontakti">Каширани опаковки</a></h3>
@@ -218,7 +294,7 @@
                                 <li class="splide__slide">
                                     <div class="service-card2 round bg-info">
                                         <div class="serv-thumb"
-                                            style="background-image: url('/assets/images/serv-s4.png');"><span
+                                            style="background-image: url('/assets/images/welcome/displei.webp');"><span
                                                 class="icon round-2"><img src="/assets/images/icons/road.png"
                                                     alt=""></span></div>
                                         <h3 class="display-4"><a href="#kontakti">Рекламни дисплеи</a></h3>
@@ -232,8 +308,8 @@
                                 <li class="splide__slide">
                                     <div class="service-card2 round bg-info">
                                         <div class="serv-thumb"
-                                            style="background-image: url('/assets/images/serv-s1.png');"><span
-                                                class="icon round-2"><img src="/assets/images/icons/bus.png"
+                                            style="background-image: url('/assets/images/welcome/separator.png');">
+                                            <span class="icon round-2"><img src="/assets/images/icons/bus.png"
                                                     alt=""></span></div>
                                         <h3 class="display-4"><a href="#kontakti">Сепаратори и решетки</a></h3>
                                         <p>Вътрешни разделители, решетки и обложки за по-добро подреждане и защита на
@@ -246,8 +322,8 @@
                                 <li class="splide__slide">
                                     <div class="service-card2 round bg-info">
                                         <div class="serv-thumb"
-                                            style="background-image: url('/assets/images/serv-s2.png');"><span
-                                                class="icon round-2"><img src="/assets/images/icons/bus-gear.png"
+                                            style="background-image: url('/assets/images/welcome/pizza-boxes.jpg');">
+                                            <span class="icon round-2"><img src="/assets/images/icons/bus-gear.png"
                                                     alt=""></span></div>
                                         <h3 class="display-4"><a href="#kontakti">Подложки за пици и торти</a></h3>
                                         <p>Картонени подложки за пици, торти и сладкарски изделия, подходящи за
@@ -257,20 +333,7 @@
                                                         class="fa fa-arrow-right"></i></span>Запитване</a></div>
                                     </div>
                                 </li>
-                                <li class="splide__slide">
-                                    <div class="service-card2 round bg-info">
-                                        <div class="serv-thumb"
-                                            style="background-image: url('/assets/images/serv-s3.png');"><span
-                                                class="icon round-2"><img src="/assets/images/icons/plane-lg.png"
-                                                    alt=""></span></div>
-                                        <h3 class="display-4"><a href="#kontakti">Луксозни опаковки</a></h3>
-                                        <p>Опаковки с представителна визия за продукти, при които впечатлението и
-                                            детайлите имат значение.</p>
-                                        <div class="service-footer border-top"><a class="custom-btn"
-                                                href="#kontakti"><span class="icon rounded-3"><i
-                                                        class="fa fa-arrow-right"></i></span>Запитване</a></div>
-                                    </div>
-                                </li>
+
                             </ul>
                         </div>
                     </div>
@@ -278,7 +341,10 @@
             </div>
         </div>
     </section>
-    <!-- Services Section End -->
+
+
+
+
     <!-- Choose Section Start -->
     <section class="choose-sec2 bg-cover sec-padding" style="background-image: url('images/choose-bg.png');">
         <div class="container">
@@ -378,59 +444,7 @@
     </section>
     <!-- Materials Section End -->
 
-    <!-- Experience Section Start -->
-    <section class="team-sec sec-padding position-relative">
-        <img src="/assets/images/slide-sh1.png" alt="Декоративен елемент"
-            class="abs-img d-none d-lg-block top-0 stat-0">
-        <div class="container">
-            <div class="col-lg-8 mx-auto text-center sec-intro">
-                <span class="sub-title2 fadeInUp">ЮКОН ООД</span>
-                <h2 class="sec-title">Партньор за производство на картонени опаковки</h2>
-                <p>От първоначалната идея до избора на подходящ материал — подхождаме отговорно към всяка заявка.</p>
-            </div>
-            <div class="row gy-5">
-                <div class="col-lg-3 col-sm-6 fadeInUp" data-delay=".2">
-                    <div class="team-card fadeInUp">
-                        <div class="team-thumb round overflow-hidden"><img src="/assets/images/tm1.jpg"
-                                alt="Производство на кашони от велпапе" class="img-fluid"></div>
-                        <div class="team-info">
-                            <h3 class="display-4 mb-0">Опит</h3><span>Работим на българския пазар от 1996 г.</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 fadeInUp" data-delay=".3">
-                    <div class="team-card">
-                        <div class="team-thumb round overflow-hidden"><img src="/assets/images/tm2.jpg"
-                                alt="Разнообразни картонени опаковки" class="img-fluid"></div>
-                        <div class="team-info">
-                            <h3 class="display-4 mb-0">Разнообразие</h3><span>Кашони, щанцови и каширани
-                                опаковки</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 fadeInUp" data-delay=".4">
-                    <div class="team-card">
-                        <div class="team-thumb round overflow-hidden"><img src="/assets/images/tm3.jpg"
-                                alt="Опаковки според продукта" class="img-fluid"></div>
-                        <div class="team-info">
-                            <h3 class="display-4 mb-0">Гъвкавост</h3><span>Решения според приложението и нуждите</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 fadeInUp" data-delay=".5">
-                    <div class="team-card">
-                        <div class="team-thumb round overflow-hidden"><img src="/assets/images/tm4.jpg"
-                                alt="Екипът на ЮКОН ООД" class="img-fluid"></div>
-                        <div class="team-info">
-                            <h3 class="display-4 mb-0">Отговорност</h3><span>Професионално отношение към всяка
-                                поръчка</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Experience Section End -->
+
 
     <!-- Packaging Section Start -->
     <section class="operation-sec bg-dark position-relative sec-padding">
@@ -468,7 +482,7 @@
                         <div class="tab-pane fade show active" id="air" role="tabpanel"
                             aria-labelledby="air-tab">
                             <div class="operation-content">
-                                <div class="operation-thumb"><img src="/assets/images/tab-main1.jpg"
+                                <div class="operation-thumb"><img src="/assets/images/welcome/transport.jpg"
                                         class="img-fluid" alt="Транспортни кашони от велпапе"></div>
                                 <div class="opt-card bg-white rounded-4 p-4"><span><img
                                             src="/assets/images/tab-icon.png" alt=""></span>
@@ -514,7 +528,7 @@
 
     <!-- FAQ Section Start -->
     <section id="kontakti" class="faq-sec overflow-hidden sec-padding position-relative">
-        <img src="/assets/images/red-container.png" alt="container" class="anim-img right-top moveXS">
+        {{-- <img src="/assets/images/red-container.png" alt="container" class="anim-img right-top moveXS"> --}}
         <div class="container">
             <div class="sec-intro mx-auto text-center">
                 <span class="sub-title2 fadeInUp">Често задавани въпроси</span>
@@ -673,6 +687,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const productsSplide = document.getElementById('productsSplide');
+
             if (!productsSplide || typeof Splide === 'undefined') return;
 
             const productsSlider = new Splide(productsSplide, {
@@ -699,6 +714,9 @@
                     },
                 },
             });
+
+            console.log(productsSlider);
+
 
             productsSlider.mount();
 

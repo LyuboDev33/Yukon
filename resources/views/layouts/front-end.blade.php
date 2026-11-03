@@ -13,65 +13,45 @@
 
     <!-- Favicon -->
     <link rel="icon" sizes="180x180" href="{{ asset('assets/images/favicon/favicon-yukon.png') }}?v={{ time() }}">
-
     <!-- Fancybox CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css">
-
-
     <!-- Choices.js CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet"
         href="{{ asset('assets/css/bootstrap.min.css') }}?v={{ filemtime(public_path('assets/css/bootstrap.min.css')) }}">
-
-
     <!-- Jarallax CSS -->
-    <link rel="stylesheet"
-        href="{{ asset('assets/css/jarallax.min.css') }}?v={{ filemtime(public_path('assets/css/jarallax.min.css')) }}">
-
-
+    <link rel="stylesheet" href="{{ asset('assets/css/jarallax.min.css') }}?v={{ filemtime(public_path('assets/css/jarallax.min.css')) }}">
     <!-- Nice Select CSS -->
-    <link rel="stylesheet"
-        href="{{ asset('assets/css/nice-select.css') }}?v={{ filemtime(public_path('assets/css/nice-select.css')) }}">
-
-
+    <link rel="stylesheet" href="{{ asset('assets/css/nice-select.css') }}?v={{ filemtime(public_path('assets/css/nice-select.css')) }}">
     <!-- Splide CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
-
     <!-- Main Template CSS -->
-    <link rel="stylesheet"
-        href="{{ asset('assets/css/style.css') }}?v={{ filemtime(public_path('assets/css/style.css')) }}">
-
-        <!-- Main Shop CSS -->
-    <link rel="stylesheet"
-        href="{{ asset('assets/css/shop.css') }}?v={{ time() }}">
-
-            <!-- Main Template CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}?v={{ filemtime(public_path('assets/css/style.css')) }}">
+    <!-- Main Shop CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/shop.css') }}?v={{ time() }}">
+    <!-- Main Template CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}?v={{ time() }}">
-
-                <!-- Main Template CSS -->
+    <!-- Main Template CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/catalog.css') }}?v={{ time() }}">
 
-        <link rel="stylesheet" href="{{ asset('assets/css/machines.css') }}?v={{ time() }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/machines.css') }}?v={{ time() }}">
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
 
-     <!-- Fancybox JS -->
+    <!-- Fancybox JS -->
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.umd.js" defer></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js" defer></script>
     <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
 
-            <script src="https://cdn.jsdelivr.net/npm/tom-select@2.6.2/dist/js/tom-select.complete.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.6.2/dist/js/tom-select.complete.min.js"></script>
 
 
 
     <!-- jQuery -->
-    <script
-        src="{{ asset('assets/js/jquery-3.7.1.min.js') }}?v={{ time() }}">
-    </script>
+    <script src="{{ asset('assets/js/jquery-3.7.1.min.js') }}?v={{ time() }}"></script>
 
 </head>
 
@@ -128,9 +108,7 @@
     </script>
 
     <!-- Bootstrap Datepicker -->
-    <script
-        src="{{ asset('assets/js/bootstrap.bundle.min.js') }}?v={{ time() }}">
-    </script>
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}?v={{ time() }}"></script>
 
 
     <!-- Choices.js -->
@@ -139,7 +117,7 @@
     <!-- Splide JS -->
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
 
-        <!-- Form JS -->
+    <!-- Form JS -->
     <script src="{{ asset('assets/js/custom-codes.js') }}?v={{ time() }}"></script>
 
 
