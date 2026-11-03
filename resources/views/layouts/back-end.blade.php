@@ -35,7 +35,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
 
-    <script src="https://cdn.tiny.cloud/1/v2rtxhtgnbmw7x4hswnvpvejzuaankjl6lfde5n3swkjawjo/tinymce/8/tinymce.min.js"
+    <script src="https://cdn.tiny.cloud/1/973db2xhexyflby655ufnv507y0zq9fiu9nloc0wjfy7c93i/tinymce/8/tinymce.min.js"
         referrerpolicy="origin" crossorigin="anonymous"></script>
 
     <script src="/assets/js/jquery-3.7.1.min.js?v=<?php echo time(); ?>"></script>

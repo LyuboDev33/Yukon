@@ -288,6 +288,7 @@
                                             <td>
                                                 <div class="d-flex align-items-center gap-3">
 
+
                                                     <div class="img-box">
                                                         <img src="{{ asset('/assets/images/products/' . $product->product_image) }}"
                                                             alt="{{ $product->product_name }}"
