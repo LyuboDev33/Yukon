@@ -30,8 +30,8 @@
     <section class="slider-sec2 position-relative">
         <div class="hero-slider2">
             <div class="slide-item position-relative">
-                {{-- <div class="item-bg" style="background-image: url('/assets/images/welcome/slider1-boxes.jpg');"></div> --}}
-                <div class="item-bg" style="background-image: url('/assets/images/welcome/2149128335.jpg');"></div>
+                {{-- <div class="item-bg" style="background-image: url('/assets/images/welcome/slider1-boxes.jpg?v=<?= time() ?>');"></div> --}}
+                <div class="item-bg" style="background-image: url('/assets/images/welcome/2149128335.jpg?v=<?= time() ?>');"></div>
 
                 <div class="slide-content">
                     <span class="sub-title h5">ЮКОН ООД • КЮСТЕНДИЛ • ОТ 1996 Г.</span>
@@ -48,7 +48,7 @@
                         </a>
                     </div>
                 </div>
-                {{-- <img src="/assets/images/slide-anim.png" class="abs-img start-0 bottom-0 d-none d-sm-block"
+                {{-- <img src="/assets/images/slide-anim.png?v=<?= time() ?>" class="abs-img start-0 bottom-0 d-none d-sm-block"
                     alt="Картонени опаковки от велпапе"> --}}
             </div>
         </div>
@@ -57,20 +57,20 @@
 
     <!-- About Section Start -->
     <section id="za-nas" class="about-sec2 overflow-hidden">
-        {{-- <img src="/assets/images/container.png" alt="container" class="position-absolute top-0"> --}}
+        {{-- <img src="/assets/images/container.png?v=<?= time() ?>" alt="container" class="position-absolute top-0"> --}}
         <div class="container">
             <div class="row align-items-end">
                 <div class="col-xl-6 col-sm-8 ms-sm-auto ">
                     <div class="about-media-box position-relative">
                         <div class="ab-main-img">
-                            <img src="/assets/images/about-m.jpg" class="img-fluid" alt="">
+                            <img src="/assets/images/about-m.jpg?v=<?= time() ?>" class="img-fluid" alt="">
                             <div class="experien-stat">
                                 <p class="text-info m-0"> <span class="purecounter" data-purecounter-end="30">30</span>+
                                     години
                                     опит</p>
                             </div>
                             <div class="about-sm">
-                                <img class="img-fluid" src="/assets/images/about-m2.png" alt="">
+                                <img class="img-fluid" src="/assets/images/about-m2.png?v=<?= time() ?>" alt="">
                             </div>
                         </div>
                     </div>
@@ -104,14 +104,14 @@
                     </div>
                     <div class="about-footer d-sm-flex align-items-center gap-5 bg-shade round mt-5">
                         <div class="af-item d-flex align-items-start gap-4">
-                            <img src="/assets/images/af-1.png" alt="transform">
+                            <img src="/assets/images/af-1.png?v=<?= time() ?>" alt="transform">
                             <div class="af-info">
                                 <h3 class="h5">Практични опаковки</h3>
                                 <p>Опаковки за надеждна защита и удобно транспортиране на продукти.</p>
                             </div>
                         </div>
                         <div class="af-item d-flex align-items-start gap-4">
-                            <img src="/assets/images/af-2.png" alt="transform">
+                            <img src="/assets/images/af-2.png?v=<?= time() ?>" alt="transform">
                             <div class="af-info">
                                 <h3 class="h5">Индивидуален подход</h3>
                                 <p>Опаковки за надеждна защита и удобно транспортиране на продукти.</p>
@@ -130,87 +130,87 @@
 
             <div class="text-slide-wrap">
                 <div class="text-item">
-                    <img src="/assets/images/star-1.png" alt="">
+                    <img src="/assets/images/star-1.png?v=<?= time() ?>" alt="">
                     <h3 class="display-1">Кашони</h3>
                 </div>
                 <div class="text-item">
-                    <img src="/assets/images/star-1.png" alt="">
+                    <img src="/assets/images/star-1.png?v=<?= time() ?>" alt="">
                     <h3 class="display-1">Велпапе</h3>
                 </div>
                 <div class="text-item">
-                    <img src="/assets/images/star-1.png" alt="">
+                    <img src="/assets/images/star-1.png?v=<?= time() ?>" alt="">
                     <h3 class="display-1">Опаковки</h3>
                 </div>
                 <div class="text-item">
-                    <img src="/assets/images/star-1.png" alt="">
+                    <img src="/assets/images/star-1.png?v=<?= time() ?>" alt="">
                     <h3 class="display-1">Транспортни кашони</h3>
                 </div>
                 <div class="text-item">
-                    <img src="/assets/images/star-1.png" alt="">
+                    <img src="/assets/images/star-1.png?v=<?= time() ?>" alt="">
                     <h3 class="display-1">Производство</h3>
                 </div>
 
                 <div class="text-item">
-                    <img src="/assets/images/star-1.png" alt="">
+                    <img src="/assets/images/star-1.png?v=<?= time() ?>" alt="">
                     <h3 class="display-1">Кашони</h3>
                 </div>
                 <div class="text-item">
-                    <img src="/assets/images/star-1.png" alt="">
+                    <img src="/assets/images/star-1.png?v=<?= time() ?>" alt="">
                     <h3 class="display-1">Велпапе</h3>
                 </div>
                 <div class="text-item">
-                    <img src="/assets/images/star-1.png" alt="">
+                    <img src="/assets/images/star-1.png?v=<?= time() ?>" alt="">
                     <h3 class="display-1">Опаковки</h3>
                 </div>
                 <div class="text-item">
-                    <img src="/assets/images/star-1.png" alt="">
+                    <img src="/assets/images/star-1.png?v=<?= time() ?>" alt="">
                     <h3 class="display-1">Транспортни кашони</h3>
                 </div>
                 <div class="text-item">
-                    <img src="/assets/images/star-1.png" alt="">
+                    <img src="/assets/images/star-1.png?v=<?= time() ?>" alt="">
                     <h3 class="display-1">Производство</h3>
                 </div>
             </div>
 
             <div class="text-slide-wrap" aria-hidden="true">
                 <div class="text-item">
-                    <img src="/assets/images/star-1.png" alt="">
+                    <img src="/assets/images/star-1.png?v=<?= time() ?>" alt="">
                     <h3 class="display-1">Кашони</h3>
                 </div>
                 <div class="text-item">
-                    <img src="/assets/images/star-1.png" alt="">
+                    <img src="/assets/images/star-1.png?v=<?= time() ?>" alt="">
                     <h3 class="display-1">Велпапе</h3>
                 </div>
                 <div class="text-item">
-                    <img src="/assets/images/star-1.png" alt="">
+                    <img src="/assets/images/star-1.png?v=<?= time() ?>" alt="">
                     <h3 class="display-1">Опаковки</h3>
                 </div>
                 <div class="text-item">
-                    <img src="/assets/images/star-1.png" alt="">
+                    <img src="/assets/images/star-1.png?v=<?= time() ?>" alt="">
                     <h3 class="display-1">Транспортни кашони</h3>
                 </div>
                 <div class="text-item">
-                    <img src="/assets/images/star-1.png" alt="">
+                    <img src="/assets/images/star-1.png?v=<?= time() ?>" alt="">
                     <h3 class="display-1">Производство</h3>
                 </div>
 
-                <img src="/assets/images/star-1.png" alt="">
+                <img src="/assets/images/star-1.png?v=<?= time() ?>" alt="">
                 <h3 class="display-1">Кашони</h3>
 
                 <div class="text-item">
-                    <img src="/assets/images/star-1.png" alt="">
+                    <img src="/assets/images/star-1.png?v=<?= time() ?>" alt="">
                     <h3 class="display-1">Велпапе</h3>
                 </div>
                 <div class="text-item">
-                    <img src="/assets/images/star-1.png" alt="">
+                    <img src="/assets/images/star-1.png?v=<?= time() ?>" alt="">
                     <h3 class="display-1">Опаковки</h3>
                 </div>
                 <div class="text-item">
-                    <img src="/assets/images/star-1.png" alt="">
+                    <img src="/assets/images/star-1.png?v=<?= time() ?>" alt="">
                     <h3 class="display-1">Транспортни кашони</h3>
                 </div>
                 <div class="text-item">
-                    <img src="/assets/images/star-1.png" alt="">
+                    <img src="/assets/images/star-1.png?v=<?= time() ?>" alt="">
                     <h3 class="display-1">Производство</h3>
                 </div>
             </div>
@@ -225,7 +225,7 @@
 
     <section id="produkti" class="services-sec2 sec-padding overflow-hidden bg-cover jarallax" data-jarallax
         data-speed=".2">
-        <img src="/assets/images/service2-bg.jpg" alt="Фон на секцията с продукти" class="jarallax-img">
+        <img src="/assets/images/service2-bg.jpg?v=<?= time() ?>" alt="Фон на секцията с продукти" class="jarallax-img">
         <div class="container ct-container p-0">
             <div class="row align-items-center serv-header">
                 <div class="col-lg-8">
@@ -252,8 +252,8 @@
                                 <li class="splide__slide">
                                     <div class="service-card2 round bg-info">
                                         <div class="serv-thumb"
-                                            style="background-image: url('/assets/images/welcome/serv-s1.png');"><span
-                                                class="icon round-2"><img src="/assets/images/icons/bus.png"
+                                            style="background-image: url('/assets/images/welcome/serv-s1.png?v=<?= time() ?>');"><span
+                                                class="icon round-2"><img src="/assets/images/icons/bus.png?v=<?= time() ?>"
                                                     alt=""></span></div>
                                         <h3 class="display-4"><a href="#kontakti">Транспортни опаковки</a></h3>
                                         <p>Здрави кашони от велпапе за опаковане, съхранение и транспортиране на
@@ -266,8 +266,8 @@
                                 <li class="splide__slide">
                                     <div class="service-card2 round bg-info">
                                         <div class="serv-thumb"
-                                            style="background-image: url('/assets/images/welcome/serv-s2.png');"><span
-                                                class="icon round-2"><img src="/assets/images/icons/bus-gear.png"
+                                            style="background-image: url('/assets/images/welcome/serv-s2.png?v=<?= time() ?>');"><span
+                                                class="icon round-2"><img src="/assets/images/icons/bus-gear.png?v=<?= time() ?>"
                                                     alt=""></span></div>
                                         <h3 class="display-4"><a href="#kontakti">Щанцови опаковки</a></h3>
                                         <p>Опаковки с индивидуална форма и конструкция, съобразени с продукта и
@@ -280,8 +280,8 @@
                                 <li class="splide__slide">
                                     <div class="service-card2 round bg-info">
                                         <div class="serv-thumb"
-                                            style="background-image: url('/assets/images/welcome/serv-s3.jpg');"><span
-                                                class="icon round-2"><img src="/assets/images/icons/plane-lg.png"
+                                            style="background-image: url('/assets/images/welcome/serv-s3.jpg?v=<?= time() ?>');"><span
+                                                class="icon round-2"><img src="/assets/images/icons/plane-lg.png?v=<?= time() ?>"
                                                     alt=""></span></div>
                                         <h3 class="display-4"><a href="#kontakti">Каширани опаковки</a></h3>
                                         <p>Опаковки с възможност за качествено графично оформление и ефектно представяне
@@ -294,8 +294,8 @@
                                 <li class="splide__slide">
                                     <div class="service-card2 round bg-info">
                                         <div class="serv-thumb"
-                                            style="background-image: url('/assets/images/welcome/displei.webp');"><span
-                                                class="icon round-2"><img src="/assets/images/icons/road.png"
+                                            style="background-image: url('/assets/images/welcome/displei.webp?v=<?= time() ?>');"><span
+                                                class="icon round-2"><img src="/assets/images/icons/road.png?v=<?= time() ?>"
                                                     alt=""></span></div>
                                         <h3 class="display-4"><a href="#kontakti">Рекламни дисплеи</a></h3>
                                         <p>Картонени дисплеи за подредба и представяне на продукти в търговски обекти и
@@ -308,8 +308,8 @@
                                 <li class="splide__slide">
                                     <div class="service-card2 round bg-info">
                                         <div class="serv-thumb"
-                                            style="background-image: url('/assets/images/welcome/separator.png');">
-                                            <span class="icon round-2"><img src="/assets/images/icons/bus.png"
+                                            style="background-image: url('/assets/images/welcome/separator.png?v=<?= time() ?>');">
+                                            <span class="icon round-2"><img src="/assets/images/icons/bus.png?v=<?= time() ?>"
                                                     alt=""></span></div>
                                         <h3 class="display-4"><a href="#kontakti">Сепаратори и решетки</a></h3>
                                         <p>Вътрешни разделители, решетки и обложки за по-добро подреждане и защита на
@@ -322,8 +322,8 @@
                                 <li class="splide__slide">
                                     <div class="service-card2 round bg-info">
                                         <div class="serv-thumb"
-                                            style="background-image: url('/assets/images/welcome/pizza-boxes.jpg');">
-                                            <span class="icon round-2"><img src="/assets/images/icons/bus-gear.png"
+                                            style="background-image: url('/assets/images/welcome/pizza-boxes.jpg?v=<?= time() ?>');">
+                                            <span class="icon round-2"><img src="/assets/images/icons/bus-gear.png?v=<?= time() ?>"
                                                     alt=""></span></div>
                                         <h3 class="display-4"><a href="#kontakti">Подложки за пици и торти</a></h3>
                                         <p>Картонени подложки за пици, торти и сладкарски изделия, подходящи за
@@ -346,7 +346,7 @@
 
 
     <!-- Choose Section Start -->
-    <section class="choose-sec2 bg-cover sec-padding" style="background-image: url('images/choose-bg.png');">
+    <section class="choose-sec2 bg-cover sec-padding" style="background-image: url('images/choose-bg.png?v=<?= time() ?>');">
         <div class="container">
             <div class="sec-intro mx-auto text-center">
                 <span class="sub-title2 fadeInUp">Защо да изберете ЮКОН</span>
@@ -356,33 +356,33 @@
                 <div class="col-lg-3 col-sm-6">
                     <div class="single-choose fadeInUp">
                         <h3 class="display-6 fw-bold">Опит от 1996 г.</h3><span class="icon bg-primary"><img
-                                src="/assets/images/icons/water.svg" alt="Опит"></span>
+                                src="/assets/images/icons/water.svg?v=<?= time() ?>" alt="Опит"></span>
                     </div>
                     <div class="single-choose fadeInUp">
                         <h3 class="display-6 fw-bold">Разнообразие от опаковки</h3><span class="icon bg-primary"><img
-                                src="/assets/images/icons/air-heat.svg" alt="Видове опаковки"></span>
+                                src="/assets/images/icons/air-heat.svg?v=<?= time() ?>" alt="Видове опаковки"></span>
                     </div>
                     <div class="single-choose fadeInUp">
                         <h3 class="display-6 fw-bold">Практични решения</h3><span class="icon bg-primary"><img
-                                src="/assets/images/icons/fan.svg" alt="Практични решения"></span>
+                                src="/assets/images/icons/fan.svg?v=<?= time() ?>" alt="Практични решения"></span>
                     </div>
                 </div>
                 <div class="col-lg-6 d-sm-none d-lg-block">
-                    <div class="choose-media"><img src="/assets/images/choose-main.png"
+                    <div class="choose-media"><img src="/assets/images/choose-main.png?v=<?= time() ?>"
                             alt="Производство на кашони и опаковки от велпапе" class="img-fluid"></div>
                 </div>
                 <div class="col-lg-3 col-sm-6 reverse-choose">
                     <div class="single-choose fadeInUp">
                         <h3 class="display-6 fw-bold">Подход към клиента</h3><span class="icon bg-primary"><img
-                                src="/assets/images/icons/celling.svg" alt="Обслужване"></span>
+                                src="/assets/images/icons/celling.svg?v=<?= time() ?>" alt="Обслужване"></span>
                     </div>
                     <div class="single-choose fadeInUp">
                         <h3 class="display-6 fw-bold">Защита при транспорт</h3><span class="icon bg-primary"><img
-                                src="/assets/images/icons/ac-cond.svg" alt="Защита"></span>
+                                src="/assets/images/icons/ac-cond.svg?v=<?= time() ?>" alt="Защита"></span>
                     </div>
                     <div class="single-choose fadeInUp">
                         <h3 class="display-6 fw-bold">Решения по заявка</h3><span class="icon bg-primary"><img
-                                src="/assets/images/icons/floor-heat.svg" alt="Изработка по заявка"></span>
+                                src="/assets/images/icons/floor-heat.svg?v=<?= time() ?>" alt="Изработка по заявка"></span>
                     </div>
                 </div>
             </div>
@@ -392,7 +392,7 @@
 
     <!-- Materials Section Start -->
     <section id="materiali" class="video-sec2 sec-padding jarallax" data-jarallax data-speed=".2">
-        <div class="parallax-overly"><img src="/assets/images/serv-bg2.jpg" alt="Велпапе и материали за опаковки"
+        <div class="parallax-overly"><img src="/assets/images/serv-bg2.jpg?v=<?= time() ?>" alt="Велпапе и материали за опаковки"
                 class="jarallax-img"></div>
         <div class="container">
             <div class="row align-items-start">
@@ -449,7 +449,7 @@
     <!-- Packaging Section Start -->
     <section class="operation-sec bg-dark position-relative sec-padding">
         <div class="operate-bg jarallax bg-cover position-absolute" data-speed="0.8"
-            style="background-image: url('images/opt-bg.png');"></div>
+            style="background-image: url('images/opt-bg.png?v=<?= time() ?>');"></div>
         <div class="container ct-container">
             <div class="row">
                 <div class="col-lg-7 pe-lg-5">
@@ -482,10 +482,10 @@
                         <div class="tab-pane fade show active" id="air" role="tabpanel"
                             aria-labelledby="air-tab">
                             <div class="operation-content">
-                                <div class="operation-thumb"><img src="/assets/images/welcome/transport.jpg"
+                                <div class="operation-thumb"><img src="/assets/images/welcome/transport.jpg?v=<?= time() ?>"
                                         class="img-fluid" alt="Транспортни кашони от велпапе"></div>
                                 <div class="opt-card bg-white rounded-4 p-4"><span><img
-                                            src="/assets/images/tab-icon.png" alt=""></span>
+                                            src="/assets/images/tab-icon.png?v=<?= time() ?>" alt=""></span>
                                     <h3 class="mt-3 h5">Транспортни опаковки</h3>
                                     <p>Практични кашони от велпапе за защита на продукти при съхранение и транспорт.</p>
                                     <a class="link-btn" href="#kontakti">Запитване <i
@@ -495,10 +495,10 @@
                         </div>
                         <div class="tab-pane fade" id="byroad" role="tabpanel" aria-labelledby="byroad-tab">
                             <div class="operation-content">
-                                <div class="operation-thumb"><img src="/assets/images/tab-main2.jpg"
+                                <div class="operation-thumb"><img src="/assets/images/tab-main2.jpg?v=<?= time() ?>"
                                         class="img-fluid" alt="Щанцови и каширани картонени опаковки"></div>
                                 <div class="opt-card bg-white rounded-4 p-4"><span><img
-                                            src="/assets/images/tab-icon.png" alt=""></span>
+                                            src="/assets/images/tab-icon.png?v=<?= time() ?>" alt=""></span>
                                     <h3 class="mt-3 h5">Опаковки по форма и визия</h3>
                                     <p>Възможност за различни конструкции и оформление според предназначението на
                                         изделието.</p><a class="link-btn" href="#kontakti">Запитване <i
@@ -508,10 +508,10 @@
                         </div>
                         <div class="tab-pane fade" id="road" role="tabpanel" aria-labelledby="road-tab">
                             <div class="operation-content">
-                                <div class="operation-thumb"><img src="/assets/images/tab-main3.jpg"
+                                <div class="operation-thumb"><img src="/assets/images/tab-main3.jpg?v=<?= time() ?>"
                                         class="img-fluid" alt="Картонени дисплеи и сепаратори"></div>
                                 <div class="opt-card bg-white rounded-4 p-4"><span><img
-                                            src="/assets/images/tab-icon.png" alt=""></span>
+                                            src="/assets/images/tab-icon.png?v=<?= time() ?>" alt=""></span>
                                     <h3 class="mt-3 h5">Допълващи решения</h3>
                                     <p>Дисплеи, сепаратори, решетки, обложки и подложки за различни приложения.</p><a
                                         class="link-btn" href="#kontakti">Запитване <i
@@ -528,7 +528,7 @@
 
     <!-- FAQ Section Start -->
     <section id="kontakti" class="faq-sec overflow-hidden sec-padding position-relative">
-        {{-- <img src="/assets/images/red-container.png" alt="container" class="anim-img right-top moveXS"> --}}
+        {{-- <img src="/assets/images/red-container.png?v=<?= time() ?>" alt="container" class="anim-img right-top moveXS"> --}}
         <div class="container">
             <div class="sec-intro mx-auto text-center">
                 <span class="sub-title2 fadeInUp">Често задавани въпроси</span>
@@ -641,7 +641,7 @@
             <div class="row justify-content-md-center gy-4 mt-5">
                 <div class="col-xl-4 col-md-6 fadeInUp" data-delay=".2">
                     <article class="blog-entry2 bg-info round">
-                        <div class="blog-thumb"><a href="#materiali"><img src="/assets/images/blog4.jpg"
+                        <div class="blog-thumb"><a href="#materiali"><img src="/assets/images/blog4.jpg?v=<?= time() ?>"
                                     alt="Видове велпапе за кашони и опаковки" class="img-fluid"></a></div>
                         <div class="blog-inner">
                             <div class="blog-meta d-flex gap-4"><span><i class="fa-regular fa-lightbulb"></i>
@@ -654,7 +654,7 @@
                 </div>
                 <div class="col-xl-4 col-md-6 fadeInUp" data-delay=".4">
                     <article class="blog-entry2 bg-info round">
-                        <div class="blog-thumb"><a href="#produkti"><img src="/assets/images/blog5.jpg"
+                        <div class="blog-thumb"><a href="#produkti"><img src="/assets/images/blog5.jpg?v=<?= time() ?>"
                                     alt="Транспортни картонени кашони" class="img-fluid"></a></div>
                         <div class="blog-inner">
                             <div class="blog-meta d-flex gap-4"><span><i class="fa-regular fa-box"></i>
@@ -667,7 +667,7 @@
                 </div>
                 <div class="col-xl-4 col-md-6 fadeInUp" data-delay=".6">
                     <article class="blog-entry2 bg-info round">
-                        <div class="blog-thumb"><a href="#kontakti"><img src="/assets/images/blog6.jpg"
+                        <div class="blog-thumb"><a href="#kontakti"><img src="/assets/images/blog6.jpg?v=<?= time() ?>"
                                     alt="Опаковки от велпапе по заявка" class="img-fluid"></a></div>
                         <div class="blog-inner">
                             <div class="blog-meta d-flex gap-4"><span><i class="fa-regular fa-comments"></i>
