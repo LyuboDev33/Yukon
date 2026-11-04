@@ -12,7 +12,8 @@
     @yield('SEO')
 
     <!-- Favicon -->
-    <link rel="icon" sizes="180x180" href="{{ asset('assets/images/favicon/favicon-yukon.png') }}?v={{ time() }}">
+    <link rel="icon" sizes="180x180"
+        href="{{ asset('assets/images/favicon/favicon-yukon.png') }}?v={{ time() }}">
     <!-- Fancybox CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css">
     <!-- Choices.js CSS -->
@@ -21,13 +22,16 @@
     <link rel="stylesheet"
         href="{{ asset('assets/css/bootstrap.min.css') }}?v={{ filemtime(public_path('assets/css/bootstrap.min.css')) }}">
     <!-- Jarallax CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/jarallax.min.css') }}?v={{ filemtime(public_path('assets/css/jarallax.min.css')) }}">
+    <link rel="stylesheet"
+        href="{{ asset('assets/css/jarallax.min.css') }}?v={{ filemtime(public_path('assets/css/jarallax.min.css')) }}">
     <!-- Nice Select CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/nice-select.css') }}?v={{ filemtime(public_path('assets/css/nice-select.css')) }}">
+    <link rel="stylesheet"
+        href="{{ asset('assets/css/nice-select.css') }}?v={{ filemtime(public_path('assets/css/nice-select.css')) }}">
     <!-- Splide CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
     <!-- Main Template CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}?v={{ filemtime(public_path('assets/css/style.css')) }}">
+    <link rel="stylesheet"
+        href="{{ asset('assets/css/style.css') }}?v={{ filemtime(public_path('assets/css/style.css')) }}">
     <!-- Main Shop CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/shop.css') }}?v={{ time() }}">
     <!-- Main Template CSS -->
@@ -36,6 +40,12 @@
     <link rel="stylesheet" href="{{ asset('assets/css/catalog.css') }}?v={{ time() }}">
 
     <link rel="stylesheet" href="{{ asset('assets/css/machines.css') }}?v={{ time() }}">
+
+    <link rel="stylesheet" href="{{ asset('assets/css/checkout.css') }}?v={{ time() }}">
+
+    <link rel="stylesheet" href="https://unpkg.com/slim-select@4.6.2/dist/slimselect.css">
+
+    <script src="https://unpkg.com/slim-select@4.6.2/dist/slimselect.js"></script>
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
@@ -70,7 +80,7 @@
     </div>
 
     <!-- Cookies Modal -->
-    <div class="cookies__modal shadow">
+    {{-- <div class="cookies__modal shadow">
 
         <img class="cookies" src="{{ asset('assets/images/cookie.webp') }}" alt="Бисквитки">
 
@@ -87,7 +97,7 @@
             </div>
         </div>
 
-    </div>
+    </div> --}}
 
 
 
@@ -128,7 +138,17 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             initializeFancybox();
-            initializeChoicesJS();
+            // initializeChoicesJS();
+
+            new SlimSelect({
+                select: '#city'
+            });
+            new SlimSelect({
+                select: '#ekont_office_list'
+            });
+            new SlimSelect({
+                select: '#speedy_office_list'
+            });
         });
 
         function initializeFancybox() {
@@ -139,40 +159,42 @@
             Fancybox.bind('[data-fancybox]', {});
         }
 
-        function initializeChoicesJS() {
-            if (typeof Choices === 'undefined') {
-                return;
-            }
 
-            const attributeSelects = document.querySelectorAll(
-                '.attribute-choice'
-            );
 
-            if (attributeSelects.length === 0) {
-                return;
-            }
+        // function initializeChoicesJS() {
+        //     if (typeof Choices === 'undefined') {
+        //         return;
+        //     }
 
-            attributeSelects.forEach(function(select) {
-                if (select.dataset.choicesInitialized === 'true') {
-                    return;
-                }
+        //     const attributeSelects = document.querySelectorAll(
+        //         '.attribute-choice'
+        //     );
 
-                new Choices(select, {
-                    searchEnabled: true,
-                    searchChoices: true,
-                    itemSelectText: '',
-                    searchResultLimit: -1,
-                    searchPlaceholderValue: 'Търси стойност...',
-                    noResultsText: 'Няма намерени резултати',
-                    noChoicesText: 'Няма налични стойности',
-                    placeholder: true,
-                    removeItemButton: true,
-                    shouldSort: false
-                });
+        //     if (attributeSelects.length === 0) {
+        //         return;
+        //     }
 
-                select.dataset.choicesInitialized = 'true';
-            });
-        }
+        //     attributeSelects.forEach(function(select) {
+        //         if (select.dataset.choicesInitialized === 'true') {
+        //             return;
+        //         }
+
+        //         new Choices(select, {
+        //             searchEnabled: true,
+        //             searchChoices: true,
+        //             itemSelectText: '',
+        //             searchResultLimit: -1,
+        //             searchPlaceholderValue: 'Търси стойност...',
+        //             noResultsText: 'Няма намерени резултати',
+        //             noChoicesText: 'Няма налични стойности',
+        //             placeholder: true,
+        //             removeItemButton: true,
+        //             shouldSort: false
+        //         });
+
+        //         select.dataset.choicesInitialized = 'true';
+        //     });
+        // }
     </script>
 
 

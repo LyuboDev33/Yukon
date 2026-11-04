@@ -4148,7 +4148,7 @@ section.promo-sec .breadcrumb-item+.breadcrumb-item:before {
 }
 
 .slider-sec2 .slide-item {
-    padding: 250px 0 100px
+    padding: 250px 0 125px
 }
 
 @media (max-width:1199.98px) {
@@ -9710,7 +9710,6 @@ form.form.checkout-form input[type=checkbox] {
         left: 15px;
         /* height: 176px; */
         z-index: 99999;
-        display: none;
         text-align: center;
         align-items: center;
         flex-direction: row;

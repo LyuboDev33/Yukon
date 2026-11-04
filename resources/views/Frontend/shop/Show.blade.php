@@ -3,7 +3,8 @@
     @section('SEO')
         <title>{{ $product->name }} | ЮКОН – Картонени кутии и опаковки</title>
 
-        <meta name="description" content="{!! $product->description ?? '' !!}">
+        <meta name="description"
+            content="{{ strip_tags($product->description ?? '') }}">
 
         <meta name="robots" content="index,follow,max-image-preview:large">
 
@@ -12,19 +13,26 @@
         <meta property="og:locale" content="bg_BG">
         <meta property="og:type" content="product">
         <meta property="og:site_name" content="ЮКОН">
+
         <meta property="og:title" content="{{ $product->name }} | ЮКОН">
+
         <meta property="og:description"
-            content="{{ $product->description ?? '' }}">
+            content="{{ strip_tags($product->description ?? '') }}">
+
         <meta property="og:url" content="{{ route('shop.show', $product->slug) }}">
 
         @if ($product->main_image)
             <meta property="og:image" content="{{ asset('assets/images/products/' . $product->main_image) }}">
+
             <meta property="og:image:alt" content="{{ $product->name }}">
         @endif
 
         <meta name="twitter:card" content="summary_large_image">
+
         <meta name="twitter:title" content="{{ $product->name }} | ЮКОН">
-        <meta name="twitter:description" content="{!! $product->description ?? '' !!}">
+
+        <meta name="twitter:description"
+            content="{{ strip_tags($product->description ?? '') }}">
 
         @if ($product->main_image)
             <meta name="twitter:image" content="{{ asset('assets/images/products/' . $product->main_image) }}">
@@ -49,7 +57,8 @@
                             <!-- Main Product Image -->
                             <div class="product-details__img mb-3">
 
-                                <a href="{{ $galleryImages->first() }}" data-fancybox="product-gallery" class="d-block">
+                                <a href="{{ $galleryImages->first() }}" data-fancybox="product-gallery"
+                                    class="d-block">
 
                                     <img src="{{ $galleryImages->first() }}" alt="{{ $product->name }}"
                                         class="img-fluid w-100 rounded-3">
@@ -93,8 +102,8 @@
                             {{ $product->name }}
                         </h1>
                         <div>
-                        <h3>Описание на продукта: </h3>
-                        {!! $product->description !!}
+                            <h3>Описание на продукта: </h3>
+                            {!! $product->description !!}
                         </div>
 
 

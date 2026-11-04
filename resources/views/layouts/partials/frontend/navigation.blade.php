@@ -26,7 +26,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('materials') }}">Материали</a>
+        <a class="nav-link" href="{{ route('materials') }}">Видове велпапе</a>
     </li>
 
     <!-- Contact -->

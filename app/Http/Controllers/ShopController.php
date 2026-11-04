@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin\EkontOffice;
+use App\Models\Admin\SpeedyOffice;
 use App\Models\API\City;
 use App\Models\Category;
 use App\Models\Product;
@@ -138,7 +139,8 @@ class ShopController extends Controller
         }
 
         return view('Frontend.shop.Checkout', [
-            'offices'           => EkontOffice::get(),
+            'ekontOffices'      => EkontOffice::get(),
+            'speedyOffices'     => SpeedyOffice::get(),
             'cities'            => City::get(),
             'products'          => $products,
             'subtotal'          => $subtotal,

@@ -22,7 +22,8 @@ class CreateOrderRequest extends FormRequest
 
             'delivery_method' => [
                 'required',
-                Rule::in(['personal', 'office']),
+                'string',
+                'max:50',
             ],
 
             'payment_method' => [
@@ -45,7 +46,7 @@ class CreateOrderRequest extends FormRequest
             ],
 
             'office_list' => [
-                'exclude_unless:delivery_method,office',
+                Rule::excludeIf(fn() => $this->input('delivery_method') === 'personal'),
                 'required',
                 'string',
                 'max:255',
@@ -100,7 +101,7 @@ class CreateOrderRequest extends FormRequest
 
             'city.required' => 'Моля, изберете град.',
             'billing_address.required' => 'Моля, въведете адрес за доставка.',
-            'office_list.required' => 'Моля, изберете офис на Еконт.',
+            'office_list.required' => 'Моля, изберете офис за доставка.',
 
             'company_name.required' => 'Моля, въведете името на фирмата.',
             'company_mol.required' => 'Моля, въведете името на МОЛ.',

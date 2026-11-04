@@ -311,11 +311,13 @@ class OrdersController extends Controller
                         ? $validated['billing_address']
                         : null,
 
-                    'courier' => $validated['delivery_method'] === 'office'
-                        ? 'econt'
-                        : null,
+                    'courier' => match ($validated['delivery_method']) {
+                        'office' => 'econt',
+                        'speedy' => 'speedy',
+                        default => null,
+                    },
 
-                    'office_list' => $validated['delivery_method'] === 'office'
+                    'office_list' => $validated['delivery_method'] !== 'personal'
                         ? $validated['office_list']
                         : null,
 
@@ -382,7 +384,6 @@ class OrdersController extends Controller
                     'promoCode' => $promoCode,
                 ];
             }, 3);
-
         } catch (\InvalidArgumentException $exception) {
 
             return back()

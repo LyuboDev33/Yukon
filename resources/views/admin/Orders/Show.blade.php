@@ -178,11 +178,22 @@
                                 <p class="mb-1">
                                     Доставка:
 
-                                    @if ($order->delivery_method === 'office')
-                                        До офис на куриер Speedy
-                                    @else
-                                        До адрес
-                                    @endif
+                                    @switch($order->delivery_method)
+                                        @case('personal')
+                                            До личен адрес
+                                        @break
+
+                                        @case('office')
+                                            До офис на куриер Еконт
+                                        @break
+
+                                        @case('speedy')
+                                            До офис на куриер Спиди
+                                        @break
+
+                                        @default
+                                            {{ $order->delivery_method }}
+                                    @endswitch
 
                                     <br>
 
