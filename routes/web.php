@@ -1,11 +1,12 @@
 <?php
 
 use App\Http\Controllers\FrontEndController;
+use App\Http\Controllers\OfferController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShopController;
-use Illuminate\Support\Facades\Route;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Route;
 
 
 Route::fallback(function () {
@@ -45,6 +46,9 @@ Route::post('/checkout/promocode/apply', [ShopController::class, 'applyPromoCode
 Route::post('/cart/add/{product}', [OrdersController::class, 'addProduct'])->name('product.cart.add');
 Route::delete('/cart/remove/{productId}', [OrdersController::class, 'removeProduct'])->name('cart.remove');
 Route::post('/order/create', [OrdersController::class, 'create'])->name('order.create');
+
+/** All offer routes */
+Route::post('/offers/store', [OfferController::class, 'store'])->name('offers.store');
 
 
 /** All wishlist routes */

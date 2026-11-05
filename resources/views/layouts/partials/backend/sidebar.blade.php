@@ -21,8 +21,7 @@
 
             <li>
                 <a href="{{ route('admin.orders.index') }}"
-                class="{{ request()->routeIs('admin.orders.index') ||
-                          request()->routeIs('admin.orders.show') ? 'is-active' : '' }}">
+                    class="{{ request()->routeIs('admin.orders.index') || request()->routeIs('admin.orders.show') ? 'is-active' : '' }}">
                     <i class="fa-solid fa-bag-shopping"></i>
                     <span>Поръчки</span>
                 </a>
@@ -31,7 +30,7 @@
             <li>
                 <a href="{{ route('admin.category.index') }}"
                     class="{{ request()->routeIs('admin.category.index') ? 'is-active' : '' }}">
-                  <i class="fa-solid fa-boxes-stacked"></i>
+                    <i class="fa-solid fa-boxes-stacked"></i>
                     <span>Категории</span>
                 </a>
             </li>
@@ -40,7 +39,7 @@
             <li>
                 <a href="{{ route('admin.attributes.index') }}"
                     class="{{ request()->routeIs('admin.attributes.index') ? 'is-active' : '' }}">
-                 <i class="fa-solid fa-boxes-packing"></i>
+                    <i class="fa-solid fa-boxes-packing"></i>
                     <span>Продуктови Атрибути</span>
                 </a>
             </li>
@@ -51,8 +50,10 @@
             <li>
                 <a href="{{ route('admin.products.index') }}"
                     class="{{ request()->routeIs('admin.products.index') ||
-                            request()->routeIs('admin.products.create') ||
-                            request()->routeIs('admin.products.show') ? 'is-active' : '' }}">
+                    request()->routeIs('admin.products.create') ||
+                    request()->routeIs('admin.products.show')
+                        ? 'is-active'
+                        : '' }}">
                     <i class="fa-solid fa-dolly"></i>
                     <span>Продукти</span>
                 </a>
@@ -61,10 +62,19 @@
             <li>
                 <a href="{{ route('admin.promocodes.index') }}"
                     class="{{ request()->routeIs('admin.promocodes.index') ? 'is-active' : '' }}">
-                 <i class="fa-solid fa-percent"></i>
+                    <i class="fa-solid fa-percent"></i>
                     <span>Промо кодове</span>
                 </a>
             </li>
+
+            <li>
+                <a href="{{ route('admin.offers.index') }}"
+                    class="{{ request()->routeIs('admin.offers.*') ? 'is-active' : '' }}">
+                    <i class="fa-solid fa-file-invoice"></i>
+                    <span>Оферти от клиенти</span>
+                </a>
+            </li>
+
 
 
             {{-- <li>

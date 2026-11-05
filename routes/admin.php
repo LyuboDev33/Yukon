@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminOrdersController;
 use App\Http\Controllers\Admin\AdminProductsController;
 use App\Http\Controllers\Admin\AdminPromoCodesController;
 use App\Http\Controllers\Admin\ProductAttributesController;
+use App\Http\Controllers\OfferController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -13,18 +14,31 @@ Route::prefix('admin')
     ->middleware(['auth'])
     ->group(function () {
 
+
+        /** All offer routing */
+         Route::prefix('/offers')->group(function () {
+            Route::get('/', [OfferController::class, 'index'])->name('admin.offers.index');
+            Route::get('/{offer}', [OfferController::class, 'show'])->name('admin.offers.show');
+            Route::patch('/{offer}', [OfferController::class, 'update'])->name('admin.offers.update');
+        });
+
+
+        /**  Promo codes routing */
         Route::prefix('promo-codes')->group(function () {
             Route::get('/', [AdminPromoCodesController::class, 'index'])->name('admin.promocodes.index');
             Route::post('/create', [AdminPromoCodesController::class, 'create'])->name('admin.promocodes.create');
             Route::patch('/change-status', [AdminPromoCodesController::class, 'changeStatus'])->name('admin.promocodes.change-status');
             Route::delete('/delete', [AdminPromoCodesController::class, 'delete'])->name('admin.promocodes.delete');
         });
+
+        /** Orders routing */
         Route::prefix('orders')->group(function () {
             Route::get('/', [AdminOrdersController::class, 'index'])->name('admin.orders.index');
             Route::get('/show/{order_id}',  [AdminOrdersController::class, 'show'])->name('admin.orders.show');
             Route::put('/{order}/status', [AdminOrdersController::class, 'updateOrderStatus'])->name('admin.update.order.status');
         });
 
+        /** Products routing */
         Route::prefix('products')->group(function () {
             Route::get('/', [AdminProductsController::class, 'index'])->name('admin.products.index');
             Route::get('/create-product-view', [AdminProductsController::class, 'createProductView'])->name('admin.products.create');
@@ -45,7 +59,7 @@ Route::prefix('admin')
                 ->name('product.gallery-image.delete');
         });
 
-
+        /** Product codes routing  */
         Route::prefix('product-attributes')->group(function () {
             Route::get('/', [ProductAttributesController::class, 'index'])->name('admin.attributes.index');
             Route::post('/types',          [ProductAttributesController::class, 'storeType'])->name('admin.attributes.types.store');

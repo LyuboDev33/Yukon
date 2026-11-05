@@ -90,13 +90,13 @@
                     </button>
 
 
-                        {{-- Currently applied filters: outside the dropdown --}}
-                        @include('Frontend.shop.partials.applied-filters')
+                    {{-- Currently applied filters: outside the dropdown --}}
+                    @include('Frontend.shop.partials.applied-filters')
 
                 </div>
             </div>
 
-                                                                        @include('Frontend.shop.partials.breadcrumb', $breadcrumbs ?? [])
+            @include('Frontend.shop.partials.breadcrumb', $breadcrumbs ?? [])
 
 
             {{-- Active category / results --}}
@@ -144,7 +144,8 @@
 
                             @if ($product->categories->isNotEmpty())
                                 <div class="catalog-product__categories">
-                                   <p class="text-xl-start"> {{ $product->categories->pluck('name')->join(' > ') }}</p>
+                                    <p class="text-xl-start"> {{ $product->categories->pluck('name')->join(' > ') }}
+                                    </p>
                                 </div>
                             @endif
 
