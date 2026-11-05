@@ -25,7 +25,7 @@ class OfferController extends Controller
             ->paginate(15)
             ->withQueryString();
 
-        return view('admin.offers.index', compact('offers'));
+        return view('admin.Offers.index', compact('offers'));
     }
 
     /**
@@ -33,7 +33,7 @@ class OfferController extends Controller
      */
     public function show(Offer $offer)
     {
-        return view('admin.offers.show', [
+        return view('admin.Offers.show', [
             'offer' => $offer,
             'offerStatuses' => Offer::STATUSES,
         ]);
