@@ -1,15 +1,30 @@
-
 <x-frontend>
 
     @section('SEO')
-        <title>Видове велпапе и материали | ЮКОН ООД</title>
+        <title>Видове велпапе – 3 и 5 пластно | ЮКОН ООД</title>
 
         <meta name="description"
-            content="Разгледайте видовете велпапе, използвани от ЮКОН ООД – E, B, C, E+C и B+C вълна. Материали за производство на кашони и опаковки от велпапе.">
+            content="Разгледайте видовете 3-пластно и 5-пластно велпапе от ЮКОН ООД – E, B, C, E+C и B+C вълни. Характеристики, дебелини и приложения за кашони и опаковки.">
 
-        <meta name="robots" content="index,follow">
+        <meta name="robots" content="index, follow">
+
+        <link rel="canonical" href="{{ url()->current() }}">
+
+        <!-- Open Graph -->
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Видове велпапе – 3-пластно и 5-пластно | ЮКОН ООД">
+        <meta property="og:description"
+            content="Научете повече за видовете велпапе E, B, C, E+C и B+C. Разгледайте дебелините, характеристиките и приложенията им в производството на кашони и опаковки.">
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta property="og:locale" content="bg_BG">
+        <meta property="og:site_name" content="ЮКОН ООД">
+
+        <!-- Twitter / X -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Видове велпапе – 3-пластно и 5-пластно | ЮКОН ООД">
+        <meta name="twitter:description"
+            content="Видове велпапе за кашони и опаковки – E, B, C, E+C и B+C вълни. Сравнете дебелините и приложенията на материалите от ЮКОН ООД.">
     @endsection
-
 
     <!-- Promo Section Start -->
     <section class="promo-sec bg-cover jarallax" data-jarallax data-speed=".4">
@@ -119,8 +134,7 @@
                         <article class="material-card">
 
                             <div class="material-card__image">
-                                <img src="/assets/images/materials/e-wave.jpg"
-                                    alt="Трипластно велпапе E вълна">
+                                <img src="/assets/images/materials/e-wave.jpg" alt="Трипластно велпапе E вълна">
                             </div>
 
                             <div class="material-card__content">
@@ -148,8 +162,7 @@
                         <article class="material-card">
 
                             <div class="material-card__image">
-                                <img src="/assets/images/materials/b-wave.jpg"
-                                    alt="Трипластно велпапе B вълна">
+                                <img src="/assets/images/materials/b-wave.jpg" alt="Трипластно велпапе B вълна">
                             </div>
 
                             <div class="material-card__content">
@@ -175,8 +188,7 @@
                         <article class="material-card">
 
                             <div class="material-card__image">
-                                <img src="/assets/images/materials/c-wave.jpg"
-                                    alt="Трипластно велпапе C вълна">
+                                <img src="/assets/images/materials/c-wave.jpg" alt="Трипластно велпапе C вълна">
                             </div>
 
                             <div class="material-card__content">
@@ -214,8 +226,7 @@
                         <article class="material-card">
 
                             <div class="material-card__image">
-                                <img src="/assets/images/materials/ec-wave.jpg"
-                                    alt="Петпластно велпапе E+C вълна">
+                                <img src="/assets/images/materials/ec-wave.jpg" alt="Петпластно велпапе E+C вълна">
                             </div>
 
                             <div class="material-card__content">
@@ -244,8 +255,7 @@
                         <article class="material-card">
 
                             <div class="material-card__image">
-                                <img src="/assets/images/materials/bc-wave.jpg"
-                                    alt="Петпластно велпапе B+C вълна">
+                                <img src="/assets/images/materials/bc-wave.jpg" alt="Петпластно велпапе B+C вълна">
                             </div>
 
                             <div class="material-card__content">

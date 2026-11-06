@@ -767,7 +767,7 @@ body.catalog-sidebar-open {
 
 @media (max-width: 1199px) {
     .catalog-products {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(1, minmax(0, 1fr));
         gap: 20px;
     }
 }
@@ -808,7 +808,7 @@ body.catalog-sidebar-open {
     }
 
     .catalog-products {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(1, minmax(0, 1fr));
         gap: 12px;
         margin-top: 20px;
     }

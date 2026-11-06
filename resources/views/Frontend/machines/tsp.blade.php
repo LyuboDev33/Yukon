@@ -1,13 +1,30 @@
 <x-frontend>
 
     @section('SEO')
-        <title>Автоматична машина за щамповане TSP / KAM | Машини за картон</title>
+    <title>Автоматична машина за щамповане TSP / KAM | 14 500 €</title>
 
-        <meta name="description"
-            content="Автоматично устройство за щамповане TSP / KAM за обработка на картон и велпапе. Свържете се с нас за технически характеристики, снимки и информация за наличността.">
+    <meta name="description"
+        content="Автоматична машина за щамповане TSP / KAM за изрязване и обработка на картон и велпапе. Цена: 14 500 €. Разгледайте машината и изпратете запитване.">
 
-        <meta name="robots" content="index,follow">
-    @endsection
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="product">
+    <meta property="og:title" content="Автоматична машина за щамповане TSP / KAM | 14 500 €">
+    <meta property="og:description"
+        content="Машина TSP / KAM за щамповане и изрязване на картон и велпапе. Разгледайте информацията за машината и се свържете с нас за подробности.">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:locale" content="bg_BG">
+    <meta property="og:site_name" content="{{ config('app.name') }}">
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Автоматична машина за щамповане TSP / KAM | 14 500 €">
+    <meta name="twitter:description"
+        content="Автоматична машина TSP / KAM за щамповане и изрязване на картон и велпапе. Цена: 14 500 €. Изпратете запитване.">
+@endsection
 
     <!-- Hero Section -->
     <section class="machine-hero">
@@ -451,7 +468,7 @@
                                     <i class="fas fa-euro-sign"></i>
                                 </div>
 
-                              
+
                             </div>
 
                         </div>

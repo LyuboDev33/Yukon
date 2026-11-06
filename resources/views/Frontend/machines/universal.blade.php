@@ -1,6 +1,28 @@
 
 <x-frontend>
 
+     @section('SEO')
+        <title>Ламинатор UNIVERSAL – 1978 г. | 28 500 €</title>
+
+        <meta name="description" content="Ламинатор UNIVERSAL, произведен в Германия през 1978 г. Машината е ремонтирана и е в производство според продавача. Цена: 28 500 €, по договаряне.">
+
+        <meta name="robots" content="index, follow">
+
+        <meta property="og:type" content="product">
+        <meta property="og:title" content="Ламинатор UNIVERSAL – 1978 г. | 28 500 €">
+        <meta property="og:description" content="Индустриален ламинатор UNIVERSAL, произведен в Германия през 1978 г. Разгледайте техническите характеристики и изпратете запитване.">
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta property="og:locale" content="bg_BG">
+        <meta property="og:site_name" content="{{ config('app.name') }}">
+
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Ламинатор UNIVERSAL – 1978 г. | 28 500 €">
+        <meta name="twitter:description" content="Индустриален ламинатор UNIVERSAL, произведен в Германия през 1978 г. Цена по договаряне – 28 500 €.">
+
+        <link rel="canonical" href="{{ url()->current() }}">
+    @endsection
+
+
     <!-- Promo Section Start -->
     <section class="machine-hero">
         <img

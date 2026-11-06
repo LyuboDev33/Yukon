@@ -3090,7 +3090,11 @@ header .header-nav-wrapper.header-sticky.scroll-on .navbar .container-fluid {
 section.promo-sec {
     padding: 210px 0 50px;
     background-color: #d9d9d9;
-    background-blend-mode: multiply
+    background-blend-mode: multiply;
+    background: url(/assets/images/about-us.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 @media (max-width:767.98px) {
@@ -4782,6 +4786,17 @@ section.promo-sec .breadcrumb-item+.breadcrumb-item:before {
     margin: 30px 0
 }
 
+@media(max-width: 767px) {
+
+    .about-sec2 ul.check {
+        flex-wrap: unset;
+        flex-direction: column;
+    }
+
+}
+
+
+
 .about-sec2 ul.check li {
     flex: 0 0 45%
 }
@@ -5158,12 +5173,14 @@ section.promo-sec .breadcrumb-item+.breadcrumb-item:before {
 }
 
 .service-card2 .serv-thumb {
-    clip-path: polygon(100% 0, 100% 67%, 91% 100%, 0 100%, 0 0);
+    /* clip-path: polygon(100% 0, 100% 67%, 91% 100%, 0 100%, 0 0); */
     -webkit-border-radius: 16px;
     -moz-border-radius: 16px;
     -ms-border-radius: 16px;
     border-radius: 16px;
-    overflow: hidden
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .service-card2 .serv-thumb:before {
@@ -5183,7 +5200,7 @@ section.promo-sec .breadcrumb-item+.breadcrumb-item:before {
 .service-card2 .serv-thumb .icon-xl,
 .service-card2 .serv-thumb .icon-xs {
     width: 100px;
-    height: 200px;
+    height: 300px;
     /* background-color: var(--dark); */
     -webkit-transition: all .4s ease;
     -moz-transition: all .4s ease;
@@ -10205,222 +10222,299 @@ form.form.checkout-form input[type=checkbox] {
     }
 }
 
-    /* ========================================
+/* ========================================
            CONTACT PAGE
         ======================================== */
 
-        .yukon-contact .sec-intro {
-            max-width: 760px;
-        }
+.yukon-contact .sec-intro {
+    max-width: 760px;
+}
 
-        .yukon-contact .sec-intro .sub-title {
-            color: var(--primary);
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
+.yukon-contact .sec-intro .sub-title {
+    color: var(--primary);
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
 
-        .yukon-contact .sec-intro .sec-title {
-            color: var(--headings-color);
-            margin-bottom: 20px;
-        }
+.yukon-contact .sec-intro .sec-title {
+    color: var(--headings-color);
+    margin-bottom: 20px;
+}
 
-        .yukon-contact .contact-description {
-            color: var(--body-color);
-            font-size: 17px;
-            line-height: 1.8;
-            margin-bottom: 0;
-        }
+.yukon-contact .contact-description {
+    color: var(--body-color);
+    font-size: 17px;
+    line-height: 1.8;
+    margin-bottom: 0;
+}
 
-        /* ========================================
+/* ========================================
            CONTACT CARDS
         ======================================== */
 
-        .yukon-contact .contact-card {
-            position: relative;
-            display: flex;
-            align-items: flex-start;
-            gap: 22px;
-            height: 100%;
-            min-height: 250px;
-            padding: 35px 30px;
-            background: var(--white);
-            border: 1px solid var(--theme-border);
-            border-radius: 18px;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+.yukon-contact .contact-card {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 22px;
+    height: 100%;
+    min-height: 250px;
+    padding: 35px 30px;
+    background: var(--white);
+    border: 1px solid var(--theme-border);
+    border-radius: 18px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-        .yukon-contact .contact-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(var(--dark-rgb), 0.08);
-        }
+.yukon-contact .contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(var(--dark-rgb), 0.08);
+}
 
-        .yukon-contact .contact-card .icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            width: 65px;
-            height: 65px;
-            background: var(--shade);
-            border-radius: 14px;
-        }
+.yukon-contact .contact-card .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 65px;
+    height: 65px;
+    background: var(--shade);
+    border-radius: 14px;
+}
 
-        .yukon-contact .contact-card .icon i {
-            color: var(--primary);
-            font-size: 27px;
-        }
+.yukon-contact .contact-card .icon i {
+    color: var(--primary);
+    font-size: 27px;
+}
 
-        .yukon-contact .contact-info {
-            position: relative;
-            z-index: 2;
-            min-width: 0;
-        }
+.yukon-contact .contact-info {
+    position: relative;
+    z-index: 2;
+    min-width: 0;
+}
 
-        .yukon-contact .contact-info h3 {
-            color: var(--headings-color);
-            font-size: 23px;
-            font-weight: 800;
-            margin-bottom: 8px;
-        }
+.yukon-contact .contact-info h3 {
+    color: var(--headings-color);
+    font-size: 23px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
 
-        .yukon-contact .contact-info .contact-role {
-            display: block;
-            color: var(--mute);
-            font-size: 14px;
-            margin-bottom: 22px;
-        }
+.yukon-contact .contact-info .contact-role {
+    display: block;
+    color: var(--mute);
+    font-size: 14px;
+    margin-bottom: 22px;
+}
 
-        .yukon-contact .contact-info ul {
-            padding: 0;
-            margin: 0 0 18px;
-            list-style: none;
-        }
+.yukon-contact .contact-info ul {
+    padding: 0;
+    margin: 0 0 18px;
+    list-style: none;
+}
 
-        .yukon-contact .contact-info ul li {
-            color: var(--body-color);
-            font-size: 16px;
-            line-height: 1.8;
-            overflow-wrap: anywhere;
-        }
+.yukon-contact .contact-info ul li {
+    color: var(--body-color);
+    font-size: 16px;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
 
-        .yukon-contact .contact-info ul li a {
-            color: var(--dark);
-            font-weight: 700;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
+.yukon-contact .contact-info ul li a {
+    color: var(--dark);
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
 
-        .yukon-contact .contact-info ul li a:hover {
-            color: var(--primary);
-        }
+.yukon-contact .contact-info ul li a:hover {
+    color: var(--primary);
+}
 
-        .yukon-contact .contact-info .ct-url {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--primary);
-            font-size: 14px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
+.yukon-contact .contact-info .ct-url {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--primary);
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
 
-        .yukon-contact .contact-info .ct-url:hover {
-            color: var(--dark);
-        }
+.yukon-contact .contact-info .ct-url:hover {
+    color: var(--dark);
+}
 
-        .yukon-contact .contact-card .card-meta {
-            position: absolute;
-            right: 18px;
-            bottom: 12px;
-            color: var(--shade);
-            font-size: 38px;
-            font-weight: 900;
-            line-height: 1;
-            pointer-events: none;
-            z-index: 0;
-        }
+.yukon-contact .contact-card .card-meta {
+    position: absolute;
+    right: 18px;
+    bottom: 12px;
+    color: var(--shade);
+    font-size: 38px;
+    font-weight: 900;
+    line-height: 1;
+    pointer-events: none;
+    z-index: 0;
+}
 
-        /* ========================================
+/* ========================================
            COMPANY INFORMATION
         ======================================== */
 
-        .yukon-contact .company-contact {
-            margin-top: 50px;
-            padding: 40px;
-            background: var(--dark);
-            border-radius: 20px;
-        }
+.yukon-contact .company-contact {
+    margin-top: 50px;
+    padding: 40px;
+    background: var(--dark);
+    border-radius: 20px;
+}
 
-        .yukon-contact .company-contact h3 {
-            color: var(--white);
-            font-size: 27px;
-            font-weight: 800;
-            margin-bottom: 15px;
-        }
+.yukon-contact .company-contact h3 {
+    color: var(--white);
+    font-size: 27px;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
 
-        .yukon-contact .company-contact p {
-            color: var(--shade);
-            font-size: 16px;
-            line-height: 1.8;
-            margin-bottom: 0;
-        }
+.yukon-contact .company-contact p {
+    color: var(--shade);
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 0;
+}
 
-        .yukon-contact .company-contact a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 700;
-        }
+.yukon-contact .company-contact a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 700;
+}
 
-        .yukon-contact .company-contact a:hover {
-            color: var(--white);
-        }
+.yukon-contact .company-contact a:hover {
+    color: var(--white);
+}
 
-        /* ========================================
+/* ========================================
            RESPONSIVE
         ======================================== */
 
-        @media (max-width: 991px) {
-            .yukon-contact .contact-card {
-                min-height: 230px;
-            }
-        }
+@media (max-width: 991px) {
+    .yukon-contact .contact-card {
+        min-height: 230px;
+    }
+}
 
-        @media (max-width: 767px) {
-            .yukon-contact .contact-card {
-                padding: 28px 24px;
-                gap: 16px;
-                min-height: 0;
-            }
+@media (max-width: 767px) {
+    .yukon-contact .contact-card {
+        padding: 28px 24px;
+        gap: 16px;
+        min-height: 0;
+    }
 
-            .yukon-contact .contact-card .icon {
-                width: 52px;
-                height: 52px;
-            }
+    .yukon-contact .contact-card .icon {
+        width: 52px;
+        height: 52px;
+    }
 
-            .yukon-contact .contact-card .icon i {
-                font-size: 23px;
-            }
+    .yukon-contact .contact-card .icon i {
+        font-size: 23px;
+    }
 
-            .yukon-contact .contact-info h3 {
-                font-size: 21px;
-            }
+    .yukon-contact .contact-info h3 {
+        font-size: 21px;
+    }
 
-            .yukon-contact .contact-card .card-meta {
-                font-size: 28px;
-            }
+    .yukon-contact .contact-card .card-meta {
+        font-size: 28px;
+    }
 
-            .yukon-contact .company-contact {
-                padding: 30px 24px;
-            }
+    .yukon-contact .company-contact {
+        padding: 30px 24px;
+    }
 
-            .yukon-contact .company-contact h3 {
-                font-size: 24px;
-            }
+    .yukon-contact .company-contact h3 {
+        font-size: 24px;
+    }
 
-            .yukon-contact .contact-description {
-                font-size: 16px;
-            }
-        }
+    .yukon-contact .contact-description {
+        font-size: 16px;
+    }
+}
+
+
+
+/* Packaging Videos */
+
+.packaging-videos {
+    position: relative;
+    z-index: 2;
+}
+
+.packaging-video {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 30px;
+    background: #111;
+}
+
+.packaging-video video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 30px;
+}
+
+.packaging-video-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 76px;
+    height: 76px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.95);
+    color: #111;
+
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 3;
+
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.packaging-video-play:hover {
+    background: #fff;
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.packaging-video-play.is-hidden {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .packaging-video {
+        border-radius: 20px;
+    }
+
+    .packaging-video video {
+        border-radius: 20px;
+    }
+
+    .packaging-video-play {
+        width: 60px;
+        height: 60px;
+        font-size: 20px;
+    }
+}

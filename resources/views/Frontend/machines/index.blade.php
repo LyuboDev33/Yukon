@@ -1,5 +1,33 @@
 <x-frontend>
 
+    @section('SEO')
+    <title>Индустриални машини за продажба | Ламинатори и машини за картон</title>
+
+    <meta name="description"
+        content="Разгледайте индустриални машини за продажба – JAGENBERG DIANA 105, ламинатор UNIVERSAL и TSP KAM. Машини за лепене, ламиниране и щамповане на картон и велпапе.">
+
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title"
+        content="Индустриални машини за продажба | Машини за картон и велпапе">
+    <meta property="og:description"
+        content="Индустриално оборудване за обработка на картон и велпапе. Разгледайте машини за лепене на кутии, ламинатори и машини за щамповане с цени и характеристики.">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:locale" content="bg_BG">
+    <meta property="og:site_name" content="{{ config('app.name') }}">
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title"
+        content="Индустриални машини за продажба | Ламинатори и машини за картон">
+    <meta name="twitter:description"
+        content="Разгледайте JAGENBERG DIANA 105, UNIVERSAL и TSP KAM – индустриални машини за обработка на картон и велпапе. Цени, характеристики и запитвания.">
+@endsection
+
     <!-- Services Section Start -->
     <section class="services-sec bg-shade sec-padding">
         <div class="container">

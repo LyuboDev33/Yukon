@@ -1,6 +1,34 @@
 
 <x-frontend>
 
+    @section('SEO')
+    <title>JAGENBERG DIANA 105 – Машина за лепене на кутии | 24 000 €</title>
+
+    <meta name="description"
+        content="JAGENBERG DIANA 105 – машина за триточково лепене на картонени кутии, 1998 г. Работи с картон и велпапе E/B. Цена: 24 000 €. Налична за оглед в България.">
+
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="product">
+    <meta property="og:title"
+        content="JAGENBERG DIANA 105 – Машина за лепене на кутии | 24 000 €">
+    <meta property="og:description"
+        content="Машина JAGENBERG DIANA 105, 1998 г., за триточково лепене на картон и велпапе. Работни размери 350 × 410 до 889 × 1041 мм. Цена: 24 000 €.">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:locale" content="bg_BG">
+    <meta property="og:site_name" content="{{ config('app.name') }}">
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title"
+        content="JAGENBERG DIANA 105 – Машина за лепене на кутии | 24 000 €">
+    <meta name="twitter:description"
+        content="JAGENBERG DIANA 105, 1998 г. Машина за триточково лепене на картонени кутии. Цена: 24 000 €. Разгледайте характеристиките и изпратете запитване.">
+@endsection
+
     <!-- Promo Section Start -->
     <section class="machine-hero">
         <img
