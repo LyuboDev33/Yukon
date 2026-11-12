@@ -124,6 +124,16 @@
                                     <span class="checkout__choice-icon"><i class="fa-solid fa-truck-fast"></i></span>
                                     <span><strong>Спиди</strong><small>Доставка до офис на Спиди</small></span>
                                 </button>
+                                <button
+                                    class="checkout__choice nav-link {{ old('delivery_method') === 'pigeon' ? 'active' : '' }}"
+                                    id="delivery-pigeon-tab" data-bs-toggle="tab" data-bs-target="#pigeon-delivery"
+                                    type="button" role="tab" aria-controls="pigeon-delivery"
+                                    aria-selected="{{ old('delivery_method') === 'pigeon' ? 'true' : 'false' }}"
+                                    data-delivery="pigeon">
+                                    <span class="checkout__choice-icon"><i class="fa-solid fa-truck"></i></span>
+                                    <span><strong>Pigeon Express</strong><small>Доставка до офис на Pigeon
+                                            Express</small></span>
+                                </button>
                             </div>
                             @error('delivery_method')
                                 <div class="checkout__error">{{ $message }}</div>
@@ -211,6 +221,39 @@
                                         <div class="checkout__hint">Изберете удобен офис от списъка.</div>
                                         @error('office_list')
                                             @if (old('delivery_method') === 'speedy')
+                                                <div class="checkout__error">{{ $message }}</div>
+                                            @endif
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div id="pigeon-delivery"
+                                    class="checkout__panel tab-pane fade {{ old('delivery_method') === 'pigeon' ? 'show active' : '' }}"
+                                    role="tabpanel" aria-labelledby="delivery-pigeon-tab" tabindex="0">
+
+                                    <div class="checkout__field mb-0">
+                                        <label class="checkout__label" for="pigeon_office_list">
+                                            Офис на Pigeon Express <span class="checkout__required">*</span>
+                                        </label>
+
+                                        <select id="pigeon_office_list" class="checkout__input" data-office-select
+                                            name="office_list">
+                                            <option value="">Изберете офис на Pigeon Express</option>
+
+                                            @foreach ($pigeonOffices as $office)
+                                                <option value="{{ $office->address }} [{{ $office->code }}]"
+                                                    {{ old('delivery_method') === 'pigeon' && old('office_list') === $office->address . ' [' . $office->code . ']'
+                                                        ? 'selected'
+                                                        : '' }}>
+                                                    {{ $office->address }} [{{ $office->code }}]
+                                                </option>
+                                            @endforeach
+                                        </select>
+
+                                        <div class="checkout__hint">Изберете удобен офис от списъка.</div>
+
+                                        @error('office_list')
+                                            @if (old('delivery_method') === 'pigeon')
                                                 <div class="checkout__error">{{ $message }}</div>
                                             @endif
                                         @enderror
@@ -409,6 +452,7 @@
             const address = document.getElementById('billing_address');
             const ekont = document.getElementById('ekont_office_list');
             const speedy = document.getElementById('speedy_office_list');
+            const pigeon = document.getElementById('pigeon_office_list');
 
             const tabs = document.querySelectorAll('#checkout-delivery-tabs [data-delivery]');
 
@@ -423,11 +467,14 @@
 
                 ekont.disabled = method.value !== 'office';
                 speedy.disabled = method.value !== 'speedy';
+                pigeon.disabled = method.value !== 'pigeon';
 
                 selectedOffice.value = method.value === 'office' ?
                     ekont.value :
                     method.value === 'speedy' ?
                     speedy.value :
+                    method.value === 'pigeon' ?
+                    pigeon.value :
                     '';
             }
 
@@ -440,7 +487,7 @@
                     selectedOffice.value = '';
 
                     // Reset Slim Select instances AND their visible HTML.
-                    [city, ekont, speedy].forEach(select => {
+                    [city, ekont, speedy, pigeon].forEach(select => {
                         if (select.slim) {
                             select.slim.setSelected('');
                         } else {
@@ -452,7 +499,7 @@
                 });
             });
 
-            [ekont, speedy].forEach(select => {
+            [ekont, speedy, pigeon].forEach(select => {
                 select.addEventListener('change', sync);
             });
 

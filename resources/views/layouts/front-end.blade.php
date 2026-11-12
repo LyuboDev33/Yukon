@@ -150,6 +150,10 @@
             new SlimSelect({
                 select: '#speedy_office_list'
             });
+
+            new SlimSelect({
+                select: '#pigeon_office_list'
+            });
         });
 
         function initializeFancybox() {

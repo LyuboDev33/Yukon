@@ -2,6 +2,7 @@
 
 use App\Models\API\City;
 use App\Services\Admin\EkontService;
+use App\Services\Admin\PigeonExpressService;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use App\Services\Admin\SpeedyService;
@@ -40,6 +41,10 @@ Route::prefix('admin/api')
 
         Route::get('/speedy', function () {
             SpeedyService::insertOffices();
+        });
+
+        Route::get('/pigeon-express', function () {
+            PigeonExpressService::insertOffices();
         });
 
     });

@@ -14,31 +14,6 @@ Route::fallback(function () {
 });
 
 
-Route::get('/test', function () {
-
-
-    $curl = curl_init();
-
-    curl_setopt_array($curl, [
-        CURLOPT_URL => "https://api-docs.pigeonexpress.com//cities?page=1&per_page=50",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_HTTPHEADER => [
-            "X-API-Key: " . env('PIGEON_EXPRESS_PK'),
-            "X-API-Secret: " . env('PIGEON_SECRET_KEY'),
-        ],
-    ]);
-
-    $response = curl_exec($curl);
-
-    dd($response);
-
-    curl_close($curl);
-
-    $cities = json_decode($response, true);
-
-    dd($cities);
-});
-
 
 Route::get('/', [FrontEndController::class, 'welcome'])->name('home');
 
