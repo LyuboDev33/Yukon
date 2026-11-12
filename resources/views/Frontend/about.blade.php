@@ -5,10 +5,10 @@
         <title>За нас | ЮКОН ООД – Производство на кашони и опаковки от велпапе</title>
 
         <meta name="description"
-            content="ЮКОН ООД е производител на кашони и опаковки от велпапе от 1996 г. в Кюстендил. Изработваме транспортни, щанцови, каширани и луксозни опаковки по нуждите на клиентите.">
+            content="ЮКОН ООД е производител на кашони и опаковки от велпапе от 1996 г. в Кюстендил. Изработваме транспортни, щанцови, каширани опаковки по нуждите на клиентите.">
 
         <meta name="keywords"
-            content="ЮКОН ООД, Юкон Кюстендил, производство на кашони, производство на опаковки, кашони от велпапе, опаковки от велпапе, транспортни опаковки, щанцови опаковки, каширани опаковки, луксозни опаковки, картонени кутии, производител на кашони, велпапе Кюстендил">
+            content="ЮКОН ООД, Юкон Кюстендил, производство на кашони, производство на опаковки, кашони от велпапе, опаковки от велпапе, транспортни опаковки, щанцови опаковки, каширани опаковки, картонени кутии, производител на кашони, велпапе Кюстендил">
 
         <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
         <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
@@ -26,7 +26,7 @@
         <meta name="twitter:card" content="summary">
         <meta name="twitter:title" content="ЮКОН ООД – Производство на кашони и опаковки">
         <meta name="twitter:description"
-            content="Производство на кашони, транспортни, щанцови, каширани и луксозни опаковки от велпапе. ЮКОН ООД, Кюстендил, от 1996 г.">
+            content="Производство на кашони, транспортни, щанцови, каширани опаковки от велпапе. ЮКОН ООД, Кюстендил, от 1996 г.">
 
         <meta name="author" content="ЮКОН ООД">
         <meta name="application-name" content="ЮКОН ООД">
@@ -79,7 +79,7 @@
                     <div class="about-thumb me-lg-4">
 
                         <img class="img-fluid"
-                            src="{{ asset('/assets/images/about-d.jpg') }}"
+                            src="{{ asset('/assets/images/za-nas.jpg') }}"
                             alt="ЮКОН ООД – производство на кашони и опаковки от велпапе"
                             loading="lazy">
 
@@ -226,7 +226,7 @@
                     </span>
 
                     <div class="process-thumb rounded-circle d-flex align-items-center justify-content-center">
-                        <img src="{{ asset('/assets/images/st1.png') }}"
+                        <img src="{{ asset('/assets/images/about/kashoni-1.jpg') }}"
                             alt="Обсъждане на нуждите от опаковки"
                             loading="lazy">
                     </div>
@@ -249,7 +249,7 @@
                     </span>
 
                     <div class="process-thumb rounded-circle d-flex align-items-center justify-content-center">
-                        <img src="{{ asset('/assets/images/st2.png') }}"
+                        <img src="{{ asset('/assets/images/about/kashoni-2.jpg') }}"
                             alt="Избор на материали и опаковки"
                             loading="lazy">
                     </div>
@@ -272,7 +272,7 @@
                     </span>
 
                     <div class="process-thumb rounded-circle d-flex align-items-center justify-content-center">
-                        <img src="{{ asset('/assets/images/st3.png') }}"
+                        <img src="{{ asset('/assets/images/about/kashoni-3.jpg') }}"
                             alt="Производство на кашони и опаковки"
                             loading="lazy">
                     </div>
@@ -365,7 +365,7 @@
                             Специализирани сме в производството на опаковки
                             от вълнообразен картон (велпапе), включително
                             транспортни кашони, рекламни кутии, рекламни дисплеи,
-                            касетки за плодове и зеленчуци, луксозни опаковки,
+                            касетки за плодове и зеленчуци,
                             кутии за пици и торти, кутии за обувки и други.
                         </p>
 

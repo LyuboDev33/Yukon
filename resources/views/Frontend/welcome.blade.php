@@ -3,9 +3,9 @@
     @section('SEO')
         <title>ЮКОН ООД | Производство на кашони и опаковки от велпапе</title>
         <meta name="description"
-            content="ЮКОН ООД произвежда кашони и опаковки от велпапе в Кюстендил от 1996 г. Транспортни, щанцови, каширани и луксозни опаковки, дисплеи и подложки по заявка.">
+            content="ЮКОН ООД произвежда кашони и опаковки от велпапе в Кюстендил от 1996 г. Транспортни, щанцови, каширани опаковки, дисплеи и подложки по заявка.">
         <meta name="keywords"
-            content="ЮКОН ООД, производство на кашони, кашони от велпапе, опаковки от велпапе, картонени кутии, транспортни опаковки, щанцови опаковки, каширани опаковки, рекламни дисплеи, сепаратори, подложки за пица, луксозни опаковки, Кюстендил">
+            content="ЮКОН ООД, производство на кашони, кашони от велпапе, опаковки от велпапе, картонени кутии, транспортни опаковки, щанцови опаковки, каширани опаковки, рекламни дисплеи, сепаратори, подложки за пица, Кюстендил">
         <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
         <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
         <link rel="canonical" href="{{ url('/') }}">
@@ -14,7 +14,7 @@
         <meta property="og:site_name" content="ЮКОН ООД">
         <meta property="og:title" content="ЮКОН ООД | Кашони и опаковки от велпапе">
         <meta property="og:description"
-            content="Производство на транспортни, щанцови, каширани и луксозни опаковки от велпапе. ЮКОН ООД, Кюстендил — доверен опит от 1996 година.">
+            content="Производство на транспортни, щанцови, каширани опаковки от велпапе. ЮКОН ООД, Кюстендил — доверен опит от 1996 година.">
         <meta property="og:url" content="{{ url('/') }}">
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="ЮКОН ООД | Кашони и опаковки от велпапе">
@@ -32,7 +32,7 @@
             <div class="slide-item position-relative">
                 {{-- <div class="item-bg" style="background-image: url('/assets/images/welcome/slider1-boxes.jpg?v=<?= time() ?>');"></div> --}}
                 <div class="item-bg"
-                    style="background-image: url('/assets/images/welcome/2149128335.jpg?v=<?= time() ?>');"></div>
+                    style="background-image: url('/assets/images/welcome-2.jpg?v=<?= time() ?>');"></div>
 
                 <div class="slide-content">
                     <span class="sub-title h5">ЮКОН ООД • КЮСТЕНДИЛ • ОТ 1996 Г.</span>
@@ -61,7 +61,7 @@
         {{-- <img src="/assets/images/container.png?v=<?= time() ?>" alt="container" class="position-absolute top-0"> --}}
         <div class="container">
             <div class="row align-items-end">
-                <div class="col-xl-6 col-sm-8 ms-sm-auto ">
+                <div class="col-xl-6 col-sm-8 ms-sm-auto align-self-start main-page-boxes">
                     <div class="about-media-box position-relative">
                         <div class="ab-main-img">
                             <img src="/assets/images/about-m.jpg?v=<?= time() ?>" class="img-fluid" alt="">

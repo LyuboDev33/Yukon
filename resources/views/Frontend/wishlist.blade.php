@@ -1,6 +1,6 @@
 <x-frontend>
 
-    @section('SEO')
+    {{-- @section('SEO')
         <title>Любими продукти | ReLux TopShopping</title>
 
         <meta name="description"
@@ -31,7 +31,7 @@
         <meta name="application-name" content="ReLux TopShopping">
 
         <meta name="theme-color" content="#171717">
-    @endsection
+    @endsection --}}
 
     <div class="main-content-wrapper">
         <div class="wishlist-area pt--40 pb--80 pt-md--30 pb-md--60">

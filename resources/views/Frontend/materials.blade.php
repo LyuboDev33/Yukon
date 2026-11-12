@@ -127,6 +127,7 @@
 
                         <div class="materials-category__heading">
                             <h3>3-пластно велпапе</h3>
+                            <img src="/assets/images/materials/3-plastno.webp" alt="Структура на 3-пластно велпапе" class="img-fluid mt-3" loading="lazy">
                         </div>
 
 
@@ -134,7 +135,7 @@
                         <article class="material-card">
 
                             <div class="material-card__image">
-                                <img src="/assets/images/materials/e-wave.jpg" alt="Трипластно велпапе E вълна">
+                                <img src="/assets/images/materials/e-wave.webp" alt="Трипластно велпапе E вълна">
                             </div>
 
                             <div class="material-card__content">
@@ -162,7 +163,7 @@
                         <article class="material-card">
 
                             <div class="material-card__image">
-                                <img src="/assets/images/materials/b-wave.jpg" alt="Трипластно велпапе B вълна">
+                                <img src="/assets/images/materials/B-wave.webp" alt="Трипластно велпапе B вълна">
                             </div>
 
                             <div class="material-card__content">
@@ -188,7 +189,7 @@
                         <article class="material-card">
 
                             <div class="material-card__image">
-                                <img src="/assets/images/materials/c-wave.jpg" alt="Трипластно велпапе C вълна">
+                                <img src="/assets/images/materials/C-wave.webp" alt="Трипластно велпапе C вълна">
                             </div>
 
                             <div class="material-card__content">
@@ -219,6 +220,7 @@
 
                         <div class="materials-category__heading">
                             <h3>5-пластно велпапе</h3>
+                            <img src="/assets/images/materials/5-plastno.webp" alt="Структура на 5-пластно велпапе" class="img-fluid mt-3" loading="lazy">
                         </div>
 
 
@@ -226,7 +228,7 @@
                         <article class="material-card">
 
                             <div class="material-card__image">
-                                <img src="/assets/images/materials/ec-wave.jpg" alt="Петпластно велпапе E+C вълна">
+                                <img src="/assets/images/materials/CE-wave.webp" alt="Петпластно велпапе E+C вълна">
                             </div>
 
                             <div class="material-card__content">
@@ -255,7 +257,7 @@
                         <article class="material-card">
 
                             <div class="material-card__image">
-                                <img src="/assets/images/materials/bc-wave.jpg" alt="Петпластно велпапе B+C вълна">
+                                <img src="/assets/images/materials/BC-wave.webp" alt="Петпластно велпапе B+C вълна">
                             </div>
 
                             <div class="material-card__content">

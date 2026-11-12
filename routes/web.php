@@ -14,6 +14,30 @@ Route::fallback(function () {
 });
 
 
+Route::get('/test', function () {
+
+
+    $curl = curl_init();
+
+    curl_setopt_array($curl, [
+        CURLOPT_URL => "https://api-docs.pigeonexpress.com//cities?page=1&per_page=50",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_HTTPHEADER => [
+            "X-API-Key: " . env('PIGEON_EXPRESS_PK'),
+            "X-API-Secret: " . env('PIGEON_SECRET_KEY'),
+        ],
+    ]);
+
+    $response = curl_exec($curl);
+
+    dd($response);
+
+    curl_close($curl);
+
+    $cities = json_decode($response, true);
+
+    dd($cities);
+});
 
 
 Route::get('/', [FrontEndController::class, 'welcome'])->name('home');
@@ -33,8 +57,7 @@ Route::prefix('/shop')->group(function () {
     Route::get('/category/{category_slug}', [ShopController::class, 'category'])->name('shop.category');
     Route::get('/product/{slug}', [ShopController::class, 'show'])->name('shop.show');
     Route::get('/products/{product}/calculate-price', [ShopController::class, 'calculatePrice'])
-          ->name('product.price.calculate');
-
+        ->name('product.price.calculate');
 });
 
 Route::get('/cart', [ShopController::class, 'cart'])->name('cart');
