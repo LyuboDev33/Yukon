@@ -1866,3 +1866,10 @@ body {
 .choose-media img {
     border-radius: 30px;
 }
+
+.custom-image-shape {
+    border-radius: 0 50% 50% 50%;
+    height: 197px;
+    width: 197px;
+    object-fit: cover;
+}

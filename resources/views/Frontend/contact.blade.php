@@ -90,6 +90,30 @@
                     и възможностите за изработка.
                 </p>
 
+                <!-- Custom Packaging Information -->
+                <div class="custom-packaging-info mt-4 p-4 bg-white rounded-3 text-start">
+
+                    <h3 class="h5 fw-bold mb-3">
+                        <i class="fa-solid fa-box-open me-2"></i>
+                        Нуждаете се от опаковка по индивидуален размер?
+                    </h3>
+
+                    <p class="mb-3">
+                        Ако имате нужда от опаковка по индивидуален размер,
+                        изпратете ни желаните размери, като уточните дали са
+                        <strong>външни или вътрешни</strong>, както и
+                        <strong>дължината, ширината, височината и необходимия брой</strong>.
+                    </p>
+
+                    <p class="mb-0">
+                        Ако изпитвате затруднения при избора на материал
+                        или вид велпапе, не се колебайте да се свържете
+                        с нас за съдействие.
+                    </p>
+
+                </div>
+                <!-- End Custom Packaging Information -->
+
             </div>
 
 

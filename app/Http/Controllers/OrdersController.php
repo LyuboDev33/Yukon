@@ -20,9 +20,6 @@ use Illuminate\Support\Facades\Storage;
 class OrdersController extends Controller
 {
 
-
-
-
     /**
      * Add a product to the session cart.
      *

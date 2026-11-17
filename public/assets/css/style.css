@@ -4907,8 +4907,8 @@ position: absolute;
 
 .about-sec3 .about-media3 .experien-stat {
     bottom: auto;
-    left: 10px;
-    top: 40px
+    left: -40px;
+    top: -30px;
 }
 
 @media (max-width:575.98px) {
@@ -6009,7 +6009,7 @@ position: absolute;
     background: url(../images/choose-s-b.png) no-repeat 50%/contain;
     content: "";
     width: 100%;
-    height: 40px;
+    /* height: 40px; */
     left: 100%;
     position: absolute;
     top: 50%;

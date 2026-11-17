@@ -651,7 +651,7 @@
                     <div class="packaging-video">
 
                         <video class="lazy-video" preload="none" playsinline controls
-                            poster="{{ asset('assets/images/welcome/transport.jpg') }}"
+                            poster="{{ asset('/assets/images/welcome/13e8e65c-2d2a-45c7-a542-cc6ff132aa05.jpeg') }}"
                             aria-label="Видео от производството на картонени опаковки">
 
                             <source data-src="{{ asset('assets/videos/mashina-1.mp4') }}" type="video/mp4">
@@ -668,7 +668,7 @@
                     <div class="packaging-video">
 
                         <video class="lazy-video" preload="none" playsinline controls
-                            poster="{{ asset('assets/images/welcome/transport.jpg') }}"
+                            poster="{{ asset('/assets/images/welcome/ee1a7c6b-6e64-46c3-a6b3-6ffb3a7dc2cf.jpeg') }}"
                             aria-label="Видео от работата на индустриална машина">
 
                             <source data-src="{{ asset('assets/videos/mashina-2.mp4') }}" type="video/mp4">

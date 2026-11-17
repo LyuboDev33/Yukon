@@ -85,10 +85,6 @@
                                     <a href="tel:0889525537">0889 525 537</a>
                                 </p>
 
-                                <p>
-                                    <i class="me-2 fa fa-phone"></i>
-                                    <a href="tel:078550011">078 55 00 11</a>
-                                </p>
 
                                 <p>
                                     <i class="me-2 fa fa-envelope-open"></i>
@@ -127,7 +123,7 @@
 
                         <div class="materials-category__heading">
                             <h3>3-пластно велпапе</h3>
-                            <img src="/assets/images/materials/3-plastno.webp" alt="Структура на 3-пластно велпапе" class="img-fluid mt-3" loading="lazy">
+                            <img src="/assets/images/materials/3-plastno-new.webp" alt="Структура на 3-пластно велпапе" class="img-fluid mt-3" loading="lazy">
                         </div>
 
 
@@ -135,7 +131,7 @@
                         <article class="material-card">
 
                             <div class="material-card__image">
-                                <img src="/assets/images/materials/e-wave.webp" alt="Трипластно велпапе E вълна">
+                                <img src="/assets/images/materials/e-wave-new.webp" alt="Трипластно велпапе E вълна">
                             </div>
 
                             <div class="material-card__content">
@@ -163,7 +159,7 @@
                         <article class="material-card">
 
                             <div class="material-card__image">
-                                <img src="/assets/images/materials/B-wave.webp" alt="Трипластно велпапе B вълна">
+                                <img src="/assets/images/materials/b-wave-new.webp" alt="Трипластно велпапе B вълна">
                             </div>
 
                             <div class="material-card__content">
@@ -189,7 +185,7 @@
                         <article class="material-card">
 
                             <div class="material-card__image">
-                                <img src="/assets/images/materials/C-wave.webp" alt="Трипластно велпапе C вълна">
+                                <img src="/assets/images/materials/c-new.webp" alt="Трипластно велпапе C вълна">
                             </div>
 
                             <div class="material-card__content">
@@ -220,7 +216,10 @@
 
                         <div class="materials-category__heading">
                             <h3>5-пластно велпапе</h3>
-                            <img src="/assets/images/materials/5-plastno.webp" alt="Структура на 5-пластно велпапе" class="img-fluid mt-3" loading="lazy">
+                            <img src="/assets/images/materials/5-plastovo-velpape.webp"
+                                alt="Структура на 5-пластно велпапе"
+                                class="img-fluid mt-3"
+                                loading="lazy">
                         </div>
 
 
@@ -228,7 +227,7 @@
                         <article class="material-card">
 
                             <div class="material-card__image">
-                                <img src="/assets/images/materials/CE-wave.webp" alt="Петпластно велпапе E+C вълна">
+                                <img src="/assets/images/materials/CE-velpape.webp" alt="Петпластно велпапе E+C вълна">
                             </div>
 
                             <div class="material-card__content">
@@ -257,7 +256,7 @@
                         <article class="material-card">
 
                             <div class="material-card__image">
-                                <img src="/assets/images/materials/BC-wave.webp" alt="Петпластно велпапе B+C вълна">
+                                <img src="/assets/images/materials/BC-velpape.webp" alt="Петпластно велпапе B+C вълна">
                             </div>
 
                             <div class="material-card__content">
