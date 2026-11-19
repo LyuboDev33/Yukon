@@ -32,7 +32,7 @@
             <div class="slide-item position-relative">
                 {{-- <div class="item-bg" style="background-image: url('/assets/images/welcome/slider1-boxes.jpg?v=<?= time() ?>');"></div> --}}
                 <div class="item-bg"
-                    style="background-image: url('/assets/images/welcome-2.jpg?v=<?= time() ?>');"></div>
+                    style="background-image: url('/assets/images/welcome/welcome-2.png?v=<?= time() ?>');"></div>
 
                 <div class="slide-content">
                     <span class="sub-title h5">ЮКОН ООД • КЮСТЕНДИЛ • ОТ 1996 Г.</span>
@@ -804,11 +804,13 @@
                 <div class="col-xl-4 col-md-6 fadeInUp" data-delay=".2">
                     <article class="blog-entry2 bg-info round">
                         <div class="blog-thumb"><a href="#materiali"><img
-                                    src="/assets/images/blog4.jpg?v=<?= time() ?>"
+                                    src="/assets/images/welcome/purva-products.jpg?v=<?= time() ?>"
                                     alt="Видове велпапе за кашони и опаковки" class="img-fluid"></a></div>
                         <div class="blog-inner">
-                            <div class="blog-meta d-flex gap-4"><span><i class="fa-regular fa-lightbulb"></i>
-                                    Материали</span></div>
+                            <div class="blog-meta d-flex gap-4">
+                                {{-- <span><i class="fa-regular fa-lightbulb"></i>
+                                    Материали</span> --}}
+                                </div>
                             <h3 class="display-4"><a href="#materiali">Видове велпапе и приложение</a></h3>
                             <div class="blog-footer border-top"><a href="#materiali" class="link-btn">Научете повече
                                     <i class="fa-solid fa-circle-arrow-right"></i></a></div>
@@ -818,11 +820,13 @@
                 <div class="col-xl-4 col-md-6 fadeInUp" data-delay=".4">
                     <article class="blog-entry2 bg-info round">
                         <div class="blog-thumb"><a href="#produkti"><img
-                                    src="/assets/images/blog5.jpg?v=<?= time() ?>" alt="Транспортни картонени кашони"
+                                    src="/assets/images/welcome/vtora-products.jpg?v=<?= time() ?>" alt="Транспортни картонени кашони"
                                     class="img-fluid"></a></div>
                         <div class="blog-inner">
-                            <div class="blog-meta d-flex gap-4"><span><i class="fa-regular fa-box"></i>
-                                    Продукти</span></div>
+                            <div class="blog-meta d-flex gap-4">
+                                {{-- <span><i class="fa-regular fa-box"></i>
+                                    Продукти</span> --}}
+                                </div>
                             <h3 class="display-4"><a href="#produkti">Как да изберете транспортен кашон</a></h3>
                             <div class="blog-footer border-top"><a href="#produkti" class="link-btn">Разгледайте
                                     продуктите <i class="fa-solid fa-circle-arrow-right"></i></a></div>
@@ -832,11 +836,13 @@
                 <div class="col-xl-4 col-md-6 fadeInUp" data-delay=".6">
                     <article class="blog-entry2 bg-info round">
                         <div class="blog-thumb"><a href="{{ route('contact') }}"><img
-                                    src="/assets/images/blog6.jpg?v=<?= time() ?>" alt="Опаковки от велпапе по заявка"
+                                    src="/assets/images/welcome/treta-products.jpg?v=<?= time() ?>" alt="Опаковки от велпапе по заявка"
                                     class="img-fluid"></a></div>
                         <div class="blog-inner">
-                            <div class="blog-meta d-flex gap-4"><span><i class="fa-regular fa-comments"></i>
-                                    Запитвания</span></div>
+                            <div class="blog-meta d-flex gap-4">
+                                {{-- <span><i class="fa-regular fa-comments"></i>
+                                    Запитвания</span> --}}
+                                </div>
                             <h3 class="display-4"><a href="{{ route('contact') }}">Нуждаете се от опаковки за ваш продукт?</a></h3>
                             <div class="blog-footer border-top"><a href="{{ route('contact') }}" class="link-btn">Обсъдете нуждите
                                     си <i class="fa-solid fa-circle-arrow-right"></i></a></div>
