@@ -1868,8 +1868,11 @@ body {
 }
 
 .custom-image-shape {
-    border-radius: 0 50% 50% 50%;
-    height: 197px;
-    width: 197px;
-    object-fit: cover;
+   border-radius: 20px;
+    width: 50%;
+    object-fit: scale-down;
+}
+
+.about-us-4{
+    height: 400px;
 }

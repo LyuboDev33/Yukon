@@ -29,6 +29,11 @@
         <a class="nav-link" href="{{ route('materials') }}">Видове велпапе</a>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('aktualno') }}">Актуално</a>
+    </li>
+
+
     <!-- Contact -->
     <li class="nav-item">
         <a class="nav-link" href="{{ route('machines') }}">Машини</a>

@@ -111,6 +111,11 @@ class FrontEndController extends Controller
         return view($view, compact('images'));
     }
 
+    /** Show latest programs */
+    public function aktualno () {
+        return view('Frontend.aktualno');
+    }
+
     /**
      * Get the primary brand logos.
      *

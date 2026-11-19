@@ -227,7 +227,7 @@
                         <article class="material-card">
 
                             <div class="material-card__image">
-                                <img src="/assets/images/materials/CE-velpape.webp" alt="Петпластно велпапе E+C вълна">
+                                <img src="/assets/images/materials/CE-velpape-original.png" alt="Петпластно велпапе E+C вълна">
                             </div>
 
                             <div class="material-card__content">

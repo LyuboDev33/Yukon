@@ -79,7 +79,7 @@
                     <div class="about-thumb me-lg-4">
 
                         <img class="img-fluid"
-                            src="{{ asset('/assets/images/za-nas-2.jpg') }}"
+                            src="{{ asset('/assets/images/about/za-nas-3.jpg') }}"
                             alt="ЮКОН ООД – производство на кашони и опаковки от велпапе"
                             loading="lazy">
 
@@ -326,8 +326,8 @@
 
                         <div class="d-flex ab-sm-ft align-items-center gap-4">
 
-                            <img class="round img-fluid"
-                                src="{{ asset('/assets/images/about-ft2.png') }}"
+                            <img class="round img-fluid about-us-4"
+                                src="{{ asset('/assets/images/about/za-nas-4.jpg') }}"
                                 alt="Картонени кашони и кутии"
                                 loading="lazy">
 

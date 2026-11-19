@@ -320,7 +320,7 @@
                                 <li class="splide__slide">
                                     <div class="service-card2 round bg-info">
                                         <div class="serv-thumb"
-                                            style="background-image: url('/assets/images/welcome/separator.png?v=<?= time() ?>');">
+                                            style="background-image: url('/assets/images/welcome/separator.jpg?v=<?= time() ?>');">
                                             <span class="icon round-2">
                                                 {{-- <img src="/assets/images/icons/bus.png" alt=""> --}}
                                             </span>
@@ -341,7 +341,7 @@
                                 <li class="splide__slide">
                                     <div class="service-card2 round bg-info">
                                         <div class="serv-thumb"
-                                            style="background-image: url('/assets/images/welcome/pizza-boxes.jpg?v=<?= time() ?>');">
+                                            style="background-image: url('/assets/images/welcome/pizzi-i-torti.jpg?v=<?= time() ?>');">
                                             <span class="icon round-2">
                                                 {{-- <img src="/assets/images/icons/bus-gear.png"  alt=""> --}}
                                             </span>
